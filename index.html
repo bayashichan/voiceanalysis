@@ -624,8 +624,12 @@
 <script>
     document.querySelectorAll('.line-cv-btn').forEach(function(btn) {
         btn.href = 'https://lin.ee/qtSzKLf';
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
             fbq('track', 'Lead');
+            setTimeout(function() {
+                window.location.href = 'https://lin.ee/qtSzKLf';
+            }, 300);
         });
     });
 </script>
