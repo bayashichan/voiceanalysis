@@ -308,7 +308,7 @@
         <div class="check-item-flex" style="margin-bottom: 2em; padding-bottom: 1.6em; border-bottom: 1px solid #e8ede8;">
             <span class="check-icon">✓</span>
             <div class="check-content bold">
-                他のコーチングを受けても変わらなかったけど、声紋分析によって、自分がやるべきことが明確になって、結果も出てきた！毎朝が楽しみでしかたない！
+                他のコーチングでは変われなかった。声紋分析で、結果も収入も動き始めた！
             </div>
         </div>
         <div class="check-item-flex">
@@ -558,6 +558,12 @@
         <div class="check-item-flex">
             <span class="check-icon">✓</span>
             <div class="check-content bold">
+                やることが明確になったら、仕事の質が変わった。収入も、自然と動き始めた。
+            </div>
+        </div>
+        <div class="check-item-flex">
+            <span class="check-icon">✓</span>
+            <div class="check-content bold">
                 言い訳しなくなった。動ける自分が、誇らしい！
             </div>
         </div>
@@ -584,29 +590,16 @@
 </div>
 
 <script>
-    // fbclidをLIFF URLに引き継ぐ
-    (function() {
-        var params = new URLSearchParams(window.location.search);
-        var fbclid = params.get('fbclid') || '';
-        var tag = params.get('tag') || '';
-
-        var liffUrl = 'https://liff.line.me/2009544922-LSEmGTNF'
-            + '?fbclid=' + encodeURIComponent(fbclid)
-            + '&tag=' + encodeURIComponent(tag)
-            + '&ch=3e5e783e-9029-4712-bbb3-1d45ef7ad270'
-            + '&oa=@582xsdpe';
-
-        document.querySelectorAll('.line-cv-btn').forEach(function(btn) {
-            btn.href = liffUrl;
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                fbq('track', 'Lead');
-                setTimeout(function() {
-                    window.location.href = liffUrl;
-                }, 300);
-            });
+    document.querySelectorAll('.line-cv-btn').forEach(function(btn) {
+        btn.href = 'https://lin.ee/p39un8cJ';
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            fbq('track', 'Lead');
+            setTimeout(function() {
+                window.location.href = 'https://lin.ee/p39un8cJ';
+            }, 300);
         });
-    })();
+    });
 </script>
 
 </body>
