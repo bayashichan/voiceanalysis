@@ -11,8 +11,6 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        /* ベースフォントを16pxに統一。iPhoneデフォルトと揃えることで
-           ブラウザの自動拡大を防ぎつつ、視認性を確保する */
         html {
             font-size: 16px;
         }
@@ -32,15 +30,10 @@
             background-color: #fff;
             padding: 28px 20px 40px;
             line-height: 1.9;
-            /* word-break: break-all は英数字を強制分断するため削除。
-               overflow-wrap: break-word のみで日本語LPには十分 */
             word-break: normal;
             overflow-wrap: break-word;
         }
 
-        /* ── ヘッダータイトル ──
-           clamp()でフォントサイズを画面幅に応じて自動スケール。
-           <br>に依存せず、どの端末でも自然に折り返す */
         .header-title {
             text-align: center;
             font-size: clamp(1.15rem, 5vw, 1.35rem);
@@ -50,7 +43,6 @@
             line-height: 1.65;
         }
 
-        /* ── 画像 ── */
         img {
             display: block;
             margin: 24px auto;
@@ -59,12 +51,10 @@
             border-radius: 4px;
         }
 
-        /* ── 段落 ── */
         p {
             margin: 0 0 1.3em;
         }
 
-        /* ── テキスト装飾 ── */
         .bold {
             font-weight: bold;
         }
@@ -80,8 +70,6 @@
             line-height: 1.7;
         }
 
-        /* ── セクションタイトル ──
-           clamp()で見出しサイズも自動調整 */
         .section-title {
             background-color: #f4f6f4;
             padding: 16px 16px;
@@ -93,14 +81,12 @@
             text-align: center;
         }
 
-        /* ── 区切り線 ── */
         hr.divider {
             border: 0;
             border-top: 1px solid #e0e0e0;
             margin: 32px 0;
         }
 
-        /* ── チェックマーク付きボックス ── */
         .voice-box {
             padding: 18px 14px;
             border-radius: 6px;
@@ -125,7 +111,6 @@
         .check-icon {
             color: #2ea76b;
             font-size: 1rem;
-            /* line-heightをcontainerに合わせて1.9に統一 */
             line-height: 1.9;
             flex-shrink: 0;
             width: 18px;
@@ -134,12 +119,10 @@
         .check-content {
             flex: 1;
             min-width: 0;
-            /* check-content内は自然な折り返しに任せる */
             word-break: normal;
             overflow-wrap: break-word;
         }
 
-        /* ── ミントボックス ── */
         .mint-box {
             background-color: #f4f6f4;
             border-left: 3px solid #006400;
@@ -150,41 +133,23 @@
             margin-bottom: 0;
         }
 
-        /* ── テーブル ── */
-        .table-container {
-            width: 100%;
-            margin: 20px 0;
-            /* テーブルのみ小さめ。ベース16pxから0.875remで14px相当 */
-            font-size: 0.875rem;
-            line-height: 1.6;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-        th, td {
-            padding: 9px 6px;
-            vertical-align: top;
-            border-bottom: 1px solid #eaeaea;
-            word-break: break-all;
-        }
-        th {
-            font-weight: normal;
+        /* 画像キャプション */
+        .img-caption {
             text-align: center;
-            font-size: 0.875rem;
-        }
-        th:first-child {
-            width: 18%;
-        }
-        td:first-child {
-            font-weight: bold;
+            font-size: 0.85rem;
+            color: #555;
+            margin-top: -12px;
+            margin-bottom: 24px;
+            line-height: 1.6;
         }
 
-        /* ── CTAボタン ──
-           フォントサイズを1remに。タップ領域も padding 16px以上を確保 */
+        /* ストーリーセクション */
+        .story-block {
+            border-left: 2px solid #e0e0e0;
+            padding-left: 16px;
+            margin-bottom: 2em;
+        }
+
         .btn {
             display: block;
             width: 92%;
@@ -198,30 +163,24 @@
             font-size: 1rem;
             border-radius: 6px;
             letter-spacing: 0.06em;
-            /* タップ時のちらつき防止 */
             -webkit-tap-highlight-color: transparent;
         }
         .btn:active {
             background-color: #245a33;
         }
 
-        /* ── フッター ── */
         a.footer-link {
             color: #666;
             text-decoration: underline;
             word-break: break-all;
         }
 
-        /* ── レスポンシブ ──
-           375px未満の小型端末のみ15pxにフォールバック。
-           それ以外は16pxをそのまま使う */
         @media (max-width: 374px) {
             html { font-size: 15px; }
             .container { padding: 22px 16px 32px; }
             img { max-width: 85%; }
         }
 
-        /* タブレット・PC: コンテナ幅を広げるだけ。フォントはそのまま */
         @media (min-width: 768px) {
             .container {
                 max-width: 520px;
@@ -230,6 +189,7 @@
         }
     </style>
 
+    <!-- Meta Pixel -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -245,6 +205,8 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1302054671384974&ev=PageView&noscript=1"
     /></noscript>
+
+    <!-- Microsoft Clarity -->
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -257,264 +219,265 @@
 
 <div class="container">
 
-    <!-- <br>を削除。clamp()フォントサイズが画面幅で自動調整するため
-         どの端末でも自然に折り返す -->
-    <div class="header-title">自分の可能性をあきらめたくない方へ</div>
+    <!-- ══════════════════════════════
+         FV
+    ══════════════════════════════ -->
 
-    <div class="voice-box bg-gray" style="margin-bottom: 36px;">
+    <div class="header-title">気づいたら、なりたくない自分になっていた。</div>
+
+    <div class="voice-box bg-gray" style="margin-bottom: 28px;">
         <div class="check-item-flex" style="margin-bottom: 1.6em;">
-            <span class="check-icon">✓</span>
+            <span class="check-icon">✔</span>
             <div class="check-content bold">
-                「周りからは"いい仕事だね"と言われる。それでも、心の中のモヤモヤは消えずに日に日に大きくなっていく…。」
+                「いつか動こう、とずっと思っている。<br>
+                なのに、いつまで同じ場所にいるんだろう。」
             </div>
         </div>
         <div class="check-item-flex" style="margin-bottom: 1.6em;">
-            <span class="check-icon">✓</span>
+            <span class="check-icon">✔</span>
             <div class="check-content bold">
-                「何がしたいのかわからない。でも、このままじゃ絶対に嫌だ！」
+                「悪くない毎日だ。<br>
+                でも、これでいいんだろうか。」
             </div>
         </div>
         <div class="check-item-flex">
-            <span class="check-icon">✓</span>
+            <span class="check-icon">✔</span>
             <div class="check-content bold">
-                学んでも動いても、なぜか成果だけが、自分についてこない。
+                「学んだ。本も読んだ。<br>
+                それでも、何年も何も変わっていない。」
             </div>
         </div>
     </div>
 
-    <p style="margin-bottom: 2em;">しんどいですよね。</p>
-
-    <!-- 意味のある段落区切りの<br>は残す。見た目調整目的のものは削除 -->
-    <p style="margin-bottom: 2em;">
-        …頑張ってきた。違和感も、焦りも、ずっと感じてきた。
+    <p style="margin-bottom: 1.6em;">
+        その感覚、私にもありました。<br>
+        何年も、ずっとそこにいた。<br>
+        一人で抱え続けるのは、苦しすぎますよね。
     </p>
 
-    <p style="margin-bottom: 2.4em;">
-        その感覚こそが、次に進む力になることがあります。
+    <!-- グラフ画像 -->
+    <img src="voiceanalysis.png" alt="声紋分析グラフ">
+    <p class="img-caption">
+        特許技術による声紋分析。<br>
+        6秒の声が、このように可視化されます。
     </p>
 
-    <!-- <br>を削除。連続した事実の羅列は文章として流す -->
-    <p style="margin-bottom: 2em;">
+    <p style="margin-bottom: 1.2em;">
         私は、<span class="bold">救急救命士（国家資格）</span>として20年以上、生死の現場で<span class="bold">2,000名以上</span>と向き合ってきました。
     </p>
 
-    <p style="margin-bottom: 1.4em;">
-        今はその経験をもとに、<span class="bold">特許技術による声紋分析</span>を用いて、たった6秒の声から本音を可視化し、その人が持つ本来の力を取り戻しながら、ずっと求めていた人生を掴むサポートをしています。
+    <p style="margin-bottom: 2em;">
+        今はその経験をもとに、6秒の声から本音を可視化する声紋分析を用いて、ずっと求めていた人生を掴むサポートをしています。
     </p>
 
-    <p style="margin-bottom: 2.4em;">
-        言葉は取り繕えても、声の周波数だけは、本音を隠せません。
-    </p>
+    <div class="section-title">こんな変化を感じた方がいます</div>
 
-    <img src="voiceanalysis.png" alt="声紋分析グラフ">
-
-    <p class="center" style="margin-bottom: 2em;">
-        専用の診断システムが、声から、科学的に才能を発見します。
-    </p>
-
-    <div class="mint-box" style="margin-bottom: 36px;">
-        <p style="margin-bottom:0;">声紋分析コーチ　若林寛紀</p>
-    </div>
-
-    <div class="section-title">提供するサポートを受けることで、こんな変化が起きる可能性が高まります</div>
-
-    <div class="voice-box bg-yellow">
-        <div class="check-item-flex" style="margin-bottom: 2em; padding-bottom: 1.6em; border-bottom: 1px solid #e8ede8;">
-            <span class="check-icon">✓</span>
+    <div class="voice-box bg-gray" style="margin-bottom: 28px;">
+        <div class="check-item-flex" style="margin-bottom: 1.6em;">
+            <span class="check-icon">✔</span>
             <div class="check-content bold">
-                ずっと抱えてきたモヤモヤの正体がわかった。「これだ」と思える方向が見つかった！こんなにスッキリする日が来るなんて！
+                「無駄なことをしなくなった。<br>
+                本当に必要なことだけに、集中できるようになった。」
             </div>
         </div>
-        <div class="check-item-flex" style="margin-bottom: 2em; padding-bottom: 1.6em; border-bottom: 1px solid #e8ede8;">
-            <span class="check-icon">✓</span>
+        <div class="check-item-flex" style="margin-bottom: 1.6em;">
+            <span class="check-icon">✔</span>
             <div class="check-content bold">
-                他のコーチングでは変われなかった。声紋分析で、結果も収入も動き始めた！
+                「ズレても、自分の基準で戻ってこれる。<br>
+                迷子にならなくなった。」
             </div>
         </div>
         <div class="check-item-flex">
-            <span class="check-icon">✓</span>
+            <span class="check-icon">✔</span>
             <div class="check-content bold">
-                一人で考えていても、どういう未来に向かって生きたいのかが全然見えていなかった。声紋分析とコーチングを受けることで、初めて目標イメージが明確になった。一回きりの人生が、楽しく価値あるものになると確信できた！
+                「去年の自分とは、全く違う結果が出始めている。<br>
+                初めて、未来が楽しみになった。」
             </div>
         </div>
     </div>
 
-    <p>なぜ、同じ場所に留まり続けてしまうのか。その答えが、声の中にあります。</p>
-
-    <p>「やっと、自分の方向が見えた」そう感じるきっかけを、このLINEで届けています。</p>
+    <p style="margin-bottom: 0.8em;">「やっと、自分の方向が見えた」</p>
+    <p style="margin-bottom: 2em;">そう感じるきっかけを、このLINEで届けています。</p>
 
     <p>登録は30秒です。</p>
 
     <a href="#" class="btn line-cv-btn">無料 公式LINE 友だち追加</a>
 
     <hr class="divider">
+
+    <!-- ══════════════════════════════
+         悩みの深掘り
+    ══════════════════════════════ -->
 
     <div class="section-title">こんな想いに、心当たりはありませんか</div>
 
-    <p><span class="bold">「評価されても、心がモヤモヤする」</span></p>
-    <p><span class="bold">「この道でいいのか…正解がわからない」</span></p>
-    <p><span class="bold">「何年も同じ場所で足踏みしている気がする」</span></p>
-    <p><span class="bold">「周りの期待に応え続けて、息が詰まりそうだ」</span></p>
-    <p><span class="bold">「肩書きを外したら、何も残らない気がする」</span></p>
-    <p><span class="bold">「やりたいことが、もう自分でもわからない」</span></p>
-    <p><span class="bold">「変わりたいのに、何から始めればいいかわからない」</span></p>
-    <p><span class="bold">「学んでも学んでも、現実は何も変わっていない」</span></p>
-    <p><span class="bold">「一瞬だけ変われた気がして、また元に戻る」</span></p>
-    <p><span class="bold">「正解なんてない。動くしかない。わかってるのに動けない」</span></p>
-    <p><span class="bold">「言い訳だけが、どんどん上手くなっていく」</span></p>
-    <p><span class="bold">「こんな自分が、一番嫌いだ」</span></p>
+    <p class="bold">「周りからは恵まれていると言われる。<br>なのに、心のどこかがずっと渇いている。」</p>
+    <p class="bold">「このまま定年まで続けるのか。<br>そう気づいた瞬間、息が詰まった。」</p>
+    <p class="bold">「あんな上司にはなりたくない、と思っていた。<br>気づいたら、自分がその姿に近づいていた。」</p>
+    <p class="bold">「上からの指示をこなしながら、<br>これって何のためにやってるんだろう、と思う。」</p>
+    <p class="bold">「頼られるようになった。<br>でも、このまま自分を殺して終わってたまるか。」</p>
+    <p class="bold">「子供が生まれて、守るものができた。<br>だからこそ、このまま終わったら絶対に後悔する。」</p>
+    <p class="bold">「飛び出す勇気はまだない。<br>でも、このまま染まっていくのは絶対に嫌だ。」</p>
+    <p class="bold">「本を読んだ。学んだ。でも気づけば何年も経っていた。<br>何も変わっていない自分が怖い。」</p>
+    <p class="bold">「いつか動こう、とずっと思っている。<br>なのに、いつまで同じ場所にいるんだろう。」</p>
+    <p class="bold">「変わりたいと思っている。<br>でも、また今日も何もしなかった。」</p>
+    <p class="bold">「肩書きを外したら、何も残らない気がする。」</p>
+    <p class="bold">「やりたいことが、もう自分でもわからない。」</p>
+    <p class="bold">「正解なんてない。動くしかない。<br>わかってるのに、動けない。」</p>
+    <p class="bold">「言い訳だけが、どんどん上手くなっていく。」</p>
+    <p class="bold">「こんな自分を、ずっと好きになれない。」</p>
 
     <hr class="divider">
+
+    <!-- ══════════════════════════════
+         ストーリー
+    ══════════════════════════════ -->
+
+    <div class="section-title">声紋分析コーチ　若林寛紀について</div>
+
+    <div class="story-block">
+        <p>自分という軸が、なかった。</p>
+        <p>それを隠すために鎧を着た。<br>
+        強がり、変わり者を演じ、全部一人で抱え込んだ。</p>
+        <p>できることは増えた。スキルも増えた。評価もされた。<br>
+        でも、人とつながれない孤独感が<br>
+        ずっと、心の奥にあった。</p>
+    </div>
+
+    <div class="story-block">
+        <p>どうにかしたくて、学んだ。<br>
+        スピリチュアル、ビジネス、自己啓発。<br>
+        知識が入るたびに「これだ」と思った。</p>
+        <p>でも、時間が経つと気づく。<br>
+        何年も、何も変わっていない。</p>
+        <p>家庭ができた。家族ができた。<br>
+        人並みの生活は、ちゃんとできていた。</p>
+        <p>それでも、消えない違和感があった。<br>
+        自分の人生に対する、深い不完全燃焼感。</p>
+    </div>
+
+    <div class="story-block">
+        <p>たどり着いたのは、自分の内側を見ることだった。</p>
+        <p>声紋分析で、自分がどう出来上がったかが見えた。<br>
+        自分の弱さを、初めて認めた。</p>
+        <p>その瞬間、ずっと着ていた鎧が外れた。</p>
+        <p>一人ではできなかった。<br>
+        良きコーチ、良き出会い、良き場があった。<br>
+        その場で初めて、まっさらな自分と向き合えた。</p>
+    </div>
+
+    <div class="story-block">
+        <p>以前の自分とは、まるで違う人間になっていると思う。</p>
+        <p>変わったのは、意識だけだった。</p>
+        <p>でも、意識が変わったら、<br>
+        今まで目に入らなかった情報が見えるようになった。<br>
+        今まで手を出せなかったことに、手を出せるようになった。<br>
+        常に枠を超えることを意識し続けて、今がある。</p>
+        <p>来年の自分は、今の自分が想像できない場所にいる。<br>
+        そう思える人生を、初めて生きている。</p>
+    </div>
+
+    <div class="mint-box">
+        <p style="margin-bottom:0.4em;" class="bold">声紋分析コーチ　若林寛紀</p>
+        <p style="margin-bottom:0;" class="small-text">国家資格・救急救命士 / 生命の最前線の現場で20年以上従事</p>
+    </div>
+
+    <a href="#" class="btn line-cv-btn">無料 公式LINE 友だち追加</a>
+
+    <hr class="divider">
+
+    <!-- ══════════════════════════════
+         なぜ声紋分析なのか
+    ══════════════════════════════ -->
 
     <div class="section-title">なぜ、声紋分析なのか</div>
 
-    <p>人の心には、自分でも気づいていない層があります。</p>
+    <p>言葉は取り繕えます。<br>
+    でも、声の周波数だけは、本音を隠せません。</p>
 
-    <p>今、意識していること。習慣やクセとして染みついていること。そして、自分でも言葉にできない、本質の部分。</p>
+    <p>声紋分析は、たった6秒の声から、自分でも気づいていない本音を<span class="bold">12色のカラーバランスとして可視化</span>します。</p>
 
-    <p>声紋分析は、専用の診断システムで声の周波数を解析し、この<span class="bold">3層の状態を12色のカラーバランスとして可視化</span>します。</p>
+    <img src="voiceanalysis.png" alt="声紋分析グラフ">
+    <p class="img-caption">12色のバランスが、あなたの本音を映し出します。</p>
 
-    <p>心を階層別に視覚化する技術は、<span class="bold">世界初</span>とされています。</p>
+    <p>感覚ではなく、データとして自分を見る。</p>
 
-    <p>この技術を確立したのは、物理学者・心理学者である柊木匠氏です。声の周波数を色分けする<span class="bold">特許技術</span>をベースに、<span class="bold">2万人以上の統計データ</span>から体系化されたもので、企業・病院・大学など<span class="bold">約200の組織に導入</span>されています。</p>
+    <p>「そうかもしれない」と素直に受け取れるのは、人間ではなく機械が出したデータだからです。</p>
 
-    <p>感覚や主観ではなく、構造として自分を理解できるのが、この技術の強みです。</p>
+    <p>その客観的な現在地から、本当に必要な一歩が見えてくる。</p>
 
-    <p>多くの人は、「持っていないもの」を伸ばそうとして苦しくなるか、「持っているもの」を抑え込んで苦しくなっています。</p>
-
-    <p>周りの目、評価、期待。それに応えようとして、本来の自分を見失っている方がとても多いです。</p>
-
-    <p>でも、ご本人は気づいていません。言葉にできない苦しさだけを感じています。</p>
-
-    <p>声紋分析は、その<span class="bold">「見えない苦しさ」の正体を、データとして目の前に出してくれます。</span></p>
-
-    <p>ポイントは、「機械が出すデータ」であることです。人間に「あなたはこういう人です」と言われると、どうしても抵抗が生まれます。</p>
-
-    <p>たとえ本当のことでも、受け入れにくい。でも、<span class="bold">感情のない客観的なデータなら、「そうかもしれない」と素直に見つめることができます。</span></p>
-
-    <p>これが、行動の変化につながる第一歩になります。</p>
-
-    <p>さらに、声紋分析は一度やって終わりではありません。定点観測として、その都度、現在地を確認できます。声は嘘をつけません。</p>
-
-    <p>言葉では「大丈夫です」と言っていても、声の周波数は、本当の状態を映し出します。</p>
-
-    <p>行き詰まっていることも、立ち直ってきたことも、声がすべて教えてくれます。</p>
-
-    <p>だから、軌道修正が早いのです。これが、声紋分析を使う理由です。</p>
+    <p>この技術は、物理学者・心理学者である<span class="bold">柊木匠氏</span>が確立したものです。<span class="bold">2万人以上の統計データ</span>をもとに体系化され、企業・病院・大学など<span class="bold">約200の組織に導入</span>されています。</p>
 
     <hr class="divider">
 
-    <div class="section-title">声の科学が示していること</div>
+    <!-- ══════════════════════════════
+         ベネフィット再確認
+    ══════════════════════════════ -->
 
-    <p><span class="bold">カリフォルニア大学の研究より</span></p>
-
-    <p>人間の声には、「言葉を作る回路」と「感情を反映する回路」があります。言葉では取り繕えても、声には無意識の本音が現れるとされています。</p>
-
-    <p><span class="bold">声の周波数に関する複数の研究より</span></p>
-
-    <p>ストレスや不安を感じると、声の周波数が変化する傾向があります。この知見は、心理状態の客観的な把握に活用され始めています。</p>
-
-    <p class="small-text">
-        ※上記は声と心理状態の関係に関する学術的知見であり、特定のサービスの効果を保証するものではありません。
-    </p>
-
-    <hr class="divider">
-
-    <div class="section-title">データだけでは、人は変われません</div>
-
-    <p>声紋分析で、自分の現在地がわかります。「本来の素質」と「今の状態」のズレが見えます。</p>
-
-    <p>でも、それだけでは変われません。「で、どうすればいいの？」が残るからです。</p>
-
-    <p>人が変われない理由は、大きく2つあります。ひとつは、自分を客観視することの難しさです。自分の表情、声のトーン、口癖、行動パターン。無意識にやっていることが多すぎて、自分では気づけません。</p>
-
-    <p>もうひとつは、無意識の「心のクセ」です。</p>
-
-    <!-- 意味的に並列する短文はbrで区切る用法として残す -->
-    <p>
-        「本音を言うと、受け入れられない」<br>
-        「失敗したら、すべてが終わる」<br>
-        「期待に応えないと、自分に価値がない」
-    </p>
-
-    <p>これらは、自分を守るために作られたものです。でも、いつの間にか、可能性を狭める足かせになっています。</p>
-
-    <p>行動だけを変えようとしても、根本にある<span class="bold">「ものの捉え方」が変わらなければ、結局、元のパターンに戻ってしまいます。</span></p>
-
-    <p>だから、人間の介入が必要になります。</p>
-
-    <p>声紋分析で現在地を把握し、対話の中で「本当はどうしたいのか」を一緒に探っていきます。</p>
-
-    <p>言葉だけでなく、声のトーン、表情、間。非言語の情報をリアルタイムで読み取りながら、ご本人も気づいていない思考のパターンに光を当てます。</p>
-
-    <p>これは、機械にはできません。<span class="bold">人間だからできること</span>です。</p>
-
-    <p>そして、もうひとつ大切なことがあります。</p>
-
-    <p>一人で変わろうとしても、人間の「現状維持の力」はとても強いです。</p>
-
-    <p>心が折れそうになったとき、<span class="bold">「あなたならできます」と信じ続ける存在がいること。</span>これが、もう一歩を踏ん張る力になります。</p>
-
-    <hr class="divider">
-
-    <div class="section-title">本当の自分と向き合えば、こんな変化が起きる可能性があります</div>
+    <div class="section-title">こんな変化が起きる可能性があります</div>
 
     <div class="voice-box bg-yellow">
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">やっと、やっと原因がわかった…！長年のモヤモヤが晴れた！</div>
+        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
+            <span class="check-icon">✔</span>
+            <div class="check-content bold">
+                「長年のモヤモヤの正体が、やっとわかった。<br>
+                霧が晴れたように、進む方向が見えた。」
+            </div>
+        </div>
+        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
+            <span class="check-icon">✔</span>
+            <div class="check-content bold">
+                「誰かの顔色をうかがわなくなった。<br>
+                自分がどうしたいか、それだけで決められるようになった。」
+            </div>
+        </div>
+        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
+            <span class="check-icon">✔</span>
+            <div class="check-content bold">
+                「無駄なことをしなくなった。<br>
+                本当に必要なことだけに、時間とエネルギーを使えるようになった。」
+            </div>
+        </div>
+        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
+            <span class="check-icon">✔</span>
+            <div class="check-content bold">
+                「ズレても、自分の基準で戻ってこれる。<br>
+                何があっても、迷子にならなくなった。」
+            </div>
+        </div>
+        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
+            <span class="check-icon">✔</span>
+            <div class="check-content bold">
+                「朝、目が覚めた瞬間の感覚が変わった。<br>
+                生きている実感が、じわっと湧いてくる。」
+            </div>
+        </div>
+        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
+            <span class="check-icon">✔</span>
+            <div class="check-content bold">
+                「去年の自分とは、全く違う結果が出始めている。<br>
+                初めて、未来が楽しみになった。」
+            </div>
         </div>
         <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">もう誰の顔色も伺わなくていい。この解放感！</div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">自分がどうしたいか。それだけで決められる人生になった！</div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">迷わない。これが自分の道だ、と胸を張って言える！</div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">朝、目が覚めた瞬間から、生きてる実感が湧いてくる！</div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">他人の言葉に振り回されない。もうブレない自分がいる！</div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">家族と、やっと本音で向き合えるようになった！</div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">自分の人生を生きている。その確信が、涙が出るほど嬉しい！</div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">誰かと比べて落ち込む日々が、嘘みたいに消えた！</div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">やることが明確になったら、仕事の質が変わった。収入も、自然と動き始めた。</div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✓</span>
-            <div class="check-content bold">言い訳しなくなった。動ける自分が、誇らしい！</div>
+            <span class="check-icon">✔</span>
+            <div class="check-content bold">
+                「変わったのは意識だけだった。<br>
+                でも、見える世界が、動ける範囲が、別物になった。」
+            </div>
         </div>
     </div>
 
-    <p>なぜ、同じ場所に留まり続けてしまうのか。その答えが、声の中にあります。</p>
+    <p>なぜ、同じ場所に留まり続けてしまうのか。<br>その答えが、声の中にあります。</p>
 
-    <p>「やっと、自分の方向が見えた」そう感じるきっかけを、このLINEで届けています。</p>
+    <p>「やっと、自分の方向が見えた」<br>
+    そう感じるきっかけを、このLINEで届けています。</p>
 
     <p>登録は30秒です。</p>
 
     <a href="#" class="btn line-cv-btn">無料 公式LINE 友だち追加</a>
 
-    <p class="center small-text">※無料で情報発信中です！</p>
+    <p class="center small-text">※無料で情報発信中です。</p>
 
     <div class="center small-text" style="margin-top: 36px; color: #666;">
         © 2026 若林 / 声紋分析コーチ<br>
@@ -524,6 +487,7 @@
 
 </div>
 
+<!-- LIFFリンク構成 -->
 <script>
     (function() {
         var params = new URLSearchParams(window.location.search);
