@@ -4,7 +4,14 @@
 
 @layer base {
   body {
-    @apply text-stone-800 leading-relaxed;
+    @apply text-stone-700 leading-relaxed;
     font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "游明朝", "Yu Mincho", "ＭＳ 明朝", serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* より穏やかなセレクション */
+  ::selection {
+    background-color: rgb(214 211 209 / 0.4);
   }
 }
