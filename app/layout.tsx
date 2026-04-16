@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 import "./globals.css";
-
-const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "声紋分析コーチング | 若林寛紀",
@@ -16,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" className="bg-stone-50">
-      <body className={`${geist.className} antialiased text-stone-800`}>
+      <body className="antialiased text-stone-800" style={{ fontFamily: '"ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "游明朝", "Yu Mincho", serif' }}>
         {children}
       </body>
     </html>
