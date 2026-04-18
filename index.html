@@ -28,163 +28,169 @@
             max-width: 430px;
             margin: 0 auto;
             background-color: #fff;
-            padding: 28px 20px 40px;
+            padding: 32px 24px 40px;
             line-height: 1.9;
             word-break: normal;
             overflow-wrap: break-word;
         }
 
-        .header-title {
-            text-align: center;
+        /* ファーストビューのメインコピー */
+        .fv-main {
             font-size: clamp(1.15rem, 5vw, 1.35rem);
             font-weight: 800;
-            margin: 0 0 24px;
-            letter-spacing: 0.05em;
-            line-height: 1.65;
+            margin: 0 0 32px;
+            letter-spacing: 0.04em;
+            line-height: 1.7;
         }
 
+        /* セクションの太字一行（問い型見出し含む） */
+        .section-lead {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 56px 0 24px;
+            letter-spacing: 0.02em;
+            line-height: 1.7;
+            color: #222;
+        }
+
+        /* 本文段落 */
+        p {
+            margin: 0 0 1.6em;
+            font-size: 1rem;
+            line-height: 1.95;
+        }
+
+        /* ダッシュ付き悩み独白 */
+        .dash-line {
+            margin: 0 0 1.6em;
+            padding-left: 0;
+        }
+
+        .dash-line p {
+            margin: 0;
+            text-indent: -1.2em;
+            padding-left: 1.2em;
+        }
+
+        .dash-line p + p {
+            text-indent: 0;
+            padding-left: 1.2em;
+            margin-top: 0.2em;
+        }
+
+        /* 肩書き */
+        .byline {
+            margin: 40px 0 0;
+            font-size: 0.92rem;
+            line-height: 1.9;
+            color: #555;
+        }
+
+        .byline .name {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.3em;
+            letter-spacing: 0.05em;
+        }
+
+        /* 画像 */
         img {
             display: block;
-            margin: 24px auto;
+            margin: 32px auto 8px;
             max-width: 78%;
             height: auto;
-            border-radius: 4px;
         }
 
-        p {
-            margin: 0 0 1.3em;
-        }
-
-        .bold {
-            font-weight: bold;
-        }
-        .green-bold {
-            color: #006400;
-            font-weight: bold;
-        }
-        .center {
-            text-align: center;
-        }
-        .small-text {
-            font-size: 0.82rem;
-            line-height: 1.7;
-        }
-
-        .section-title {
-            background-color: #f4f6f4;
-            padding: 16px 16px;
-            margin: 36px 0 18px;
-            font-weight: bold;
-            font-size: clamp(0.92rem, 4vw, 1rem);
-            color: #006400;
-            line-height: 1.7;
-            text-align: center;
-        }
-
-        hr.divider {
-            border: 0;
-            border-top: 1px solid #e0e0e0;
-            margin: 32px 0;
-        }
-
-        .voice-box {
-            padding: 18px 14px;
-            border-radius: 6px;
-            margin-bottom: 28px;
-        }
-        .bg-gray {
-            background-color: #f8f9fa;
-        }
-        .bg-yellow {
-            background-color: #f8f9fa;
-        }
-
-        .check-item-flex {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 1.2em;
-        }
-        .check-item-flex:last-child {
-            margin-bottom: 0;
-        }
-        .check-icon {
-            color: #2ea76b;
-            font-size: 1rem;
-            line-height: 1.9;
-            flex-shrink: 0;
-            width: 18px;
-            text-align: center;
-        }
-        .check-content {
-            flex: 1;
-            min-width: 0;
-            word-break: normal;
-            overflow-wrap: break-word;
-        }
-
-        .mint-box {
-            background-color: #f4f6f4;
-            border-left: 3px solid #006400;
-            padding: 18px 16px;
-            margin-bottom: 28px;
-        }
-        .mint-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* 画像キャプション */
         .img-caption {
             text-align: center;
-            font-size: 0.85rem;
-            color: #555;
-            margin-top: -12px;
-            margin-bottom: 24px;
+            font-size: 0.88rem;
+            color: #666;
+            margin: 0 0 32px;
             line-height: 1.6;
         }
 
-        /* ストーリーセクション */
-        .story-block {
-            border-left: 2px solid #e0e0e0;
-            padding-left: 16px;
-            margin-bottom: 2em;
+        /* 特許番号など補足 */
+        .small-note {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: -1em;
+            margin-bottom: 1.6em;
         }
 
+        /* 区切り線 */
+        hr.divider {
+            border: 0;
+            border-top: 1px solid #d8d6cf;
+            margin: 56px auto;
+            width: 40px;
+        }
+
+        /* セクション区切り線（大） */
+        hr.section-divider {
+            border: 0;
+            border-top: 1px solid #e5e3dc;
+            margin: 64px 0;
+        }
+
+        /* CTAボタン */
         .btn {
             display: block;
             width: 92%;
-            margin: 30px auto;
-            padding: 16px 10px;
+            margin: 48px auto 12px;
+            padding: 18px 10px;
             background-color: #2d6b3e;
             color: #fff;
             text-align: center;
             text-decoration: none;
             font-weight: bold;
             font-size: 1rem;
-            border-radius: 6px;
-            letter-spacing: 0.06em;
+            border-radius: 4px;
+            letter-spacing: 0.08em;
             -webkit-tap-highlight-color: transparent;
         }
+
         .btn:active {
             background-color: #245a33;
         }
 
-        a.footer-link {
-            color: #666;
+        .btn-sub {
+            text-align: center;
+            font-size: 0.82rem;
+            color: #888;
+            margin: 0 auto 48px;
+            line-height: 1.8;
+        }
+
+        /* フッター */
+        .footer {
+            text-align: center;
+            font-size: 0.78rem;
+            color: #888;
+            margin-top: 40px;
+            line-height: 1.8;
+        }
+
+        .footer a {
+            color: #888;
             text-decoration: underline;
             word-break: break-all;
         }
 
+        /* 強調 */
+        .bold {
+            font-weight: bold;
+        }
+
         @media (max-width: 374px) {
             html { font-size: 15px; }
-            .container { padding: 22px 16px 32px; }
-            img { max-width: 85%; }
+            .container { padding: 24px 18px 32px; }
         }
 
         @media (min-width: 768px) {
             .container {
                 max-width: 520px;
-                padding: 44px 32px;
+                padding: 48px 40px;
             }
         }
     </style>
@@ -220,270 +226,278 @@
 <div class="container">
 
     <!-- ══════════════════════════════
-         FV
+         セクション1：FV
     ══════════════════════════════ -->
 
-    <div class="header-title">気づいたら、なりたくない自分になっていた。</div>
+    <p class="fv-main">気づいたら、なりたくない自分になっていた。</p>
 
-    <div class="voice-box bg-gray" style="margin-bottom: 28px;">
-        <div class="check-item-flex" style="margin-bottom: 1.6em;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「いつか動こう、とずっと思っている。<br>
-                なのに、いつまで同じ場所にいるんだろう。」
-            </div>
-        </div>
-        <div class="check-item-flex" style="margin-bottom: 1.6em;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「悪くない毎日だ。<br>
-                でも、これでいいんだろうか。」
-            </div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「学んだ。本も読んだ。<br>
-                それでも、何年も何も変わっていない。」
-            </div>
-        </div>
+    <div class="dash-line">
+        <p>ー いつか動こう、とずっと思っている。</p>
+        <p>なのに、いつまで同じ場所にいるんだろう。</p>
     </div>
 
-    <p style="margin-bottom: 1.6em;">
-        その感覚、私にもありました。<br>
-        何年も、ずっとそこにいた。<br>
-        一人で抱え続けるのは、苦しすぎますよね。
-    </p>
-
-    <!-- グラフ画像（FV：lazy不要） -->
-    <img src="voiceanalysis.webp" alt="声紋分析グラフ" width="335" height="335">
-    <p class="img-caption">
-        特許技術による声紋分析。<br>
-        6秒の声が、このように可視化されます。
-    </p>
-
-    <p style="margin-bottom: 1.2em;">
-        私は、<span class="bold">救急救命士（国家資格）</span>として20年以上、生死の現場で<span class="bold">2,000名以上</span>と向き合ってきました。
-    </p>
-
-    <p style="margin-bottom: 2em;">
-        今はその経験をもとに、6秒の声から本音を可視化する声紋分析を用いて、ずっと求めていた人生を掴むサポートをしています。
-    </p>
-
-    <div class="section-title">こんな変化を感じた方がいます</div>
-
-    <div class="voice-box bg-gray" style="margin-bottom: 28px;">
-        <div class="check-item-flex" style="margin-bottom: 1.6em;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「無駄なことをしなくなった。<br>
-                本当に必要なことだけに、集中できるようになった。」
-            </div>
-        </div>
-        <div class="check-item-flex" style="margin-bottom: 1.6em;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「ズレても、自分の基準で戻ってこれる。<br>
-                迷子にならなくなった。」
-            </div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「去年の自分とは、全く違う結果が出始めている。<br>
-                初めて、未来が楽しみになった。」
-            </div>
-        </div>
+    <div class="dash-line">
+        <p>ー 悪くない毎日だ。</p>
+        <p>でも、これでいいんだろうか。</p>
     </div>
 
-    <p style="margin-bottom: 0.8em;">「やっと、自分の方向が見えた」</p>
-    <p style="margin-bottom: 2em;">そう感じるきっかけを、このLINEで届けています。</p>
+    <p class="section-lead" style="margin-top: 48px;">6秒の声に、あなたの本音が出る。</p>
 
-    <p>登録は30秒です。</p>
+    <div class="byline">
+        <div class="name">声紋分析コーチ　若林寛紀</div>
+        国家資格・救急救命士 / 生命の最前線の現場で20年以上従事
+    </div>
 
-    <a href="#" class="btn line-cv-btn">無料 公式LINE 友だち追加</a>
-
-    <hr class="divider">
+    <hr class="section-divider">
 
     <!-- ══════════════════════════════
-         悩みの深掘り
+         セクション2：独白の拡張
     ══════════════════════════════ -->
 
-    <div class="section-title">こんな想いに、心当たりはありませんか</div>
+    <p>悪い毎日ではなかった。<br>
+    ただ、いつからか、この先が見えてしまっていた。</p>
 
-    <p class="bold">「周りからは恵まれていると言われる。<br>なのに、心のどこかがずっと渇いている。」</p>
-    <p class="bold">「このまま定年まで続けるのか。<br>そう気づいた瞬間、息が詰まった。」</p>
-    <p class="bold">「あんな上司にはなりたくない、と思っていた。<br>気づいたら、自分がその姿に近づいていた。」</p>
-    <p class="bold">「上からの指示をこなしながら、<br>これって何のためにやってるんだろう、と思う。」</p>
-    <p class="bold">「頼られるようになった。<br>でも、このまま自分を殺して終わってたまるか。」</p>
-    <p class="bold">「子供が生まれて、守るものができた。<br>だからこそ、このまま終わったら絶対に後悔する。」</p>
-    <p class="bold">「飛び出す勇気はまだない。<br>でも、このまま染まっていくのは絶対に嫌だ。」</p>
-    <p class="bold">「本を読んだ。学んだ。でも気づけば何年も経っていた。<br>何も変わっていない自分が怖い。」</p>
-    <p class="bold">「いつか動こう、とずっと思っている。<br>なのに、いつまで同じ場所にいるんだろう。」</p>
-    <p class="bold">「変わりたいと思っている。<br>でも、また今日も何もしなかった。」</p>
-    <p class="bold">「肩書きを外したら、何も残らない気がする。」</p>
-    <p class="bold">「やりたいことが、もう自分でもわからない。」</p>
-    <p class="bold">「正解なんてない。動くしかない。<br>わかってるのに、動けない。」</p>
-    <p class="bold">「言い訳だけが、どんどん上手くなっていく。」</p>
-    <p class="bold">「こんな自分を、ずっと好きになれない。」</p>
+    <p>満たされているはずなのに、心のどこかがずっと渇いていた。</p>
 
-    <hr class="divider">
+    <p>本は読んだ。セミナーにも通った。<br>
+    一時的に気持ちは上がるが、月曜日には元に戻った。</p>
+
+    <p>いつか動こう、とずっと思っていた。<br>
+    そのいつかが、何年も来なかった。</p>
+
+    <p>このままでは嫌だ、とだけは確信していた。<br>
+    でも、じゃあどうする、の答えがなかった。</p>
+
+    <hr class="section-divider">
 
     <!-- ══════════════════════════════
-         ストーリー
+         セクション3：最初の驚き＋CTA1
     ══════════════════════════════ -->
 
-    <div class="section-title">声紋分析コーチ　若林寛紀について</div>
+    <p class="section-lead">声は、嘘をつかない。</p>
 
-    <div class="story-block">
-        <p>自分という軸が、なかった。</p>
-        <p>それを隠すために鎧を着た。<br>
-        強がり、変わり者を演じ、全部一人で抱え込んだ。</p>
-        <p>できることは増えた。スキルも増えた。評価もされた。<br>
-        でも、人とつながれない孤独感が<br>
-        ずっと、心の奥にあった。</p>
-    </div>
+    <p>自分が何に迷っているか、長い間、言葉にできなかった。</p>
 
-    <div class="story-block">
-        <p>どうにかしたくて、学んだ。<br>
-        スピリチュアル、ビジネス、自己啓発。<br>
-        知識が入るたびに「これだ」と思った。</p>
-        <p>でも、時間が経つと気づく。<br>
-        何年も、何も変わっていない。</p>
-        <p>家庭ができた。家族ができた。<br>
-        人並みの生活は、ちゃんとできていた。</p>
-        <p>それでも、消えない違和感があった。<br>
-        自分の人生に対する、深い不完全燃焼感。</p>
-    </div>
+    <p>6秒の声を録音して、機械が可視化したものを見た。<br>
+    そこに、自分がいた。</p>
 
-    <div class="story-block">
-        <p>たどり着いたのは、自分の内側を見ることだった。</p>
-        <p>声紋分析で、自分がどう出来上がったかが見えた。<br>
-        自分の弱さを、初めて認めた。</p>
-        <p>その瞬間、ずっと着ていた鎧が外れた。</p>
-        <p>一人ではできなかった。<br>
-        良きコーチ、良き出会い、良き場があった。<br>
-        その場で初めて、まっさらな自分と向き合えた。</p>
-    </div>
-
-    <div class="story-block">
-        <p>以前の自分とは、まるで違う人間になっていると思う。</p>
-        <p>変わったのは、意識だけだった。</p>
-        <p>でも、意識が変わったら、<br>
-        今まで目に入らなかった情報が見えるようになった。<br>
-        今まで手を出せなかったことに、手を出せるようになった。<br>
-        常に枠を超えることを意識し続けて、今がある。</p>
-        <p>来年の自分は、今の自分が想像できない場所にいる。<br>
-        そう思える人生を、初めて生きている。</p>
-    </div>
-
-    <div class="mint-box">
-        <p style="margin-bottom:0.4em;" class="bold">声紋分析コーチ　若林寛紀</p>
-        <p style="margin-bottom:0;" class="small-text">国家資格・救急救命士 / 生命の最前線の現場で20年以上従事</p>
-    </div>
-
-    <a href="#" class="btn line-cv-btn">無料 公式LINE 友だち追加</a>
-
-    <hr class="divider">
-
-    <!-- ══════════════════════════════
-         なぜ声紋分析なのか
-    ══════════════════════════════ -->
-
-    <div class="section-title">なぜ、声紋分析なのか</div>
-
-    <p>言葉は取り繕えます。<br>
-    でも、声の周波数だけは、本音を隠せません。</p>
-
-    <p>声紋分析は、たった6秒の声から、自分でも気づいていない本音を<span class="bold">12色のカラーバランスとして可視化</span>します。</p>
-
-    <!-- グラフ画像（2枚目：lazyあり） -->
     <img src="voiceanalysis.webp" alt="声紋分析グラフ" width="335" height="335" loading="lazy">
-    <p class="img-caption">12色のバランスが、あなたの本音を映し出します。</p>
+    <p class="img-caption">はじめて自分の声を見たとき、固まった。</p>
 
-    <p>感覚ではなく、データとして自分を見る。</p>
+    <p>12色のバランスが、そのまま自分の状態を映していた。</p>
 
-    <p>「そうかもしれない」と素直に受け取れるのは、人間ではなく機械が出したデータだからです。</p>
+    <p>やっぱりそうだったんだ、と思った。</p>
 
-    <p>その客観的な現在地から、本当に必要な一歩が見えてくる。</p>
+    <p>自分がずっと無理していた場所が、はっきり見えた。<br>
+    正しいと思い込んでいたものが、自然体の自分から離れていたことが分かった。</p>
 
-    <p>この技術は、物理学者・心理学者である<span class="bold">柊木匠氏</span>が確立したものです。<span class="bold">2万人以上の統計データ</span>をもとに体系化され、企業・病院・大学など<span class="bold">約200の組織に導入</span>されています。</p>
+    <p>だから苦しかったんだ、と腑に落ちた。</p>
+
+    <p>言葉では分からないものが、声には出ている。<br>
+    気になるなら、一度見てみればいいかもしれない。</p>
+
+    <a href="#" class="btn line-cv-btn">6秒の声を、聴いてみる</a>
+    <p class="btn-sub">LINEから無料で体験できます。</p>
+
+    <hr class="section-divider">
+
+    <!-- ══════════════════════════════
+         セクション4：理論的納得
+    ══════════════════════════════ -->
+
+    <p class="section-lead">なぜ、声なのか。</p>
+
+    <p>言葉は取り繕える。でも、声は違う。</p>
+
+    <p>人が感じ取るのは、言葉の内容だけではない、ということは、<br>
+    古くから研究されてきた。</p>
+
+    <p>メラビアンという心理学者の研究によれば、<br>
+    言葉と声のトーンが矛盾している時、<br>
+    人は声のトーンを優先して相手の感情を判断するという。</p>
+
+    <p>つまり、声には、話している本人でも気づいていない情報が乗っている。</p>
+
+    <p>声の周波数を色として可視化する特許技術がある。</p>
+    <p class="small-note">（公開特許2007-212932）</p>
+
+    <p>声からストレスを測る技術は、他にもある。<br>
+    ただ、心を階層構造として可視化する技術は、世界でこれが初めてだった。</p>
+
+    <p>物理学者であり心理学者でもある柊木匠氏は、<br>
+    この技術を用いて、声紋分析という体系を確立した。</p>
+
+    <p>これまでに2万人以上が声紋分析を受け、<br>
+    企業・病院・大学など、約200の組織で導入されてきた。</p>
+
+    <p>では、たった6秒の声から、何が見えるのか。</p>
+
+    <hr class="section-divider">
+
+    <!-- ══════════════════════════════
+         セクション5：体験の予感＋CTA2
+    ══════════════════════════════ -->
+
+    <p>6秒あれば、それで足りる。</p>
+
+    <p>スマホに向かって、自分の名前を言うだけだ。<br>
+    録音は、それで終わる。</p>
+
+    <p>その声が、12色のグラフになって現れる。</p>
+
+    <p>どの色が出て、どの色が出ないか。<br>
+    そこに、その人の特性が、そのまま映る。</p>
+
+    <p>自分がまだ気づいていない自分が、そこに映っている。</p>
+
+    <p>それを、他人から直接言葉にされる経験は、そうそうない。</p>
+
+    <p>何が出るか、試してみないと分からない。</p>
+
+    <a href="#" class="btn line-cv-btn">6秒の声を、聴いてみる</a>
+    <p class="btn-sub">LINEから無料で体験できます。</p>
+
+    <hr class="section-divider">
+
+    <!-- ══════════════════════════════
+         セクション6：若林の物語
+    ══════════════════════════════ -->
+
+    <p class="section-lead">自分という軸が、なかった。</p>
+
+    <p>色々なことを試した。</p>
+
+    <p>スピリチュアルも学んだ。<br>
+    ビジネス書を読み漁った。<br>
+    セミナーにも通った。</p>
+
+    <p>一時的には、なにか変われた気がした。<br>
+    でも、月曜の朝には、元通りになっていた。</p>
+
+    <p>何が足りないのか、分からなかった。</p>
+
+    <p>ある日、自分の声を録った。</p>
+
+    <p>6秒の音声が、12色のバランスとして目の前に現れた。</p>
+
+    <p>そこには、自分が誰にも言っていなかった本音が、<br>
+    そのまま映っていた。</p>
+
+    <p>何年も本を読んでも掴めなかった輪郭が、<br>
+    たった6秒の声に、出ていた。</p>
+
+    <p>私は、弱みを見せないように生きてきた。</p>
+
+    <p>人と関わる中で、すごそうなスキル、見せかけの強さ、虚栄を張ってきた。</p>
+
+    <p>それが、誰にも隠せていると思っていた。</p>
+
+    <p>ところが、違った。<br>
+    隠せていると思い込んでいたのは、自分だけだった。</p>
+
+    <p>コーチに会って、それを直接告げられた。<br>
+    自分では見ないようにしていた事実に、一つ一つ、光を当てられた。</p>
+
+    <p>薄々は、自分でも分かっていた課題だった。<br>
+    ただ、直接向き合わずに、別の方法で解決できる何かを探し続けていた。</p>
+
+    <p>弱みを開示する。避けてきたものに、直接向き合う。<br>
+    一人では、決して選ばなかった道だった。</p>
+
+    <p>向き合い始めてから、見えてきたものがあった。</p>
+
+    <p>自分には、無自覚な逃げパターンがあった。</p>
+
+    <p>気づかないうちに同じ選択を繰り返し、望まない現状を、自分で作り出していた。</p>
+
+    <p>そう、ようやく分かった。</p>
+
+    <p>そこから、違う選択ができるようになった。<br>
+    向き合うたびに、小さな選択が積み重なり、自信になっていった。</p>
+
+    <p>以前なら諦めていたことも、自分を信じて踏ん張れるようになった。</p>
+
+    <p>今までは、誰かが用意した正解の道を選ぶしかなかった。<br>
+    今は、正解かどうか分からない道を、自分で選んで、正解にしていける。</p>
+
+    <p>そういう強さが、身についてきた。</p>
 
     <hr class="divider">
 
+    <p>コーチングという言葉を、最近よく聞くようになった。<br>
+    種類も多く、どれを選べばいいか分からない、という声も聞く。</p>
+
+    <p>私も、認知科学に基づくコーチングを体系として学んできた。</p>
+
+    <p>ただ、名乗りにはこだわってこなかった。</p>
+
+    <p>本質は、クライアントが本当に望む人生を歩んでいけるように、<br>
+    隣で伴走することだ。<br>
+    そのために、声紋分析を使っている。</p>
+
+    <p>声紋分析コーチングとして、サポートを行っている。</p>
+
+    <p>クライアントがどういう状態になるか、そこが全てだ。</p>
+
+    <p>他の方法では動けなかった人にも、<br>
+    この組み合わせが役に立つことがある、と感じている。</p>
+
+    <p>まず、6秒の声を録ってもらう。<br>
+    そこに映っているのは、本人が意識している自分と、<br>
+    実際のアクションとの間に生まれているずれだ。</p>
+
+    <p>それが、モヤモヤの正体になっていることが多い。</p>
+
+    <p>対話だけで、ここに辿り着くのには時間がかかる。<br>
+    声紋があれば、スタートの位置が違う。<br>
+    相手も、視覚として見えるものなので、腑に落ちやすい。</p>
+
+    <p>動き始めてからも、定点的に声紋を取り続ける。<br>
+    その方向が、自分にとって自然体のものなのか。<br>
+    一緒に確認しながら進んでいく。</p>
+
+    <hr class="divider">
+
+    <p>ひとつだけ、ずっと変わらずに続けてきたことがある。</p>
+
+    <p>人が死にそうな現場で、20年、声をかけ続けてきた。</p>
+
+    <p>声には、その人の状態が全部乗っている。<br>
+    そのことを、誰よりも知ってきた。</p>
+
+    <p>だから、声紋に映るものが、<br>
+    私には違った重みに感じられる。</p>
+
+    <p class="bold" style="margin-top: 40px;">一番の実例は、私自身だ。</p>
+
+    <hr class="section-divider">
+
     <!-- ══════════════════════════════
-         ベネフィット再確認
+         セクション7：締め文
     ══════════════════════════════ -->
 
-    <div class="section-title">こんな変化が起きる可能性があります</div>
+    <p>自分の声が、今どんな状態か。</p>
 
-    <div class="voice-box bg-yellow">
-        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「長年のモヤモヤの正体が、やっとわかった。<br>
-                霧が晴れたように、進む方向が見えた。」
-            </div>
-        </div>
-        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「誰かの顔色をうかがわなくなった。<br>
-                自分がどうしたいか、それだけで決められるようになった。」
-            </div>
-        </div>
-        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「無駄なことをしなくなった。<br>
-                本当に必要なことだけに、時間とエネルギーを使えるようになった。」
-            </div>
-        </div>
-        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「ズレても、自分の基準で戻ってこれる。<br>
-                何があっても、迷子にならなくなった。」
-            </div>
-        </div>
-        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「朝、目が覚めた瞬間の感覚が変わった。<br>
-                生きている実感が、じわっと湧いてくる。」
-            </div>
-        </div>
-        <div class="check-item-flex" style="margin-bottom: 1.8em; padding-bottom: 1.4em; border-bottom: 1px solid #e8ede8;">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「去年の自分とは、全く違う結果が出始めている。<br>
-                初めて、未来が楽しみになった。」
-            </div>
-        </div>
-        <div class="check-item-flex">
-            <span class="check-icon">✔</span>
-            <div class="check-content bold">
-                「変わったのは意識だけだった。<br>
-                でも、見える世界が、動ける範囲が、別物になった。」
-            </div>
-        </div>
-    </div>
+    <p>それを知ることが、最初の一歩だと思っている。</p>
 
-    <p>なぜ、同じ場所に留まり続けてしまうのか。<br>その答えが、声の中にあります。</p>
+    <p>ただ、知らないまま進むのも、ひとつの選択だ。</p>
 
-    <p>「やっと、自分の方向が見えた」<br>
-    そう感じるきっかけを、このLINEで届けています。</p>
+    <!-- ══════════════════════════════
+         セクション8：最終CTA＋フッター
+    ══════════════════════════════ -->
 
-    <p>登録は30秒です。</p>
+    <a href="#" class="btn line-cv-btn">6秒の声を、聴いてみる</a>
+    <p class="btn-sub">
+        LINEから無料で体験できます。<br>
+        30秒で登録完了。
+    </p>
 
-    <a href="#" class="btn line-cv-btn">無料 公式LINE 友だち追加</a>
+    <hr class="divider">
 
-    <p class="center small-text">※無料で情報発信中です。</p>
-
-    <div class="center small-text" style="margin-top: 36px; color: #666;">
-        © 2026 若林 / 声紋分析コーチ<br>
+    <div class="footer">
+        © 2026 若林寛紀 / 声紋分析コーチ<br>
         声紋分析技術：柊木匠氏 / 株式会社ライフスタイルマネジメント<br>
-        <a href="https://seimonbunseki.net/" target="_blank" rel="noopener noreferrer" class="footer-link">https://seimonbunseki.net/</a>
+        <a href="https://seimonbunseki.net/" target="_blank" rel="noopener noreferrer">https://seimonbunseki.net/</a>
     </div>
 
 </div>
@@ -503,14 +517,9 @@
 
         document.querySelectorAll('.line-cv-btn').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
-                // クリックの瞬間にCookieから_fbpを取得
                 var match = document.cookie.match(/(?:^|; )_fbp=([^;]*)/);
                 var fbp = match ? match[1] : '';
-                
-                // fbpがあればURLパラメータに付与
                 var finalUrl = baseLiffUrl + (fbp ? '&fbp=' + encodeURIComponent(fbp) : '');
-                
-                // LINEへ正しく遷移させる
                 window.location.href = finalUrl;
             });
         });
