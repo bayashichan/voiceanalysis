@@ -1,531 +1,319 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="favicon.png">
-    <meta name="facebook-domain-verification" content="c1bd0rxa4t91ksk6j0bfnyr4frqvxe" />
-    <title>声紋分析　アップデート林</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            -webkit-text-size-adjust: 100%;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="facebook-domain-verification" content="c1bd0rxa4t91ksk6j0bfnyr4frqvxe" />
+<title>声紋診断 | アップデート林</title>
+<style>
+* { box-sizing: border-box; -webkit-text-size-adjust: 100%; }
+html { font-size: 15px; }
+body {
+  font-family: "ヒラギノ明朝 ProN","Hiragino Mincho ProN","游明朝","Yu Mincho","ＭＳ 明朝",serif;
+  color: #2a2a2a; background-color: #f5f4f0; margin: 0; padding: 0; overflow-x: hidden;
+}
+.container {
+  max-width: 430px; margin: 0 auto; background-color: #fff;
+  padding: 36px 20px 48px; line-height: 1.9; font-size: 0.95rem;
+  word-break: break-all; overflow-wrap: break-word;
+}
+.target-label {
+  text-align: center; font-size: 0.78rem; color: #666; letter-spacing: 0.08em;
+  margin: 0 0 28px; padding-bottom: 16px; border-bottom: 1px solid #e8e8e8;
+}
+.hero { margin: 0 0 36px; }
+.hero-headline {
+  font-size: 1.35rem; font-weight: 800; line-height: 1.55;
+  letter-spacing: 0.03em; margin: 0 0 20px; color: #1a1a1a;
+}
+.hero-sub { font-size: 0.95rem; line-height: 1.9; color: #333; margin: 0 0 1.1em; }
+.hero-frame { font-size: 0.95rem; line-height: 1.9; color: #333; margin: 0 0 1.1em; }
+.hero-resolve {
+  margin-top: 20px; padding: 14px 16px; background-color: #f4f6f4;
+  border-left: 3px solid #2d6b3e; font-size: 0.95rem; line-height: 1.85; color: #1a1a1a;
+}
+.section-label { font-size: 0.72rem; letter-spacing: 0.12em; color: #2d6b3e; margin: 40px 0 10px; }
+.section-title {
+  font-size: 1.05rem; font-weight: 800; color: #1a1a1a; line-height: 1.55;
+  margin: 0 0 18px; padding-left: 12px; border-left: 3px solid #2d6b3e;
+}
+.check-list { list-style: none; padding: 0; margin: 0 0 10px; }
+.check-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid #f0f0f0;
+  font-size: 0.93rem; line-height: 1.75; color: #2a2a2a;
+}
+.check-list li:last-child { border-bottom: none; }
+.check-mark { color: #2d6b3e; font-size: 0.85rem; margin-top: 3px; flex-shrink: 0; }
+p { margin: 0 0 1.2em; line-height: 1.9; }
+p:last-child { margin-bottom: 0; }
+.mint-box {
+  background-color: #f4f6f4; border-left: 3px solid #2d6b3e;
+  padding: 18px 16px; margin: 24px 0; font-size: 0.93rem; line-height: 1.85;
+}
+.mint-box p:last-child { margin-bottom: 0; }
+.spec-block {
+  display: flex; justify-content: center; margin: 24px 0 10px;
+  border: 1px solid #e8e8e8; border-radius: 6px; overflow: hidden;
+}
+.spec-item { text-align: center; padding: 16px 12px; flex: 1; }
+.spec-item + .spec-item { border-left: 1px solid #e8e8e8; }
+.spec-number { font-size: 1.05rem; font-weight: 800; color: #2d6b3e; line-height: 1.3; display: block; }
+.spec-label { font-size: 0.7rem; color: #999; letter-spacing: 0.05em; display: block; margin-top: 5px; }
+.spec-note { text-align: center; font-size: 0.8rem; color: #888; margin: 10px 0 0; line-height: 1.7; }
+.line-section { background-color: #f8f9f8; border-radius: 8px; padding: 22px 18px; margin: 20px 0 24px; }
+.line-benefit-list { list-style: none; padding: 0; margin: 0 0 16px; }
+.line-benefit-list li {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 0.9rem; line-height: 1.75; color: #2a2a2a; font-weight: bold; margin-bottom: 10px;
+}
+.line-benefit-list li:last-child { margin-bottom: 0; }
+.line-benefit-mark { color: #2d6b3e; flex-shrink: 0; margin-top: 2px; }
+.line-info { font-size: 0.83rem; color: #666; line-height: 1.85; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #e4e8e4; }
+.btn-wrap { margin: 24px 0; }
+.btn {
+  display: block; width: 94%; margin: 0 auto; padding: 16px 12px;
+  background-color: #2d6b3e; color: #fff; text-align: center;
+  text-decoration: none; font-weight: bold; font-size: 0.95rem;
+  border-radius: 6px; letter-spacing: 0.05em; line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active { background-color: #245a33; }
+.btn-note { text-align: center; font-size: 0.75rem; color: #bbb; margin: 8px 0 0; }
+hr.divider { border: 0; border-top: 1px solid #ebebeb; margin: 36px 0; }
+.table-container { width: 100%; margin: 16px 0 24px; font-size: 0.82rem; line-height: 1.6; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+th, td { padding: 10px 8px; vertical-align: top; border-bottom: 1px solid #eaeaea; word-break: break-all; }
+th { font-weight: bold; text-align: center; font-size: 0.8rem; background-color: #f4f6f4; color: #2d6b3e; }
+th:first-child { width: 18%; }
+td:first-child { font-weight: bold; color: #666; font-size: 0.8rem; }
+.benefit-list { list-style: none; padding: 0; margin: 0; }
+.benefit-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 11px 0; border-bottom: 1px solid #f0f0f0;
+  font-size: 0.93rem; line-height: 1.75; color: #2a2a2a; font-weight: bold;
+}
+.benefit-list li:last-child { border-bottom: none; }
+.benefit-mark { color: #2d6b3e; flex-shrink: 0; margin-top: 3px; }
+.closing-block { margin: 0 0 32px; }
+.closing { font-size: 0.93rem; line-height: 2.0; color: #444; margin: 0 0 1.2em; }
+img { display: block; margin: 20px auto; max-width: 76%; height: auto; border-radius: 4px; }
+.footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid #ebebeb; text-align: center; font-size: 0.73rem; color: #bbb; line-height: 1.9; }
+@media (max-width: 374px) {
+  html { font-size: 14px; }
+  .container { padding: 28px 15px 40px; }
+  .hero-headline { font-size: 1.2rem; }
+  img { max-width: 86%; }
+}
+@media (min-width: 768px) {
+  .container { max-width: 520px; padding: 48px 32px; }
+}
+</style>
 
-        html {
-            font-size: 16px;
-        }
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+fbq("init","1302054671384974");
+fbq("track","PageView");
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1302054671384974&ev=PageView&noscript=1"/></noscript>
 
-        body {
-            font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "游明朝", "Yu Mincho", "ＭＳ 明朝", serif;
-            color: #333;
-            background-color: #f5f4f0;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 430px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 32px 24px 40px;
-            line-height: 1.9;
-            word-break: normal;
-            overflow-wrap: break-word;
-        }
-
-        /* ファーストビューのメインコピー */
-        .fv-main {
-            font-size: clamp(1.15rem, 5vw, 1.35rem);
-            font-weight: 800;
-            margin: 0 0 32px;
-            letter-spacing: 0.04em;
-            line-height: 1.7;
-        }
-
-        /* セクションの太字一行（問い型見出し含む） */
-        .section-lead {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin: 56px 0 24px;
-            letter-spacing: 0.02em;
-            line-height: 1.7;
-            color: #222;
-        }
-
-        /* 本文段落 */
-        p {
-            margin: 0 0 1.6em;
-            font-size: 1rem;
-            line-height: 1.95;
-        }
-
-        /* ダッシュ付き悩み独白 */
-        .dash-line {
-            margin: 0 0 1.6em;
-            padding-left: 0;
-        }
-
-        .dash-line p {
-            margin: 0;
-            text-indent: -1.2em;
-            padding-left: 1.2em;
-        }
-
-        .dash-line p + p {
-            text-indent: 0;
-            padding-left: 1.2em;
-            margin-top: 0.2em;
-        }
-
-        /* 肩書き */
-        .byline {
-            margin: 40px 0 0;
-            font-size: 0.92rem;
-            line-height: 1.9;
-            color: #555;
-        }
-
-        .byline .name {
-            font-weight: bold;
-            font-size: 1rem;
-            color: #333;
-            margin-bottom: 0.3em;
-            letter-spacing: 0.05em;
-        }
-
-        /* 画像 */
-        img {
-            display: block;
-            margin: 32px auto 8px;
-            max-width: 78%;
-            height: auto;
-        }
-
-        .img-caption {
-            text-align: center;
-            font-size: 0.88rem;
-            color: #666;
-            margin: 0 0 32px;
-            line-height: 1.6;
-        }
-
-        /* 特許番号など補足 */
-        .small-note {
-            font-size: 0.9rem;
-            color: #555;
-            margin-top: -1em;
-            margin-bottom: 1.6em;
-        }
-
-        /* 区切り線 */
-        hr.divider {
-            border: 0;
-            border-top: 1px solid #d8d6cf;
-            margin: 56px auto;
-            width: 40px;
-        }
-
-        /* セクション区切り線（大） */
-        hr.section-divider {
-            border: 0;
-            border-top: 1px solid #e5e3dc;
-            margin: 64px 0;
-        }
-
-        /* CTAボタン */
-        .btn {
-            display: block;
-            width: 92%;
-            margin: 48px auto 12px;
-            padding: 18px 10px;
-            background-color: #2d6b3e;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-            border-radius: 4px;
-            letter-spacing: 0.08em;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .btn:active {
-            background-color: #245a33;
-        }
-
-        .btn-sub {
-            text-align: center;
-            font-size: 0.82rem;
-            color: #888;
-            margin: 0 auto 48px;
-            line-height: 1.8;
-        }
-
-        /* フッター */
-        .footer {
-            text-align: center;
-            font-size: 0.78rem;
-            color: #888;
-            margin-top: 40px;
-            line-height: 1.8;
-        }
-
-        .footer a {
-            color: #888;
-            text-decoration: underline;
-            word-break: break-all;
-        }
-
-        /* 強調 */
-        .bold {
-            font-weight: bold;
-        }
-
-        @media (max-width: 374px) {
-            html { font-size: 15px; }
-            .container { padding: 24px 18px 32px; }
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                max-width: 520px;
-                padding: 48px 40px;
-            }
-        }
-    </style>
-
-    <!-- Meta Pixel -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1302054671384974');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1302054671384974&ev=PageView&noscript=1"
-    /></noscript>
-
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "vhe50003pj");
-    </script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vhe50003pj");
+</script>
 </head>
 <body>
-
 <div class="container">
 
-    <!-- ══════════════════════════════
-         セクション1：FV
-    ══════════════════════════════ -->
+  <p class="target-label">このまま終わりたくない人へ　声紋診断・無料LINE相談</p>
 
-    <p class="fv-main">気づいたら、なりたくない自分になっていた。</p>
+  <div class="hero">
+    <h1 class="hero-headline">気づいたら、<br>何年も同じ場所にいた。</h1>
+    <p class="hero-sub">そう感じたことはありませんか。</p>
+    <p class="hero-frame">「このままでいい」とは思えない。<br>でも、何を変えればいいかも、わからない。</p>
+    <div class="hero-resolve">その詰まりの正体を、声から整理します。</div>
+  </div>
 
-    <div class="dash-line">
-        <p>- いつか動こう、とずっと思っている。</p>
-        <p>なのに、いつまで同じ場所にいるんだろう。</p>
+  <p class="section-label">SELF CHECK</p>
+  <h2 class="section-title">3つ以上当てはまる方に、<br>声紋診断はよく機能します</h2>
+  <ul class="check-list">
+    <li><span class="check-mark">✓</span><span>評価されても、心のモヤモヤが消えない</span></li>
+    <li><span class="check-mark">✓</span><span>目標を立てると、なぜか行動が続かない</span></li>
+    <li><span class="check-mark">✓</span><span>「本当にやりたいこと」を聞かれると、答えに詰まる</span></li>
+    <li><span class="check-mark">✓</span><span>肩書きを外したら、何が残るかわからない</span></li>
+    <li><span class="check-mark">✓</span><span>周りの期待に応え続けて、自分が何者かわからなくなってきた</span></li>
+    <li><span class="check-mark">✓</span><span>学んでも学んでも、現実は何も変わっていない</span></li>
+  </ul>
+
+  <hr class="divider">
+
+  <p class="section-label">WHY</p>
+  <h2 class="section-title">詰まりの正体は、<br>どこにあるのか</h2>
+  <p>その詰まりが、行動の問題なのか。<br>目標設定の問題なのか。<br>それとも、自分の本音が自分に見えていないだけなのか。</p>
+  <p>多くの場合、問題は一番手前にある。</p>
+  <p>言葉では「やりたい」と言っていても、声のトーンが別のことを言っている。<br>自分でも気づいていない本音が、声の中に隠れているからです。</p>
+
+  <hr class="divider">
+
+  <p class="section-label">ABOUT</p>
+  <h2 class="section-title">声紋診断とは何か</h2>
+  <p>人は、言葉では取り繕える。でも声の周波数は、嘘をつきません。</p>
+  <img src="voiceanalysis.webp" alt="声紋診断グラフ" width="335" height="335" loading="lazy">
+  <p>声の周波数を解析し、自分でも気づいていない本音の状態を12色のデータとして可視化する。これが声紋診断の核心です。</p>
+  <div class="mint-box">
+    <p>特許技術（公開特許2007-212932）をベースに、2万人以上の統計データから体系化されたもので、企業・病院・大学など約200の組織に導入されています。</p>
+  </div>
+  <p>「あなたはこういう人だ」と人に言われると、どうしても抵抗が生まれます。<br>でも、感情のない客観的なデータは、素直に見つめることができます。</p>
+  <p>これが、行動が変わる最初の一歩になります。</p>
+
+  <hr class="divider">
+
+  <p class="section-label">SPECIFICATION</p>
+  <h2 class="section-title">診断の概要</h2>
+  <div class="spec-block">
+    <div class="spec-item">
+      <span class="spec-number">6秒</span>
+      <span class="spec-label">録音のみ</span>
     </div>
-
-    <div class="dash-line">
-        <p>- 悪くない毎日だ。</p>
-        <p>でも、これでいいんだろうか。</p>
+    <div class="spec-item">
+      <span class="spec-number">20〜60分</span>
+      <span class="spec-label">診断時間</span>
     </div>
-
-    <p class="section-lead" style="margin-top: 48px;">6秒の声に、あなたの本音が出る。</p>
-
-    <div class="byline">
-        <div class="name">声紋分析　アップデート林</div>
-        国家資格・救急救命士 / 生命の最前線の現場で20年以上従事
+    <div class="spec-item">
+      <span class="spec-number">無料</span>
+      <span class="spec-label">費用</span>
     </div>
-
-    <hr class="section-divider">
-
-    <!-- ══════════════════════════════
-         セクション2：独白の拡張
-    ══════════════════════════════ -->
-
-    <p>悪い毎日ではなかった。<br>
-    ただ、いつからか、この先が見えてしまっていた。</p>
-
-    <p>満たされているはずなのに、心のどこかがずっと渇いていた。</p>
-
-    <p>本は読んだ。セミナーにも通った。<br>
-    一時的に気持ちは上がるが、月曜日には元に戻った。</p>
-
-    <p>いつか動こう、とずっと思っていた。<br>
-    そのいつかが、何年も来なかった。</p>
-
-    <p>このままでは嫌だ、とだけは確信していた。<br>
-    でも、じゃあどうする、の答えがなかった。</p>
-
-    <hr class="section-divider">
-
-    <!-- ══════════════════════════════
-         セクション3：最初の驚き＋CTA1
-    ══════════════════════════════ -->
-
-    <p class="section-lead">声は、嘘をつかない。</p>
-
-    <p>自分が何に迷っているか、長い間、言葉にできなかった。</p>
-
-    <p>6秒の声を録音して、機械が可視化したものを見た。<br>
-    そこに、自分がいた。</p>
-
-    <img src="voiceanalysis.webp" alt="声紋分析グラフ" width="335" height="335" loading="lazy">
-    <p class="img-caption">はじめて自分の声を見たとき、固まった。</p>
-
-    <p>12色のバランスが、そのまま自分の状態を映していた。</p>
-
-    <p>やっぱりそうだったんだ、と思った。</p>
-
-    <p>自分がずっと無理していた場所が、はっきり見えた。<br>
-    正しいと思い込んでいたものが、自然体の自分から離れていたことが分かった。</p>
-
-    <p>だから苦しかったんだ、と腑に落ちた。</p>
-
-    <p>言葉では分からないものが、声には出ている。<br>
-    気になるなら、一度見てみればいいかもしれない。</p>
-
-    <a href="#" class="btn line-cv-btn">6秒の声を、聴いてみる</a>
-    <p class="btn-sub">LINEから無料で体験できます。</p>
-
-    <hr class="section-divider">
-
-    <!-- ══════════════════════════════
-         セクション4：理論的納得
-    ══════════════════════════════ -->
-
-    <p class="section-lead">なぜ、声なのか。</p>
-
-    <p>言葉は取り繕える。でも、声は違う。</p>
-
-    <p>人が感じ取るのは、言葉の内容だけではない、ということは、<br>
-    古くから研究されてきた。</p>
-
-    <p>メラビアンという心理学者の研究によれば、<br>
-    言葉と声のトーンが矛盾している時、<br>
-    人は声のトーンを優先して相手の感情を判断するという。</p>
-
-    <p>つまり、声には、話している本人でも気づいていない情報が乗っている。</p>
-
-    <p>声の周波数を色として可視化する特許技術がある。</p>
-    <p class="small-note">（公開特許2007-212932）</p>
-
-    <p>声からストレスを測る技術は、他にもある。<br>
-    ただ、心を階層構造として可視化する技術は、世界でこれが初めてだった。</p>
-
-    <p>物理学者であり心理学者でもある柊木匠氏は、<br>
-    この技術を用いて、声紋分析という体系を確立した。</p>
-
-    <p>これまでに2万人以上が声紋分析を受け、<br>
-    企業・病院・大学など、約200の組織で導入されてきた。</p>
-
-    <p>では、たった6秒の声から、何が見えるのか。</p>
-
-    <hr class="section-divider">
-
-    <!-- ══════════════════════════════
-         セクション5：体験の予感＋CTA2
-    ══════════════════════════════ -->
-
-    <p>6秒あれば、それで足りる。</p>
-
-    <p>スマホに向かって、自分の名前を言うだけだ。<br>
-    録音は、それで終わる。</p>
-
-    <p>その声が、12色のグラフになって現れる。</p>
-
-    <p>どの色が出て、どの色が出ないか。<br>
-    そこに、その人の特性が、そのまま映る。</p>
-
-    <p>自分がまだ気づいていない自分が、そこに映っている。</p>
-
-    <p>それを、他人から直接言葉にされる経験は、そうそうない。</p>
-
-    <p>何が出るか、試してみないと分からない。</p>
-
-    <a href="#" class="btn line-cv-btn">6秒の声を、聴いてみる</a>
-    <p class="btn-sub">LINEから無料で体験できます。</p>
-
-    <hr class="section-divider">
-
-    <!-- ══════════════════════════════
-         セクション6：若林の物語
-    ══════════════════════════════ -->
-
-    <p class="section-lead">自分という軸が、なかった。</p>
-
-    <p>色々なことを試した。</p>
-
-    <p>スピリチュアルも学んだ。<br>
-    ビジネス書を読み漁った。<br>
-    セミナーにも通った。</p>
-
-    <p>一時的には、なにか変われた気がした。<br>
-    でも、月曜の朝には、元通りになっていた。</p>
-
-    <p>何が足りないのか、分からなかった。</p>
-
-    <p>ある日、自分の声を録った。</p>
-
-    <p>6秒の音声が、12色のバランスとして目の前に現れた。</p>
-
-    <p>そこには、自分が誰にも言っていなかった本音が、<br>
-    そのまま映っていた。</p>
-
-    <p>何年も本を読んでも掴めなかった輪郭が、<br>
-    たった6秒の声に、出ていた。</p>
-
-    <p>私は、弱みを見せないように生きてきた。</p>
-
-    <p>人と関わる中で、すごそうなスキル、見せかけの強さ、虚栄を張ってきた。</p>
-
-    <p>それが、誰にも隠せていると思っていた。</p>
-
-    <p>ところが、違った。<br>
-    隠せていると思い込んでいたのは、自分だけだった。</p>
-
-    <p>コーチに会って、それを直接告げられた。<br>
-    自分では見ないようにしていた事実に、一つ一つ、光を当てられた。</p>
-
-    <p>薄々は、自分でも分かっていた課題だった。<br>
-    ただ、直接向き合わずに、別の方法で解決できる何かを探し続けていた。</p>
-
-    <p>弱みを開示する。避けてきたものに、直接向き合う。<br>
-    一人では、決して選ばなかった道だった。</p>
-
-    <p>向き合い始めてから、見えてきたものがあった。</p>
-
-    <p>自分には、無自覚な逃げパターンがあった。</p>
-
-    <p>気づかないうちに同じ選択を繰り返し、望まない現状を、自分で作り出していた。</p>
-
-    <p>そう、ようやく分かった。</p>
-
-    <p>そこから、違う選択ができるようになった。<br>
-    向き合うたびに、小さな選択が積み重なり、自信になっていった。</p>
-
-    <p>以前なら諦めていたことも、自分を信じて踏ん張れるようになった。</p>
-
-    <p>今までは、誰かが用意した正解の道を選ぶしかなかった。<br>
-    今は、正解かどうか分からない道を、自分で選んで、正解にしていける。</p>
-
-    <p>そういう強さが、身についてきた。</p>
-
-    <hr class="divider">
-
-    <p>コーチングという言葉を、最近よく聞くようになった。<br>
-    種類も多く、どれを選べばいいか分からない、という声も聞く。</p>
-
-    <p>私も、認知科学に基づくコーチングを体系として学んできた。</p>
-
-    <p>ただ、名乗りにはこだわってこなかった。</p>
-
-    <p>本質は、クライアントが本当に望む人生を歩んでいけるように、<br>
-    隣で伴走することだ。<br>
-    そのために、声紋分析を使っている。</p>
-
-    <p>声紋分析コーチングとして、サポートを行っている。</p>
-
-    <p>クライアントがどういう状態になるか、そこが全てだ。</p>
-
-    <p>他の方法では動けなかった人にも、<br>
-    この組み合わせが役に立つことがある、と感じている。</p>
-
-    <p>まず、6秒の声を録ってもらう。<br>
-    そこに映っているのは、本人が意識している自分と、<br>
-    実際のアクションとの間に生まれているずれだ。</p>
-
-    <p>それが、モヤモヤの正体になっていることが多い。</p>
-
-    <p>対話だけで、ここに辿り着くのには時間がかかる。<br>
-    声紋があれば、スタートの位置が違う。<br>
-    相手も、視覚として見えるものなので、腑に落ちやすい。</p>
-
-    <p>動き始めてからも、定点的に声紋を取り続ける。<br>
-    その方向が、自分にとって自然体のものなのか。<br>
-    一緒に確認しながら進んでいく。</p>
-
-    <hr class="divider">
-
-    <p>ひとつだけ、ずっと変わらずに続けてきたことがある。</p>
-
-    <p>人が死にそうな現場で、20年、声をかけ続けてきた。</p>
-
-    <p>声には、その人の状態が全部乗っている。<br>
-    そのことを、誰よりも知ってきた。</p>
-
-    <p>だから、声紋に映るものが、<br>
-    私には違った重みに感じられる。</p>
-
-    <p class="bold" style="margin-top: 40px;">一番の実例は、私自身だ。</p>
-
-    <hr class="section-divider">
-
-    <!-- ══════════════════════════════
-         セクション7：締め文
-    ══════════════════════════════ -->
-
-    <p>自分の声が、今どんな状態か。</p>
-
-    <p>それを知ることが、最初の一歩だと思っている。</p>
-
-    <p>ただ、知らないまま進むのも、ひとつの選択だ。</p>
-
-    <!-- ══════════════════════════════
-         セクション8：最終CTA＋フッター
-    ══════════════════════════════ -->
-
-    <a href="#" class="btn line-cv-btn">6秒の声を、聴いてみる</a>
-    <p class="btn-sub">
-        LINEから無料で体験できます。<br>
-        30秒で登録完了。
-    </p>
-
-    <hr class="divider">
-
-    <div class="footer">
-        © 2026 声紋分析　アップデート林<br>
-        声紋分析技術：柊木匠氏 / 株式会社ライフスタイルマネジメント<br>
-        <a href="https://seimonbunseki.net/" target="_blank" rel="noopener noreferrer">https://seimonbunseki.net/</a>
-    </div>
+  </div>
+  <p class="spec-note">無理な勧誘はありません。　プライバシーは厳守します。</p>
+
+  <hr class="divider">
+
+  <p class="section-label">LINE登録で</p>
+  <h2 class="section-title">無料の声紋診断が<br>受けられます</h2>
+  <div class="line-section">
+    <ul class="line-benefit-list">
+      <li><span class="line-benefit-mark">✓</span><span>いまの自分がどの「詰まり状態」にあるか、データで見える</span></li>
+      <li><span class="line-benefit-mark">✓</span><span>言葉にできなかったモヤモヤの正体が、整理される</span></li>
+    </ul>
+    <p class="line-info">あわせて、書籍や動画には出てこない考察を定期的にお届けしています。<br>・ 声の科学、認知のクセ、人生を動かすための視点。</p>
+  </div>
+
+  <div class="btn-wrap">
+    <a href="#" class="btn line-cv-btn">無料で声紋診断を受けてみる →</a>
+  </div>
+
+  <hr class="divider">
+
+  <p class="section-label">DIFFERENCE</p>
+  <h2 class="section-title">一般的なサポートとの違い</h2>
+  <p>多くの人は、周りの期待や常識に自分を合わせて生きてきています。<br>だから「やりたい」と思っていること自体が、実は本音ではないことがあります。</p>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th></th>
+        <th>一般的な<br>サポート</th>
+        <th>声紋診断</th>
+      </tr>
+      <tr>
+        <td>本音の<br>把握</td>
+        <td>自分の言葉で語るしかない。でも「やりたい」が本音とは限らない</td>
+        <td>声の周波数が、自分でも気づいていない本音を可視化する</td>
+      </tr>
+      <tr>
+        <td>目標の質</td>
+        <td>本音とズレた目標だと、成果が出ても苦しくなる</td>
+        <td>本当にワクワクしているかをデータで確認してから進められる</td>
+      </tr>
+      <tr>
+        <td>継続性</td>
+        <td>本音でない目標は、頑張っても続かない</td>
+        <td>心からの方向性だから、自然と行動が続く</td>
+      </tr>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <p class="section-label">WHY HUMAN</p>
+  <h2 class="section-title">データだけでは、<br>人は変われません</h2>
+  <p>声紋診断で、現在地がわかります。<br>「本来の素質」と「今の状態」のズレが見えます。</p>
+  <p>でも、それだけでは変われません。「で、どうすればいいの？」が残るからです。</p>
+  <p>行動だけを変えようとしても、根本にある「ものの捉え方」が変わらなければ、元のパターンに戻ります。</p>
+  <p>だから、対話が必要になります。</p>
+  <p>声紋診断で現在地を把握し、対話の中で「本当はどうしたいのか」を一緒に探る。<br>言葉だけでなく、声のトーン、間、非言語の情報を読み取りながら、ご本人も気づいていない思考のパターンに光を当てます。</p>
+  <p>これは、機械にはできません。</p>
+
+  <hr class="divider">
+
+  <p class="section-label">PROFILE</p>
+  <h2 class="section-title">声紋診断　アップデート林</h2>
+  <div class="mint-box">
+    <p>国家資格救急救命士 ／ 生命の最前線で20年以上・2,000名以上と対話</p>
+  </div>
+  <p>人が死にそうな現場で、20年間声をかけ続けてきた。</p>
+  <p>言葉では「大丈夫です」と言っていても、声が揺れている人がいた。<br>言葉では「もう終わりです」と言っていても、声に力が残っている人がいた。</p>
+  <p>言葉と心の声がずれる瞬間を、現場で繰り返し見てきた。<br>それが声紋診断と交わったとき、自分がやるべきことが見えた。</p>
+
+  <hr class="divider">
+
+  <p class="section-label">CHANGE</p>
+  <h2 class="section-title">声と向き合うことで、<br>こんな変化が起きる可能性があります</h2>
+  <ul class="benefit-list">
+    <li><span class="benefit-mark">✓</span><span>ずっと抱えてきたモヤモヤの正体が、やっとわかった</span></li>
+    <li><span class="benefit-mark">✓</span><span>「これだ」と思える方向が見つかり、迷わなくなった</span></li>
+    <li><span class="benefit-mark">✓</span><span>誰かと比べて落ち込む日々が、嘘みたいに消えた</span></li>
+    <li><span class="benefit-mark">✓</span><span>朝、目が覚めた瞬間から、生きている実感が湧いてくる</span></li>
+    <li><span class="benefit-mark">✓</span><span>自分がどうしたいか、それだけで決められるようになった</span></li>
+    <li><span class="benefit-mark">✓</span><span>言い訳しなくなった。動ける自分が誇らしい</span></li>
+    <li><span class="benefit-mark">✓</span><span>「自分の人生を生きている」その確信が、涙が出るほど嬉しい</span></li>
+  </ul>
+
+  <hr class="divider">
+
+  <div class="closing-block">
+    <p class="closing">声を診断することで何かが変わるかどうか、正直、やってみなければわかりません。</p>
+    <p class="closing">ただ、自分の声を一度も聴いたことがない人が、自分の本心を知ろうとすることには、意味があると思っています。</p>
+    <p class="closing">気になるなら、それだけで十分です。</p>
+  </div>
+
+  <div class="btn-wrap">
+    <a href="#" class="btn line-cv-btn">無料で声紋診断を受けてみる →</a>
+    <p class="btn-note">※ 登録は30秒です。</p>
+  </div>
+
+  <div class="footer">
+    © 2026 アップデート林 / 声紋診断<br>
+    使用技術：公開特許2007-212932
+  </div>
 
 </div>
 
-<!-- LIFFリンク構成 (fbp対応版) -->
+<!-- LIFFリンク構成（fbp対応版） -->
 <script>
-    (function() {
-        var params = new URLSearchParams(window.location.search);
-        var fbclid = params.get('fbclid') || '';
-        var tag = params.get('tag') || '';
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var fbclid = params.get("fbclid") || "";
+  var tag = params.get("tag") || "";
 
-        var baseLiffUrl = 'https://liff.line.me/2009544922-LSEmGTNF'
-            + '?fbclid=' + encodeURIComponent(fbclid)
-            + '&tag=' + encodeURIComponent(tag)
-            + '&ch=3e5e783e-9029-4712-bbb3-1d45ef7ad270'
-            + '&oa=@582xsdpe';
+  var baseLiffUrl = "https://liff.line.me/2009544922-LSEmGTNF"
+    + "?fbclid=" + encodeURIComponent(fbclid)
+    + "&tag=" + encodeURIComponent(tag)
+    + "&ch=3e5e783e-9029-4712-bbb3-1d45ef7ad270"
+    + "&oa=@582xsdpe";
 
-        document.querySelectorAll('.line-cv-btn').forEach(function(btn) {
-            btn.addEventListener('click', function(e) {
-                var match = document.cookie.match(/(?:^|; )_fbp=([^;]*)/);
-                var fbp = match ? match[1] : '';
-                var finalUrl = baseLiffUrl + (fbp ? '&fbp=' + encodeURIComponent(fbp) : '');
-                window.location.href = finalUrl;
-            });
-        });
-    })();
+  document.querySelectorAll(".line-cv-btn").forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      var match = document.cookie.match(/(?:^|; )_fbp=([^;]*)/);
+      var fbp = match ? match[1] : "";
+      var finalUrl = baseLiffUrl + (fbp ? "&fbp=" + encodeURIComponent(fbp) : "");
+      window.location.href = finalUrl;
+    });
+  });
+})();
 </script>
 
 </body>
