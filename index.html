@@ -294,18 +294,18 @@ fbq("track","PageView");
 
 </div>
 
-<!-- LIFFリンク構成（fbp/fbc対応版） -->
+<!-- 中継リダイレクト方式（fbp/fbc対応版） -->
 <script>
 (function() {
   var params = new URLSearchParams(window.location.search);
   var fbclid = params.get("fbclid") || "";
   var tag = params.get("tag") || "";
 
-  var baseLiffUrl = "https://liff.line.me/2009544922-LSEmGTNF"
+  var baseRedirectUrl = "https://line-manager-omega.vercel.app/api/redirect"
     + "?fbclid=" + encodeURIComponent(fbclid)
     + "&tag=" + encodeURIComponent(tag)
     + "&ch=3e5e783e-9029-4712-bbb3-1d45ef7ad270"
-    + "&oa=@582xsdpe";
+    + "&oa=" + encodeURIComponent("@582xsdpe");
 
   document.querySelectorAll(".line-cv-btn").forEach(function(btn) {
     btn.addEventListener("click", function(e) {
@@ -321,7 +321,7 @@ fbq("track","PageView");
         fbc = "fb.1." + Date.now() + "." + fbclid;
       }
 
-      var finalUrl = baseLiffUrl
+      var finalUrl = baseRedirectUrl
         + (fbp ? "&fbp=" + encodeURIComponent(fbp) : "")
         + (fbc ? "&fbc=" + encodeURIComponent(fbc) : "");
       window.location.href = finalUrl;
