@@ -294,7 +294,7 @@ fbq("track","PageView");
 
 </div>
 
-<!-- LIFFリンク構成（fbp対応版） -->
+<!-- LIFFリンク構成（fbp/fbc対応版） -->
 <script>
 (function() {
   var params = new URLSearchParams(window.location.search);
@@ -310,9 +310,20 @@ fbq("track","PageView");
   document.querySelectorAll(".line-cv-btn").forEach(function(btn) {
     btn.addEventListener("click", function(e) {
       e.preventDefault();
-      var match = document.cookie.match(/(?:^|; )_fbp=([^;]*)/);
-      var fbp = match ? match[1] : "";
-      var finalUrl = baseLiffUrl + (fbp ? "&fbp=" + encodeURIComponent(fbp) : "");
+      var fbpMatch = document.cookie.match(/(?:^|; )_fbp=([^;]*)/);
+      var fbcMatch = document.cookie.match(/(?:^|; )_fbc=([^;]*)/);
+      var fbp = fbpMatch ? fbpMatch[1] : "";
+      var fbc = fbcMatch ? fbcMatch[1] : "";
+
+      // _fbc が未設定で fbclid がある場合のフォールバック
+      // (Meta Pixel の cookie 書き込み前にクリックされた稀なケース)
+      if (!fbc && fbclid) {
+        fbc = "fb.1." + Date.now() + "." + fbclid;
+      }
+
+      var finalUrl = baseLiffUrl
+        + (fbp ? "&fbp=" + encodeURIComponent(fbp) : "")
+        + (fbc ? "&fbc=" + encodeURIComponent(fbc) : "");
       window.location.href = finalUrl;
     });
   });
