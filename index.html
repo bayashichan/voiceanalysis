@@ -203,7 +203,7 @@ fbq("track","PageView");
   </div>
 
   <div class="btn-wrap">
-    <a href="#" class="btn line-cv-btn">LINE登録で無料の声紋診断を受けてみる →</a>
+    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn">LINE登録で無料の声紋診断を受けてみる →</a>
   </div>
 
   <hr class="divider">
@@ -283,7 +283,7 @@ fbq("track","PageView");
   </div>
 
   <div class="btn-wrap">
-    <a href="#" class="btn line-cv-btn">ライン登録で無料の声紋診断を受けてみる →</a>
+    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn">ライン登録で無料の声紋診断を受けてみる →</a>
     <p class="btn-note">※ 登録は30秒です。</p>
   </div>
 
@@ -293,66 +293,5 @@ fbq("track","PageView");
   </div>
 
 </div>
-
-<!-- LINE 友だち追加ボタン + Pixel/CAPI Lead 計測 -->
-<script>
-(function () {
-  var params = new URLSearchParams(window.location.search);
-  var fbclid = params.get('fbclid') || '';
-  var tag    = params.get('tag')    || '';
-
-  var LINE_ADD_URL       = 'https://line.me/R/ti/p/@582xsdpe';
-  var CAPI_LEAD_ENDPOINT = 'https://line-manager-omega.vercel.app/api/track/lead';
-
-  function generateEventId() {
-    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
-    return 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
-  }
-
-  document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      var fbpMatch = document.cookie.match(/(?:^|; )_fbp=([^;]*)/);
-      var fbcMatch = document.cookie.match(/(?:^|; )_fbc=([^;]*)/);
-      var fbp = fbpMatch ? fbpMatch[1] : '';
-      var fbc = fbcMatch ? fbcMatch[1] : '';
-      if (!fbc && fbclid) { fbc = 'fb.1.' + Date.now() + '.' + fbclid; }
-
-      var eventId = generateEventId();
-
-      // Browser Pixel
-      try {
-        if (typeof window.fbq === 'function') {
-          window.fbq('track', 'Lead', {}, { eventID: eventId });
-        }
-      } catch (err) {}
-
-      // CAPI（サーバー側）
-      try {
-        fetch(CAPI_LEAD_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            event_id:         eventId,
-            fbclid:           fbclid || null,
-            fbp:              fbp    || null,
-            fbc:              fbc    || null,
-            tag:              tag    || null,
-            user_agent:       navigator.userAgent,
-            event_source_url: window.location.href
-          }),
-          keepalive:   true,
-          mode:        'cors',
-          credentials: 'omit'
-        }).catch(function () {});
-      } catch (err) {}
-
-      // LINE 友だち追加画面へ
-      window.location.href = LINE_ADD_URL;
-    });
-  });
-})();
-</script>
 </body>
 </html>
