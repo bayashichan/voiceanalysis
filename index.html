@@ -294,7 +294,7 @@ fbq("track","PageView");
 
 </div>
 
-<!-- 中継リダイレクト方式（fbp/fbc対応版） -->
+<!-- 中継リダイレクト方式 + Pixel/CAPI ハイブリッド計測対応版 -->
 <script>
 (function() {
   var params = new URLSearchParams(window.location.search);
@@ -307,9 +307,20 @@ fbq("track","PageView");
     + "&ch=3e5e783e-9029-4712-bbb3-1d45ef7ad270"
     + "&oa=" + encodeURIComponent("@582xsdpe");
 
+  // ハイブリッド計測用 Lead CAPI エンドポイント
+  var CAPI_LEAD_ENDPOINT = "https://line-manager-omega.vercel.app/api/track/lead";
+
+  function generateEventId() {
+    if (typeof crypto !== "undefined" && crypto.randomUUID) {
+      return crypto.randomUUID();
+    }
+    return "lp-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
+  }
+
   document.querySelectorAll(".line-cv-btn").forEach(function(btn) {
     btn.addEventListener("click", function(e) {
       e.preventDefault();
+
       var fbpMatch = document.cookie.match(/(?:^|; )_fbp=([^;]*)/);
       var fbcMatch = document.cookie.match(/(?:^|; )_fbc=([^;]*)/);
       var fbp = fbpMatch ? fbpMatch[1] : "";
@@ -321,6 +332,42 @@ fbq("track","PageView");
         fbc = "fb.1." + Date.now() + "." + fbclid;
       }
 
+      // Browser Pixel と CAPI を同じ event_id で発火させて Meta 側で dedup させる
+      var eventId = generateEventId();
+
+      // (1) Browser Pixel で Lead を発火
+      try {
+        if (typeof window.fbq === "function") {
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+        }
+      } catch (err) { /* Pixel エラーで遷移を止めない */ }
+
+      // (2) CAPI 経由でも Lead を送信
+      //     iOS の ITP / Facebook IAB で Pixel がブロックされた場合のセーフティネット。
+      //     かつサーバ側で client_ip を確実に付与できる。
+      try {
+        var payload = JSON.stringify({
+          event_id: eventId,
+          fbclid: fbclid || null,
+          fbp: fbp || null,
+          fbc: fbc || null,
+          tag: tag || null,
+          user_agent: navigator.userAgent,
+          event_source_url: window.location.href
+        });
+
+        // keepalive: ページ遷移後もリクエストが完了するよう保証
+        fetch(CAPI_LEAD_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+          keepalive: true,
+          mode: "cors",
+          credentials: "omit"
+        }).catch(function() { /* 失敗しても遷移を止めない */ });
+      } catch (err) { /* CAPI 失敗で遷移を止めない */ }
+
+      // (3) 既存の中継 /api/redirect へ遷移
       var finalUrl = baseRedirectUrl
         + (fbp ? "&fbp=" + encodeURIComponent(fbp) : "")
         + (fbc ? "&fbc=" + encodeURIComponent(fbc) : "");
