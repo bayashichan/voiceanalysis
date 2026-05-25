@@ -166,7 +166,7 @@ fbq("track","PageView");
   <div class="mint-box">
     <p>特許技術（公開特許2007-212932）をベースに、2万人以上の統計データから体系化されたもので、企業・病院・大学など約200の組織に導入されています。</p>
   </div>
-  <p>「あなたはこういう人だ」と人に言われると、どうしても抵抗が生まれます。<br>でも、感情のない客観的なデータは、素直に見つめることができます。</p>
+  <p>「あなたはこういう人だ」と人に言られると、どうしても抵抗が生まれます。<br>でも、感情のない客観的なデータは、素直に見つめることができます。</p>
   <p>これが、行動が変わる最初の一歩になります。</p>
 
   <hr class="divider">
@@ -203,7 +203,7 @@ fbq("track","PageView");
   </div>
 
   <div class="btn-wrap">
-    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn">LINE登録で無料の声紋診断を受けてみる →</a>
+    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録で無料の声紋診断を受けてみる →</a>
   </div>
 
   <hr class="divider">
@@ -283,7 +283,7 @@ fbq("track","PageView");
   </div>
 
   <div class="btn-wrap">
-    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn">ライン登録で無料の声紋診断を受けてみる →</a>
+    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">ライン登録で無料の声紋診断を受けてみる →</a>
     <p class="btn-note">※ 登録は30秒です。</p>
   </div>
 
@@ -293,5 +293,25 @@ fbq("track","PageView");
   </div>
 
 </div>
+
+<!-- LINE 友だち追加ボタン押下で Lead 発火 -->
+<script>
+(function () {
+  function generateEventId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+    return 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+  }
+
+  document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      try {
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'Lead', {}, { eventID: generateEventId() });
+        }
+      } catch (err) {}
+    });
+  });
+})();
+</script>
 </body>
 </html>
