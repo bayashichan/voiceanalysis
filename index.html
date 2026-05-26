@@ -12,7 +12,7 @@
 html { font-size: 15px; }
 body {
   font-family: "ヒラギノ明朝 ProN","Hiragino Mincho ProN","游明朝","Yu Mincho","ＭＳ 明朝",serif;
-  color: #2a2a2a; background-color: #f5f4f0; margin: 0; padding: 0; overflow-x: hidden;
+  color: #2a2a2a; background-color: #f2f4f5; margin: 0; padding: 0; overflow-x: hidden;
 }
 .container {
   max-width: 430px; margin: 0 auto; background-color: #fff;
@@ -28,16 +28,27 @@ body {
   font-size: 1.35rem; font-weight: 800; line-height: 1.55;
   letter-spacing: 0.03em; margin: 0 0 20px; color: #1a1a1a;
 }
-.hero-sub { font-size: 0.95rem; line-height: 1.9; color: #333; margin: 0 0 1.1em; }
-.hero-frame { font-size: 0.95rem; line-height: 1.9; color: #333; margin: 0 0 1.1em; }
-.hero-resolve {
-  margin-top: 20px; padding: 14px 16px; background-color: #f4f6f4;
-  border-left: 3px solid #2d6b3e; font-size: 0.95rem; line-height: 1.85; color: #1a1a1a;
+.hero-check-box {
+  background-color: #e6e6e6; padding: 20px 16px; margin: 0 0 24px;
 }
-.section-label { font-size: 0.72rem; letter-spacing: 0.12em; color: #2d6b3e; margin: 40px 0 10px; }
+.hero-check-box p {
+  font-weight: bold; font-size: 0.95rem; line-height: 1.7; margin: 0 0 16px; color: #1a1a1a;
+}
+.hero-check-box p:last-child {
+  margin-bottom: 0;
+}
+.hero-sub { font-size: 0.95rem; line-height: 1.9; color: #333; margin: 0 0 1.1em; }
+.hero-resolve {
+  margin-top: 20px; padding: 14px 16px; background-color: #f0fcfe;
+  border-left: 4px solid #5ce1e6; font-size: 0.95rem; line-height: 1.85; color: #1a1a1a;
+}
+.section-label { 
+  font-size: 0.72rem; letter-spacing: 0.12em; font-weight: bold; 
+  color: #20b2b8; background-color: #ffffff; margin: 40px 0 10px; 
+}
 .section-title {
   font-size: 1.05rem; font-weight: 800; color: #1a1a1a; line-height: 1.55;
-  margin: 0 0 18px; padding-left: 12px; border-left: 3px solid #2d6b3e;
+  margin: 0 0 18px; padding-left: 12px; border-left: 4px solid #5ce1e6;
 }
 .check-list { list-style: none; padding: 0; margin: 0 0 10px; }
 .check-list li {
@@ -46,11 +57,11 @@ body {
   font-size: 0.93rem; line-height: 1.75; color: #2a2a2a;
 }
 .check-list li:last-child { border-bottom: none; }
-.check-mark { color: #2d6b3e; font-size: 0.85rem; margin-top: 3px; flex-shrink: 0; }
+.check-mark { color: #20b2b8; font-size: 0.9rem; font-weight: bold; margin-top: 2px; flex-shrink: 0; }
 p { margin: 0 0 1.2em; line-height: 1.9; }
 p:last-child { margin-bottom: 0; }
 .mint-box {
-  background-color: #f4f6f4; border-left: 3px solid #2d6b3e;
+  background-color: #f0fcfe; border-left: 4px solid #5ce1e6;
   padding: 18px 16px; margin: 24px 0; font-size: 0.93rem; line-height: 1.85;
 }
 .mint-box p:last-child { margin-bottom: 0; }
@@ -60,33 +71,33 @@ p:last-child { margin-bottom: 0; }
 }
 .spec-item { text-align: center; padding: 16px 12px; flex: 1; }
 .spec-item + .spec-item { border-left: 1px solid #e8e8e8; }
-.spec-number { font-size: 1.05rem; font-weight: 800; color: #2d6b3e; line-height: 1.3; display: block; }
+.spec-number { font-size: 1.15rem; font-weight: 800; color: #20b2b8; line-height: 1.3; display: block; }
 .spec-label { font-size: 0.7rem; color: #999; letter-spacing: 0.05em; display: block; margin-top: 5px; }
 .spec-note { text-align: center; font-size: 0.8rem; color: #888; margin: 10px 0 0; line-height: 1.7; }
-.line-section { background-color: #f8f9f8; border-radius: 8px; padding: 22px 18px; margin: 20px 0 24px; }
+.line-section { background-color: #f2fcfc; border-radius: 8px; padding: 22px 18px; margin: 20px 0 24px; }
 .line-benefit-list { list-style: none; padding: 0; margin: 0 0 16px; }
 .line-benefit-list li {
   display: flex; align-items: flex-start; gap: 9px;
   font-size: 0.9rem; line-height: 1.75; color: #2a2a2a; font-weight: bold; margin-bottom: 10px;
 }
 .line-benefit-list li:last-child { margin-bottom: 0; }
-.line-benefit-mark { color: #2d6b3e; flex-shrink: 0; margin-top: 2px; }
-.line-info { font-size: 0.83rem; color: #666; line-height: 1.85; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #e4e8e4; }
+.line-benefit-mark { color: #20b2b8; flex-shrink: 0; margin-top: 2px; font-weight: bold; }
+.line-info { font-size: 0.83rem; color: #666; line-height: 1.85; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #d6ecec; }
 .btn-wrap { margin: 24px 0; }
 .btn {
   display: block; width: 94%; margin: 0 auto; padding: 16px 12px;
-  background-color: #2d6b3e; color: #fff; text-align: center;
-  text-decoration: none; font-weight: bold; font-size: 0.95rem;
+  background-color: #5ce1e6; color: #1a1a1a; text-align: center;
+  text-decoration: none; font-weight: 800; font-size: 0.98rem;
   border-radius: 6px; letter-spacing: 0.05em; line-height: 1.5;
   -webkit-tap-highlight-color: transparent;
 }
-.btn:active { background-color: #245a33; }
+.btn:active { background-color: #4bd2d7; }
 .btn-note { text-align: center; font-size: 0.75rem; color: #bbb; margin: 8px 0 0; }
 hr.divider { border: 0; border-top: 1px solid #ebebeb; margin: 36px 0; }
 .table-container { width: 100%; margin: 16px 0 24px; font-size: 0.82rem; line-height: 1.6; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 th, td { padding: 10px 8px; vertical-align: top; border-bottom: 1px solid #eaeaea; word-break: break-all; }
-th { font-weight: bold; text-align: center; font-size: 0.8rem; background-color: #f4f6f4; color: #2d6b3e; }
+th { font-weight: bold; text-align: center; font-size: 0.8rem; background-color: #f0fcfe; color: #1a1a1a; }
 th:first-child { width: 18%; }
 td:first-child { font-weight: bold; color: #666; font-size: 0.8rem; }
 .benefit-list { list-style: none; padding: 0; margin: 0; }
@@ -96,7 +107,7 @@ td:first-child { font-weight: bold; color: #666; font-size: 0.8rem; }
   font-size: 0.93rem; line-height: 1.75; color: #2a2a2a; font-weight: bold;
 }
 .benefit-list li:last-child { border-bottom: none; }
-.benefit-mark { color: #2d6b3e; flex-shrink: 0; margin-top: 3px; }
+.benefit-mark { color: #20b2b8; flex-shrink: 0; margin-top: 3px; font-weight: bold; }
 .closing-block { margin: 0 0 32px; }
 .closing { font-size: 0.93rem; line-height: 2.0; color: #444; margin: 0 0 1.2em; }
 img { display: block; margin: 20px auto; max-width: 76%; height: auto; border-radius: 4px; }
@@ -131,10 +142,17 @@ fbq("track","PageView");
   <p class="target-label">このまま終わりたくない人へ　声紋診断・無料LINE相談</p>
 
   <div class="hero">
-    <h1 class="hero-headline">気づいたら、<br>何年も同じ場所にいた。</h1>
-    <p class="hero-sub">そう感じたことはありませんか。</p>
-    <p class="hero-frame">「このままでいい」とは思えない。<br>でも、何を変えればいいかも、わからない。</p>
-    <div class="hero-resolve">その詰まりの正体を、声から整理します。</div>
+    <h1 class="hero-headline">気づいたら、<br>なりたくない自分になっていた。</h1>
+    
+    <div class="hero-check-box">
+      <p>✓ 「いつか動こう、とずっと思っている。<br>　なのに、いつまで同じ場所にいるんだろう。」</p>
+      <p>✓ 「悪くない毎日だ。<br>　でも、これでいいんだろうか。」</p>
+    </div>
+
+    <p class="hero-sub" style="font-weight: bold; font-size: 1.05rem;">6秒の声に、あなたの本音が出る。</p>
+    <p class="hero-sub">私は「声紋診断コーチング」を活用した独自の手法でサポートをしています。<br>この手法は、「特許技術の声紋診断」によって、本当に望む未来を現実にする可能性を効果的に高める方法です。</p>
+    
+    <div class="hero-resolve">公式LINEで情報発信中です！<br>その「詰まり」の正体を、声から整理します。</div>
   </div>
 
   <p class="section-label">SELF CHECK</p>
