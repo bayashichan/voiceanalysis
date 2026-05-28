@@ -221,7 +221,7 @@ fbq("track","PageView");
   </div>
 
   <div class="btn-wrap">
-    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録で無料の声紋診断を受けてみる →</a>
+    <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録で無料の声紋診断を受けてみる →</a>
   </div>
 
   <hr class="divider">
@@ -301,7 +301,7 @@ fbq("track","PageView");
   </div>
 
   <div class="btn-wrap">
-    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">ライン登録で無料の声紋診断を受けてみる →</a>
+    <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">ライン登録で無料の声紋診断を受けてみる →</a>
     <p class="btn-note">※ 登録は30秒です。</p>
   </div>
 
@@ -312,21 +312,56 @@ fbq("track","PageView");
 
 </div>
 
-<!-- LINE 友だち追加ボタン押下で Lead 発火 -->
+<!-- LINE 友だち追加ボタン押下で Lead 発火 + Meta CAPI -->
 <script>
 (function () {
   function generateEventId() {
     if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
-    return 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    return 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2, 11);
+  }
+
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(?:^|;\\s*)' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
+    return match ? match[1] : '';
+  }
+
+  function getFbc() {
+    var params = new URLSearchParams(window.location.search);
+    var fbclid = params.get('fbclid');
+    if (fbclid) return 'fb.1.' + Date.now() + '.' + fbclid;
+    return getCookie('_fbc');
   }
 
   document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      var destUrl = btn.getAttribute('data-href');
+      var eventId = generateEventId();
+      var fbp = getCookie('_fbp');
+      var fbc = getFbc();
+
       try {
         if (typeof window.fbq === 'function') {
-          window.fbq('track', 'Lead', {}, { eventID: generateEventId() });
+          window.fbq('track', 'Lead', {}, { eventID: eventId });
         }
-      } catch (err) {}
+      } catch (_) {}
+
+      fetch('/api/capi', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          eventId: eventId,
+          url: window.location.href,
+          fbp: fbp,
+          fbc: fbc,
+        }),
+        keepalive: true,
+      }).catch(function () {});
+
+      setTimeout(function () {
+        window.location.href = destUrl;
+      }, 400);
     });
   });
 })();
