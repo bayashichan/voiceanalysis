@@ -13,13 +13,19 @@ export async function onRequestPost(context) {
 
   let body;
   try {
-    // Use text() + JSON.parse() to accept any Content-Type.
-    // sendBeacon with a Blob sends application/json, but some browsers may
-    // send text/plain as a fallback — both parse correctly this way.
+    // text() + JSON.parse() accepts any Content-Type (sendBeacon may send text/plain)
     const text = await request.text();
     body = JSON.parse(text);
   } catch {
     return new Response(JSON.stringify({ error: 'Invalid JSON' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  // Guard: JSON.parse('null') succeeds but destructuring null throws TypeError outside try/catch
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return new Response(JSON.stringify({ error: 'Invalid payload' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     });
@@ -58,11 +64,15 @@ export async function onRequestPost(context) {
   };
 
   try {
+    // Authorization header keeps the token out of URL query strings and server access logs
     const metaRes = await fetch(
-      `https://graph.facebook.com/v19.0/${pixelId}/events?access_token=${accessToken}`,
+      `https://graph.facebook.com/v19.0/${pixelId}/events`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
         body: JSON.stringify(payload),
       }
     );

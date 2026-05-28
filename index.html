@@ -341,12 +341,13 @@ fbq("track","PageView");
     return lsGet('_fbp_bk');
   }
 
-  // _fbc: fbclid URL param is the most reliable signal in IAB (Meta injects it on ad clicks)
+  // _fbc: fbclid URL param is the most reliable signal in IAB (Meta injects it on ad clicks).
+  // Timestamp must be Unix seconds (10 digits) per Meta spec — Date.now() gives milliseconds.
   function getFbc() {
     var params = new URLSearchParams(window.location.search);
     var fbclid = params.get('fbclid');
     if (fbclid) {
-      var v = 'fb.1.' + Date.now() + '.' + fbclid;
+      var v = 'fb.1.' + Math.floor(Date.now() / 1000) + '.' + fbclid;
       lsSet('_fbc_bk', v);
       return v;
     }
@@ -372,15 +373,42 @@ fbq("track","PageView");
     }).catch(function () {});
   }
 
+  // window.open(_blank) called synchronously within a user-gesture event handler:
+  //   - Preserves the user-gesture flag, so popup blockers don't fire
+  //   - In Instagram IAB (WKWebView), _blank target routes through the system URL
+  //     handler, which triggers iOS Universal Links → LINE app opens natively
+  //   - window.location.href in the same WKWebView suppresses Universal Links,
+  //     so this is the correct path for IAB-to-LINE-app hand-off
+  function navigateTo(url) {
+    var opened = window.open(url, '_blank');
+    if (!opened) {
+      // window.open blocked (should not happen on direct click); fall back to same-window
+      setTimeout(function () { window.location.href = url; }, 300);
+    }
+  }
+
+  // bfcache fix: iOS Safari and Instagram IAB restore the full DOM from memory on back
+  // navigation. dataset.sending persists on the element, permanently disabling the button.
+  // pageshow with persisted=true fires on bfcache restore and resets the flag.
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
+        delete btn.dataset.sending;
+      });
+    }
+  });
+
   document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
 
-      // Prevent double-fire during the redirect window
+      // Prevent double-fire
       if (btn.dataset.sending) return;
       btn.dataset.sending = '1';
 
-      var destUrl = btn.getAttribute('data-href');
+      var destUrl = btn.getAttribute('data-href') || '';
+      if (!destUrl) return;
+
       var eventId = generateEventId();
       var fbp = getFbp();
       var fbc = getFbc();
@@ -392,7 +420,7 @@ fbq("track","PageView");
         }
       } catch (_) {}
 
-      // Server-side CAPI via sendBeacon — fires even after page unload begins
+      // Server-side CAPI via sendBeacon — queued immediately, survives page unload
       postToCapi({
         eventId: eventId,
         url: window.location.href,
@@ -400,10 +428,8 @@ fbq("track","PageView");
         fbc: fbc,
       });
 
-      // sendBeacon doesn't block unload, so 300 ms is enough for fbq to queue
-      setTimeout(function () {
-        window.location.href = destUrl;
-      }, 300);
+      // Navigate synchronously — sendBeacon is already queued and does not block
+      navigateTo(destUrl);
     });
   });
 })();
