@@ -13,7 +13,11 @@ export async function onRequestPost(context) {
 
   let body;
   try {
-    body = await request.json();
+    // Use text() + JSON.parse() to accept any Content-Type.
+    // sendBeacon with a Blob sends application/json, but some browsers may
+    // send text/plain as a fallback — both parse correctly this way.
+    const text = await request.text();
+    body = JSON.parse(text);
   } catch {
     return new Response(JSON.stringify({ error: 'Invalid JSON' }), {
       status: 400,
@@ -22,6 +26,14 @@ export async function onRequestPost(context) {
   }
 
   const { eventId, url, fbp, fbc } = body;
+
+  if (!eventId) {
+    return new Response(JSON.stringify({ error: 'Missing eventId' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
   const clientIp = request.headers.get('CF-Connecting-IP') || '';
   const userAgent = request.headers.get('User-Agent') || '';
 

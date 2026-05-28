@@ -321,47 +321,89 @@ fbq("track","PageView");
   }
 
   function getCookie(name) {
-    var match = document.cookie.match(new RegExp('(?:^|;\\s*)' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
-    return match ? match[1] : '';
+    var re = new RegExp('(?:^|;\\s*)' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)');
+    var m = document.cookie.match(re);
+    return m ? decodeURIComponent(m[1]) : '';
   }
 
+  // localStorage wrapper — silently fails in restricted IAB contexts
+  function lsGet(key) {
+    try { return localStorage.getItem(key) || ''; } catch (_) { return ''; }
+  }
+  function lsSet(key, val) {
+    try { localStorage.setItem(key, val); } catch (_) {}
+  }
+
+  // _fbp: Cookie → localStorage backup (persists even when pixel fails to load in IAB)
+  function getFbp() {
+    var v = getCookie('_fbp');
+    if (v) { lsSet('_fbp_bk', v); return v; }
+    return lsGet('_fbp_bk');
+  }
+
+  // _fbc: fbclid URL param is the most reliable signal in IAB (Meta injects it on ad clicks)
   function getFbc() {
     var params = new URLSearchParams(window.location.search);
     var fbclid = params.get('fbclid');
-    if (fbclid) return 'fb.1.' + Date.now() + '.' + fbclid;
-    return getCookie('_fbc');
+    if (fbclid) {
+      var v = 'fb.1.' + Date.now() + '.' + fbclid;
+      lsSet('_fbc_bk', v);
+      return v;
+    }
+    var fromCookie = getCookie('_fbc');
+    if (fromCookie) { lsSet('_fbc_bk', fromCookie); return fromCookie; }
+    return lsGet('_fbc_bk');
+  }
+
+  // sendBeacon survives page unload and is the most reliable in IAB.
+  // Blob with application/json ensures the backend can parse the body.
+  // Falls back to fetch(keepalive) when sendBeacon is unavailable.
+  function postToCapi(payload) {
+    var json = JSON.stringify(payload);
+    if (typeof navigator.sendBeacon === 'function') {
+      var blob = new Blob([json], { type: 'application/json' });
+      if (navigator.sendBeacon('/api/capi', blob)) return;
+    }
+    fetch('/api/capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: json,
+      keepalive: true,
+    }).catch(function () {});
   }
 
   document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
 
+      // Prevent double-fire during the redirect window
+      if (btn.dataset.sending) return;
+      btn.dataset.sending = '1';
+
       var destUrl = btn.getAttribute('data-href');
       var eventId = generateEventId();
-      var fbp = getCookie('_fbp');
+      var fbp = getFbp();
       var fbc = getFbc();
 
+      // Browser-side pixel (may not load in IAB — CAPI is the reliable path)
       try {
         if (typeof window.fbq === 'function') {
           window.fbq('track', 'Lead', {}, { eventID: eventId });
         }
       } catch (_) {}
 
-      fetch('/api/capi', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          eventId: eventId,
-          url: window.location.href,
-          fbp: fbp,
-          fbc: fbc,
-        }),
-        keepalive: true,
-      }).catch(function () {});
+      // Server-side CAPI via sendBeacon — fires even after page unload begins
+      postToCapi({
+        eventId: eventId,
+        url: window.location.href,
+        fbp: fbp,
+        fbc: fbc,
+      });
 
+      // sendBeacon doesn't block unload, so 300 ms is enough for fbq to queue
       setTimeout(function () {
         window.location.href = destUrl;
-      }, 400);
+      }, 300);
     });
   });
 })();
