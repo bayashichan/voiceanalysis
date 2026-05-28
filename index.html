@@ -126,7 +126,7 @@ img { display: block; margin: 20px auto; max-width: 76%; height: auto; border-ra
 <!-- Meta Pixel -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
-fbq("init","1302054671384974");
+fbq("init","1302054671384974"); // Must match META_PIXEL_ID env var in Cloudflare Pages — mismatch silently breaks CAPI deduplication
 fbq("track","PageView");
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1302054671384974&ev=PageView&noscript=1"/></noscript>
@@ -221,7 +221,7 @@ fbq("track","PageView");
   </div>
 
   <div class="btn-wrap">
-    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録で無料の声紋診断を受けてみる →</a>
+    <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録で無料の声紋診断を受けてみる →</a>
   </div>
 
   <hr class="divider">
@@ -301,7 +301,7 @@ fbq("track","PageView");
   </div>
 
   <div class="btn-wrap">
-    <a href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">ライン登録で無料の声紋診断を受けてみる →</a>
+    <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">ライン登録で無料の声紋診断を受けてみる →</a>
     <p class="btn-note">※ 登録は30秒です。</p>
   </div>
 
@@ -312,21 +312,125 @@ fbq("track","PageView");
 
 </div>
 
-<!-- LINE 友だち追加ボタン押下で Lead 発火 -->
+<!-- LINE 友だち追加ボタン押下で Lead 発火 + Meta CAPI -->
 <script>
 (function () {
   function generateEventId() {
     if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
-    return 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    return 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2, 11);
   }
 
+  function getCookie(name) {
+    var re = new RegExp('(?:^|;\\s*)' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)');
+    var m = document.cookie.match(re);
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+
+  // localStorage wrapper — silently fails in restricted IAB contexts
+  function lsGet(key) {
+    try { return localStorage.getItem(key) || ''; } catch (_) { return ''; }
+  }
+  function lsSet(key, val) {
+    try { localStorage.setItem(key, val); } catch (_) {}
+  }
+
+  // _fbp: Cookie → localStorage backup (persists even when pixel fails to load in IAB)
+  function getFbp() {
+    var v = getCookie('_fbp');
+    if (v) { lsSet('_fbp_bk', v); return v; }
+    return lsGet('_fbp_bk');
+  }
+
+  // _fbc: fbclid URL param is the most reliable signal in IAB (Meta injects it on ad clicks).
+  // Timestamp must be Unix seconds (10 digits) per Meta spec — Date.now() gives milliseconds.
+  function getFbc() {
+    var params = new URLSearchParams(window.location.search);
+    var fbclid = params.get('fbclid');
+    if (fbclid) {
+      var v = 'fb.1.' + Math.floor(Date.now() / 1000) + '.' + fbclid;
+      lsSet('_fbc_bk', v);
+      return v;
+    }
+    var fromCookie = getCookie('_fbc');
+    if (fromCookie) { lsSet('_fbc_bk', fromCookie); return fromCookie; }
+    return lsGet('_fbc_bk');
+  }
+
+  // sendBeacon survives page unload and is the most reliable in IAB.
+  // Blob with application/json ensures the backend can parse the body.
+  // Falls back to fetch(keepalive) when sendBeacon is unavailable.
+  function postToCapi(payload) {
+    var json = JSON.stringify(payload);
+    if (typeof navigator.sendBeacon === 'function') {
+      var blob = new Blob([json], { type: 'application/json' });
+      if (navigator.sendBeacon('/api/capi', blob)) return;
+    }
+    fetch('/api/capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: json,
+      keepalive: true,
+    }).catch(function () {});
+  }
+
+  // window.open(_blank) called synchronously within a user-gesture event handler:
+  //   - Preserves the user-gesture flag, so popup blockers don't fire
+  //   - In Instagram IAB (WKWebView), _blank target routes through the system URL
+  //     handler, which triggers iOS Universal Links → LINE app opens natively
+  //   - window.location.href in the same WKWebView suppresses Universal Links,
+  //     so this is the correct path for IAB-to-LINE-app hand-off
+  function navigateTo(url) {
+    var opened = window.open(url, '_blank');
+    if (!opened) {
+      // window.open blocked (should not happen on direct click); fall back to same-window
+      setTimeout(function () { window.location.href = url; }, 300);
+    }
+  }
+
+  // bfcache fix: iOS Safari and Instagram IAB restore the full DOM from memory on back
+  // navigation. dataset.sending persists on the element, permanently disabling the button.
+  // pageshow with persisted=true fires on bfcache restore and resets the flag.
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
+        delete btn.dataset.sending;
+      });
+    }
+  });
+
   document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Resolve destination first — if data-href is absent, bail before touching any state
+      var destUrl = btn.getAttribute('data-href') || '';
+      if (!destUrl) return;
+
+      // Prevent double-fire
+      if (btn.dataset.sending) return;
+      btn.dataset.sending = '1';
+
+      var eventId = generateEventId();
+      var fbp = getFbp();
+      var fbc = getFbc();
+
+      // Browser-side pixel (may not load in IAB — CAPI is the reliable path)
       try {
         if (typeof window.fbq === 'function') {
-          window.fbq('track', 'Lead', {}, { eventID: generateEventId() });
+          window.fbq('track', 'Lead', {}, { eventID: eventId });
         }
-      } catch (err) {}
+      } catch (_) {}
+
+      // Server-side CAPI via sendBeacon — queued immediately, survives page unload
+      postToCapi({
+        eventId: eventId,
+        url: window.location.href,
+        fbp: fbp,
+        fbc: fbc,
+      });
+
+      // Navigate synchronously — sendBeacon is already queued and does not block
+      navigateTo(destUrl);
     });
   });
 })();
