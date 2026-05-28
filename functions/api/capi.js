@@ -61,7 +61,6 @@ export async function onRequestPost(context) {
         user_data: userData,
       },
     ],
-    test_event_code: 'TEST29940', // TODO: remove after CAPI verification
   };
 
   try {
