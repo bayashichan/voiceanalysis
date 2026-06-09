@@ -19,6 +19,60 @@ body {
   padding: 36px 20px 48px; line-height: 1.9; font-size: 0.95rem;
   word-break: break-all; overflow-wrap: break-word;
 }
+
+/* ── Color zone defaults: Level 1 / ファーストビュー ── */
+:root {
+  --c-accent:     #5ce1e6;
+  --c-soft:       #20b2b8;
+  --c-bg:         #f0fcfe;
+  --c-border:     #d0edef;
+  --c-btn-text:   #1a1a1a;
+  --c-btn-active: #4bd2d7;
+}
+/* Level 2: SELF CHECK */
+.cz-2 {
+  --c-accent:     #42ccd4;
+  --c-soft:       #189aa8;
+  --c-bg:         #edfafb;
+  --c-border:     #bce6e9;
+  --c-btn-active: #32bfc8;
+}
+/* Level 3: WHY + ABOUT */
+.cz-3 {
+  --c-accent:     #2cb4c0;
+  --c-soft:       #117a88;
+  --c-bg:         #e6f6f9;
+  --c-border:     #a6d6de;
+  --c-btn-active: #20a0ae;
+}
+/* Level 4: SPECIFICATION + LINE登録 */
+.cz-4 {
+  --c-accent:     #1e8ea8;
+  --c-soft:       #0e6070;
+  --c-bg:         #ddf0f5;
+  --c-border:     #8ec4d0;
+  --c-btn-text:   #fff;
+  --c-btn-active: #167a92;
+}
+/* Level 5: DIFFERENCE + WHY HUMAN */
+.cz-5 {
+  --c-accent:     #186888;
+  --c-soft:       #0b4862;
+  --c-bg:         #d6e8f0;
+  --c-border:     #76a8bf;
+  --c-btn-text:   #fff;
+  --c-btn-active: #115a76;
+}
+/* Level 6: PROFILE + CHANGE + クロージング */
+.cz-6 {
+  --c-accent:     #124668;
+  --c-soft:       #082e48;
+  --c-bg:         #cee0ec;
+  --c-border:     #5e90a8;
+  --c-btn-text:   #fff;
+  --c-btn-active: #0c3554;
+}
+
 .target-label {
   text-align: center; font-size: 0.78rem; color: #666; letter-spacing: 0.08em;
   margin: 0 0 28px; padding-bottom: 16px; border-bottom: 1px solid #e8e8e8;
@@ -39,16 +93,21 @@ body {
 }
 .hero-sub { font-size: 0.95rem; line-height: 1.9; color: #333; margin: 0 0 1.1em; }
 .hero-resolve {
-  margin-top: 20px; padding: 14px 16px; background-color: #f0fcfe;
-  border-left: 4px solid #5ce1e6; font-size: 0.95rem; line-height: 1.85; color: #1a1a1a;
+  display: block;
+  margin-top: 20px; padding: 14px 16px;
+  background-color: var(--c-bg); border-left: 4px solid var(--c-accent);
+  font-size: 0.95rem; line-height: 1.85; color: #1a1a1a;
+  text-decoration: none; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
-.section-label { 
-  font-size: 0.72rem; letter-spacing: 0.12em; font-weight: bold; 
-  color: #20b2b8; background-color: #ffffff; margin: 40px 0 10px; 
+.hero-resolve:active { opacity: 0.72; }
+.section-label {
+  font-size: 0.72rem; letter-spacing: 0.12em; font-weight: bold;
+  color: var(--c-soft); background-color: #ffffff; margin: 40px 0 10px;
 }
 .section-title {
   font-size: 1.05rem; font-weight: 800; color: #1a1a1a; line-height: 1.55;
-  margin: 0 0 18px; padding-left: 12px; border-left: 4px solid #5ce1e6;
+  margin: 0 0 18px; padding-left: 12px; border-left: 4px solid var(--c-accent);
 }
 .check-list { list-style: none; padding: 0; margin: 0 0 10px; }
 .check-list li {
@@ -57,11 +116,11 @@ body {
   font-size: 0.93rem; line-height: 1.75; color: #2a2a2a;
 }
 .check-list li:last-child { border-bottom: none; }
-.check-mark { color: #20b2b8; font-size: 0.9rem; font-weight: bold; margin-top: 2px; flex-shrink: 0; }
+.check-mark { color: var(--c-soft); font-size: 0.9rem; font-weight: bold; margin-top: 2px; flex-shrink: 0; }
 p { margin: 0 0 1.2em; line-height: 1.9; }
 p:last-child { margin-bottom: 0; }
 .mint-box {
-  background-color: #f0fcfe; border-left: 4px solid #5ce1e6;
+  background-color: var(--c-bg); border-left: 4px solid var(--c-accent);
   padding: 18px 16px; margin: 24px 0; font-size: 0.93rem; line-height: 1.85;
 }
 .mint-box p:last-child { margin-bottom: 0; }
@@ -71,33 +130,33 @@ p:last-child { margin-bottom: 0; }
 }
 .spec-item { text-align: center; padding: 16px 12px; flex: 1; }
 .spec-item + .spec-item { border-left: 1px solid #e8e8e8; }
-.spec-number { font-size: 1.15rem; font-weight: 800; color: #20b2b8; line-height: 1.3; display: block; }
+.spec-number { font-size: 1.15rem; font-weight: 800; color: var(--c-soft); line-height: 1.3; display: block; }
 .spec-label { font-size: 0.7rem; color: #999; letter-spacing: 0.05em; display: block; margin-top: 5px; }
 .spec-note { text-align: center; font-size: 0.8rem; color: #888; margin: 10px 0 0; line-height: 1.7; }
-.line-section { background-color: #f2fcfc; border-radius: 8px; padding: 22px 18px; margin: 20px 0 24px; }
+.line-section { background-color: var(--c-bg); border-radius: 8px; padding: 22px 18px; margin: 20px 0 24px; }
 .line-benefit-list { list-style: none; padding: 0; margin: 0 0 16px; }
 .line-benefit-list li {
   display: flex; align-items: flex-start; gap: 9px;
   font-size: 0.9rem; line-height: 1.75; color: #2a2a2a; font-weight: bold; margin-bottom: 10px;
 }
 .line-benefit-list li:last-child { margin-bottom: 0; }
-.line-benefit-mark { color: #20b2b8; flex-shrink: 0; margin-top: 2px; font-weight: bold; }
-.line-info { font-size: 0.83rem; color: #666; line-height: 1.85; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #d6ecec; }
+.line-benefit-mark { color: var(--c-soft); flex-shrink: 0; margin-top: 2px; font-weight: bold; }
+.line-info { font-size: 0.83rem; color: #666; line-height: 1.85; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--c-border); }
 .btn-wrap { margin: 24px 0; }
 .btn {
   display: block; width: 94%; margin: 0 auto; padding: 16px 12px;
-  background-color: #5ce1e6; color: #1a1a1a; text-align: center;
+  background-color: var(--c-accent); color: var(--c-btn-text); text-align: center;
   text-decoration: none; font-weight: 800; font-size: 0.98rem;
   border-radius: 6px; letter-spacing: 0.05em; line-height: 1.5;
   -webkit-tap-highlight-color: transparent;
 }
-.btn:active { background-color: #4bd2d7; }
+.btn:active { background-color: var(--c-btn-active); }
 .btn-note { text-align: center; font-size: 0.75rem; color: #bbb; margin: 8px 0 0; }
 hr.divider { border: 0; border-top: 1px solid #ebebeb; margin: 36px 0; }
 .table-container { width: 100%; margin: 16px 0 24px; font-size: 0.82rem; line-height: 1.6; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 th, td { padding: 10px 8px; vertical-align: top; border-bottom: 1px solid #eaeaea; word-break: break-all; }
-th { font-weight: bold; text-align: center; font-size: 0.8rem; background-color: #f0fcfe; color: #1a1a1a; }
+th { font-weight: bold; text-align: center; font-size: 0.8rem; background-color: var(--c-bg); color: #1a1a1a; }
 th:first-child { width: 18%; }
 td:first-child { font-weight: bold; color: #666; font-size: 0.8rem; }
 .benefit-list { list-style: none; padding: 0; margin: 0; }
@@ -107,7 +166,7 @@ td:first-child { font-weight: bold; color: #666; font-size: 0.8rem; }
   font-size: 0.93rem; line-height: 1.75; color: #2a2a2a; font-weight: bold;
 }
 .benefit-list li:last-child { border-bottom: none; }
-.benefit-mark { color: #20b2b8; flex-shrink: 0; margin-top: 3px; font-weight: bold; }
+.benefit-mark { color: var(--c-soft); flex-shrink: 0; margin-top: 3px; font-weight: bold; }
 .closing-block { margin: 0 0 32px; }
 .closing { font-size: 0.93rem; line-height: 2.0; color: #444; margin: 0 0 1.2em; }
 img { display: block; margin: 20px auto; max-width: 76%; height: auto; border-radius: 4px; }
@@ -139,175 +198,193 @@ fbq("track","PageView");
 <body>
 <div class="container">
 
-  <p class="target-label">このまま終わりたくない人へ　声紋診断・無料LINE相談</p>
+  <!-- ── Level 1: HERO ── -->
+  <div class="cz-1">
+    <p class="target-label">このまま終わりたくない人へ　声紋診断・無料LINE相談</p>
 
-  <div class="hero">
-    <h1 class="hero-headline">気づいたら、<br>なりたくない自分になっていた。</h1>
-    
-    <div class="hero-check-box">
-      <p>✓ 「いつか動こう、とずっと思っている。<br>　なのに、いつまで同じ場所にいるんだろう。」</p>
-      <p>✓ 「悪くない毎日だ。<br>　でも、これでいいんだろうか。」</p>
-    </div>
+    <div class="hero">
+      <h1 class="hero-headline">気づいたら、<br>なりたくない自分になっていた。</h1>
 
-    <p class="hero-sub" style="font-weight: bold; font-size: 1.05rem;">6秒の声に、あなたの本音が出る。</p>
-    <p class="hero-sub">私は「声紋診断コーチング」を活用した独自の手法でサポートをしています。<br>この手法は、「特許技術の声紋診断」によって、本当に望む未来を現実にする可能性を効果的に高める方法です。</p>
-    
-    <div class="hero-resolve">公式LINEで情報発信中です！<br>その「詰まり」の正体を、声から整理します。</div>
-  </div>
+      <div class="hero-check-box">
+        <p>✓ 「いつか動こう、とずっと思っている。<br>　なのに、いつまで同じ場所にいるんだろう。」</p>
+        <p>✓ 「悪くない毎日だ。<br>　でも、これでいいんだろうか。」</p>
+      </div>
 
-  <p class="section-label">SELF CHECK</p>
-  <h2 class="section-title">3つ以上当てはまる方に、<br>声紋診断はよく機能します</h2>
-  <ul class="check-list">
-    <li><span class="check-mark">✓</span><span>評価されても、心のモヤモヤが消えない</span></li>
-    <li><span class="check-mark">✓</span><span>目標を立てると、なぜか行動が続かない</span></li>
-    <li><span class="check-mark">✓</span><span>「本当にやりたいこと」を聞かれると、答えに詰まる</span></li>
-    <li><span class="check-mark">✓</span><span>肩書きを外したら、何が残るかわからない</span></li>
-    <li><span class="check-mark">✓</span><span>周りの期待に応え続けて、自分が何者かわからなくなってきた</span></li>
-    <li><span class="check-mark">✓</span><span>学んでも学んでも、現実は何も変わっていない</span></li>
-  </ul>
+      <p class="hero-sub" style="font-weight: bold; font-size: 1.05rem;">6秒の声に、あなたの本音が出る。</p>
+      <p class="hero-sub">私は「声紋診断コーチング」を活用した独自の手法でサポートをしています。<br>この手法は、「特許技術の声紋診断」によって、本当に望む未来を現実にする可能性を効果的に高める方法です。</p>
 
-  <hr class="divider">
-
-  <p class="section-label">WHY</p>
-  <h2 class="section-title">詰まりの正体は、<br>どこにあるのか</h2>
-  <p>その詰まりが、行動の問題なのか。<br>目標設定の問題なのか。<br>それとも、自分の本音が自分に見えていないだけなのか。</p>
-  <p>多くの場合、問題は一番手前にある。</p>
-  <p>言葉では「やりたい」と言っていても、声のトーンが別のことを言っている。<br>自分でも気づいていない本音が、声の中に隠れているからです。</p>
-
-  <hr class="divider">
-
-  <p class="section-label">ABOUT</p>
-  <h2 class="section-title">声紋診断とは何か</h2>
-  <p>人は、言葉では取り繕える。でも声の周波数は、嘘をつきません。</p>
-  <img src="voiceanalysis.webp" alt="声紋診断グラフ" width="335" height="335" loading="lazy">
-  <p>声の周波数を解析し、自分でも気づいていない本音の状態を12色のデータとして可視化する。これが声紋診断の核心です。</p>
-  <div class="mint-box">
-    <p>特許技術（公開特許2007-212932）をベースに、2万人以上の統計データから体系化されたもので、企業・病院・大学など約200の組織に導入されています。</p>
-  </div>
-  <p>「あなたはこういう人だ」と人に言られると、どうしても抵抗が生まれます。<br>でも、感情のない客観的なデータは、素直に見つめることができます。</p>
-  <p>これが、行動が変わる最初の一歩になります。</p>
-
-  <hr class="divider">
-
-  <p class="section-label">SPECIFICATION</p>
-  <h2 class="section-title">診断の概要</h2>
-  <div class="spec-block">
-    <div class="spec-item">
-      <span class="spec-number">6秒</span>
-      <span class="spec-label">録音のみ</span>
-    </div>
-    <div class="spec-item">
-      <span class="spec-number">20〜60分</span>
-      <span class="spec-label">診断時間</span>
-    </div>
-    <div class="spec-item">
-      <span class="spec-number">無料</span>
-      <span class="spec-label">費用</span>
+      <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="hero-resolve line-cv-btn">公式LINEで情報発信中です！<br>その「詰まり」の正体を、声から整理します。</a>
     </div>
   </div>
-  <p class="spec-note">無理な勧誘はありません。　プライバシーは厳守します。</p>
 
-  <hr class="divider">
-
-  <p class="section-label">LINE登録で</p>
-  <h2 class="section-title">無料の声紋診断セッションが<br>受けられます</h2>
-  <div class="line-section">
-    <ul class="line-benefit-list">
-      <li><span class="line-benefit-mark">✓</span><span>いまの自分がどの「詰まり状態」にあるか、データで見える</span></li>
-      <li><span class="line-benefit-mark">✓</span><span>言葉にできなかったモヤモヤの正体が、整理される</span></li>
+  <!-- ── Level 2: SELF CHECK ── -->
+  <div class="cz-2">
+    <p class="section-label">SELF CHECK</p>
+    <h2 class="section-title">3つ以上当てはまる方に、<br>声紋診断はよく機能します</h2>
+    <ul class="check-list">
+      <li><span class="check-mark">✓</span><span>評価されても、心のモヤモヤが消えない</span></li>
+      <li><span class="check-mark">✓</span><span>目標を立てると、なぜか行動が続かない</span></li>
+      <li><span class="check-mark">✓</span><span>「本当にやりたいこと」を聞かれると、答えに詰まる</span></li>
+      <li><span class="check-mark">✓</span><span>肩書きを外したら、何が残るかわからない</span></li>
+      <li><span class="check-mark">✓</span><span>周りの期待に応え続けて、自分が何者かわからなくなってきた</span></li>
+      <li><span class="check-mark">✓</span><span>学んでも学んでも、現実は何も変わっていない</span></li>
     </ul>
-    <p class="line-info">オンラインセッションを行います。6秒の録音データをもとに、声紋の診断を対話を通じて進めます。</p>
-    <p class="line-info">あわせて、長年特殊な環境で経験してきた経験をもとに、書籍や動画には出てこない考察を定期的にお届けしています。<br>・ 声の科学、認知のクセ、人生を動かすための視点。</p>
   </div>
 
-  <div class="btn-wrap">
-    <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録で無料の声紋診断を受けてみる →</a>
+  <!-- ── Level 3: WHY + ABOUT ── -->
+  <div class="cz-3">
+    <hr class="divider">
+
+    <p class="section-label">WHY</p>
+    <h2 class="section-title">詰まりの正体は、<br>どこにあるのか</h2>
+    <p>その詰まりが、行動の問題なのか。<br>目標設定の問題なのか。<br>それとも、自分の本音が自分に見えていないだけなのか。</p>
+    <p>多くの場合、問題は一番手前にある。</p>
+    <p>言葉では「やりたい」と言っていても、声のトーンが別のことを言っている。<br>自分でも気づいていない本音が、声の中に隠れているからです。</p>
+
+    <hr class="divider">
+
+    <p class="section-label">ABOUT</p>
+    <h2 class="section-title">声紋診断とは何か</h2>
+    <p>人は、言葉では取り繕える。でも声の周波数は、嘘をつきません。</p>
+    <img src="voiceanalysis.webp" alt="声紋診断グラフ" width="335" height="335" loading="lazy">
+    <p>声の周波数を解析し、自分でも気づいていない本音の状態を12色のデータとして可視化する。これが声紋診断の核心です。</p>
+    <div class="mint-box">
+      <p>特許技術（公開特許2007-212932）をベースに、2万人以上の統計データから体系化されたもので、企業・病院・大学など約200の組織に導入されています。</p>
+    </div>
+    <p>「あなたはこういう人だ」と人に言られると、どうしても抵抗が生まれます。<br>でも、感情のない客観的なデータは、素直に見つめることができます。</p>
+    <p>これが、行動が変わる最初の一歩になります。</p>
   </div>
 
-  <hr class="divider">
+  <!-- ── Level 4: SPECIFICATION + LINE登録 ── -->
+  <div class="cz-4">
+    <hr class="divider">
 
-  <p class="section-label">DIFFERENCE</p>
-  <h2 class="section-title">一般的なコーチングとの違い</h2>
-  <p>一般的なコーチングを否定するわけではありません。<br>ただ、私たちは無意識のうちに、周りの期待や常識に合わせて生きています。<br>そのため、頭で考えた「やりたいこと」が、心からの本音とはズレていることがよくあるのです。</p>
-  <p>もし、これまでコーチングや自己分析を試しても、モヤモヤが晴れなかったり、行動が続かなかったのなら、「声紋診断コーチング」がうまく機能する可能性があります。</p>
-  <p>従来の対話型コーチングをベースに、客観的な「声紋データ」と「認知科学」の視点を掛け合わせることで、より深く、遠回りせずに変化を起こすことができます。</p>
-  <div class="table-container">
-    <table>
-      <tr>
-        <th></th>
-        <th>一般的な<br>コーチング</th>
-        <th>声紋診断コーチング</th>
-      </tr>
-      <tr>
-        <td>現状の把握</td>
-        <td>本人の「言葉」をベースに対話を進める</td>
-        <td>「言葉」に加え、「声紋データ」で無意識の本音も可視化して進める</td>
-      </tr>
-      <tr>
-        <td>アプローチ</td>
-        <td>質問を通じて、思考の整理を促す</td>
-        <td>思考の整理に加え、認知科学に基づき「ものの捉え方」の根本から見直す</td>
-      </tr>
-      <tr>
-        <td>納得感と<br>行動</td>
-        <td>頭で理解しても、心が追いつかないことがある</td>
-        <td>データと対話の両輪で深く納得できるため、無理なく自然に行動が続く</td>
-      </tr>
-    </table>
+    <p class="section-label">SPECIFICATION</p>
+    <h2 class="section-title">診断の概要</h2>
+    <div class="spec-block">
+      <div class="spec-item">
+        <span class="spec-number">6秒</span>
+        <span class="spec-label">録音のみ</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-number">20〜60分</span>
+        <span class="spec-label">診断時間</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-number">無料</span>
+        <span class="spec-label">費用</span>
+      </div>
+    </div>
+    <p class="spec-note">無理な勧誘はありません。　プライバシーは厳守します。</p>
+
+    <hr class="divider">
+
+    <p class="section-label">LINE登録で</p>
+    <h2 class="section-title">無料の声紋診断セッションが<br>受けられます</h2>
+    <div class="line-section">
+      <ul class="line-benefit-list">
+        <li><span class="line-benefit-mark">✓</span><span>いまの自分がどの「詰まり状態」にあるか、データで見える</span></li>
+        <li><span class="line-benefit-mark">✓</span><span>言葉にできなかったモヤモヤの正体が、整理される</span></li>
+      </ul>
+      <p class="line-info">オンラインセッションを行います。6秒の録音データをもとに、声紋の診断を対話を通じて進めます。</p>
+      <p class="line-info">あわせて、長年特殊な環境で経験してきた経験をもとに、書籍や動画には出てこない考察を定期的にお届けしています。<br>・ 声の科学、認知のクセ、人生を動かすための視点。</p>
+    </div>
+
+    <div class="btn-wrap">
+      <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録で無料の声紋診断を受けてみる →</a>
+    </div>
   </div>
 
-  <hr class="divider">
+  <!-- ── Level 5: DIFFERENCE + WHY HUMAN ── -->
+  <div class="cz-5">
+    <hr class="divider">
 
-  <p class="section-label">WHY HUMAN</p>
-  <h2 class="section-title">データだけでは、<br>人は変われません</h2>
-  <p>声紋診断で、現在地がわかります。<br>「本来の素質」と「今の状態」のズレが見えます。</p>
-  <p>でも、それだけでは変われません。「で、どうすればいいの？」が残るからです。</p>
-  <p>行動だけを変えようとしても、根本にある「ものの捉え方」が変わらなければ、元のパターンに戻ります。</p>
-  <p>だから、対話が必要になります。</p>
-  <p>声紋診断で現在地を把握し、対話の中で「本当はどうしたいのか」を一緒に探る。<br>言葉だけでなく、声のトーン、間、非言語の情報を読み取りながら、ご本人も気づいていない思考のパターンに光を当てます。</p>
-  <p>これは、機械にはできません。</p>
+    <p class="section-label">DIFFERENCE</p>
+    <h2 class="section-title">一般的なコーチングとの違い</h2>
+    <p>一般的なコーチングを否定するわけではありません。<br>ただ、私たちは無意識のうちに、周りの期待や常識に合わせて生きています。<br>そのため、頭で考えた「やりたいこと」が、心からの本音とはズレていることがよくあるのです。</p>
+    <p>もし、これまでコーチングや自己分析を試しても、モヤモヤが晴れなかったり、行動が続かなかったのなら、「声紋診断コーチング」がうまく機能する可能性があります。</p>
+    <p>従来の対話型コーチングをベースに、客観的な「声紋データ」と「認知科学」の視点を掛け合わせることで、より深く、遠回りせずに変化を起こすことができます。</p>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th></th>
+          <th>一般的な<br>コーチング</th>
+          <th>声紋診断コーチング</th>
+        </tr>
+        <tr>
+          <td>現状の把握</td>
+          <td>本人の「言葉」をベースに対話を進める</td>
+          <td>「言葉」に加え、「声紋データ」で無意識の本音も可視化して進める</td>
+        </tr>
+        <tr>
+          <td>アプローチ</td>
+          <td>質問を通じて、思考の整理を促す</td>
+          <td>思考の整理に加え、認知科学に基づき「ものの捉え方」の根本から見直す</td>
+        </tr>
+        <tr>
+          <td>納得感と<br>行動</td>
+          <td>頭で理解しても、心が追いつかないことがある</td>
+          <td>データと対話の両輪で深く納得できるため、無理なく自然に行動が続く</td>
+        </tr>
+      </table>
+    </div>
 
-  <hr class="divider">
+    <hr class="divider">
 
-  <p class="section-label">PROFILE</p>
-  <h2 class="section-title">声紋診断　アップデート林</h2>
-  <div class="mint-box">
-    <p>国家資格救急救命士 ／ 生命の最前線で20年以上・2,000名以上と対話</p>
-  </div>
-  <p>人が死にそうな現場で、20年間声をかけ続けてきた。</p>
-  <p>言葉では「大丈夫です」と言っていても、声が揺れている人がいた。<br>言葉では「もう終わりです」と言っていても、声に力が残っている人がいた。</p>
-  <p>言葉と心の声がずれる瞬間を、現場で繰り返し見てきた。<br>それが声紋診断と交わったとき、自分がやるべきことが見えた。</p>
-
-  <hr class="divider">
-
-  <p class="section-label">CHANGE</p>
-  <h2 class="section-title">声と向き合うことで、<br>こんな変化が起きる可能性があります</h2>
-  <ul class="benefit-list">
-    <li><span class="benefit-mark">✓</span><span>ずっと抱えてきたモヤモヤの正体が、やっとわかった</span></li>
-    <li><span class="benefit-mark">✓</span><span>「これだ」と思える方向が見つかり、迷わなくなった</span></li>
-    <li><span class="benefit-mark">✓</span><span>誰かと比べて落ち込む日々が、嘘みたいに消えた</span></li>
-    <li><span class="benefit-mark">✓</span><span>朝、目が覚めた瞬間から、生きている実感が湧いてくる</span></li>
-    <li><span class="benefit-mark">✓</span><span>自分がどうしたいか、それだけで決められるようになった</span></li>
-    <li><span class="benefit-mark">✓</span><span>言い訳しなくなった。動ける自分が誇らしい</span></li>
-    <li><span class="benefit-mark">✓</span><span>「自分の人生を生きている」その確信が、涙が出るほど嬉しい</span></li>
-  </ul>
-
-  <hr class="divider">
-
-  <div class="closing-block">
-    <p class="closing">声を診断することで何かが変わるかどうか、正直、やってみなければわかりません。</p>
-    <p class="closing">ただ、自分の声を一度も聴いたことがない人が、自分の本心を知ろうとすることには、意味があると思っています。</p>
-    <p class="closing">気になるなら、それだけで十分です。</p>
-  </div>
-
-  <div class="btn-wrap">
-    <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">ライン登録で無料の声紋診断を受けてみる →</a>
-    <p class="btn-note">※ 登録は30秒です。</p>
+    <p class="section-label">WHY HUMAN</p>
+    <h2 class="section-title">データだけでは、<br>人は変われません</h2>
+    <p>声紋診断で、現在地がわかります。<br>「本来の素質」と「今の状態」のズレが見えます。</p>
+    <p>でも、それだけでは変われません。「で、どうすればいいの？」が残るからです。</p>
+    <p>行動だけを変えようとしても、根本にある「ものの捉え方」が変わらなければ、元のパターンに戻ります。</p>
+    <p>だから、対話が必要になります。</p>
+    <p>声紋診断で現在地を把握し、対話の中で「本当はどうしたいのか」を一緒に探る。<br>言葉だけでなく、声のトーン、間、非言語の情報を読み取りながら、ご本人も気づいていない思考のパターンに光を当てます。</p>
+    <p>これは、機械にはできません。</p>
   </div>
 
-  <div class="footer">
-    © 2026 アップデート林 / 声紋診断<br>
-    使用技術：公開特許2007-212932
+  <!-- ── Level 6: PROFILE + CHANGE + クロージング ── -->
+  <div class="cz-6">
+    <hr class="divider">
+
+    <p class="section-label">PROFILE</p>
+    <h2 class="section-title">声紋診断　アップデート林</h2>
+    <div class="mint-box">
+      <p>国家資格救急救命士 ／ 生命の最前線で20年以上・2,000名以上と対話</p>
+    </div>
+    <p>人が死にそうな現場で、20年間声をかけ続けてきた。</p>
+    <p>言葉では「大丈夫です」と言っていても、声が揺れている人がいた。<br>言葉では「もう終わりです」と言っていても、声に力が残っている人がいた。</p>
+    <p>言葉と心の声がずれる瞬間を、現場で繰り返し見てきた。<br>それが声紋診断と交わったとき、自分がやるべきことが見えた。</p>
+
+    <hr class="divider">
+
+    <p class="section-label">CHANGE</p>
+    <h2 class="section-title">声と向き合うことで、<br>こんな変化が起きる可能性があります</h2>
+    <ul class="benefit-list">
+      <li><span class="benefit-mark">✓</span><span>ずっと抱えてきたモヤモヤの正体が、やっとわかった</span></li>
+      <li><span class="benefit-mark">✓</span><span>「これだ」と思える方向が見つかり、迷わなくなった</span></li>
+      <li><span class="benefit-mark">✓</span><span>誰かと比べて落ち込む日々が、嘘みたいに消えた</span></li>
+      <li><span class="benefit-mark">✓</span><span>朝、目が覚めた瞬間から、生きている実感が湧いてくる</span></li>
+      <li><span class="benefit-mark">✓</span><span>自分がどうしたいか、それだけで決められるようになった</span></li>
+      <li><span class="benefit-mark">✓</span><span>言い訳しなくなった。動ける自分が誇らしい</span></li>
+      <li><span class="benefit-mark">✓</span><span>「自分の人生を生きている」その確信が、涙が出るほど嬉しい</span></li>
+    </ul>
+
+    <hr class="divider">
+
+    <div class="closing-block">
+      <p class="closing">声を診断することで何かが変わるかどうか、正直、やってみなければわかりません。</p>
+      <p class="closing">ただ、自分の声を一度も聴いたことがない人が、自分の本心を知ろうとすることには、意味があると思っています。</p>
+      <p class="closing">気になるなら、それだけで十分です。</p>
+    </div>
+
+    <div class="btn-wrap">
+      <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">ライン登録で無料の声紋診断を受けてみる →</a>
+      <p class="btn-note">※ 登録は30秒です。</p>
+    </div>
+
+    <div class="footer">
+      © 2026 アップデート林 / 声紋診断<br>
+      使用技術：公開特許2007-212932
+    </div>
   </div>
 
 </div>
