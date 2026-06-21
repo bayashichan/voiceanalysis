@@ -31,7 +31,7 @@ export async function onRequestPost(context) {
     });
   }
 
-  const { eventId, url, fbp, fbc } = body;
+  const { eventId, url, fbp, fbc, eventName, testEventCode } = body;
 
   if (!eventId) {
     return new Response(JSON.stringify({ error: 'Missing eventId' }), {
@@ -53,7 +53,7 @@ export async function onRequestPost(context) {
   const payload = {
     data: [
       {
-        event_name: 'Lead',
+        event_name: eventName || 'Lead',
         event_time: Math.floor(Date.now() / 1000),
         event_id: eventId,
         event_source_url: url,
@@ -62,6 +62,7 @@ export async function onRequestPost(context) {
       },
     ],
   };
+  if (testEventCode) payload.test_event_code = testEventCode;
 
   try {
     // Authorization header keeps the token out of URL query strings and server access logs
