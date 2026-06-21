@@ -19,7 +19,6 @@ body {
   padding: 36px 20px 48px; line-height: 1.9; font-size: 0.95rem;
   word-break: break-all; overflow-wrap: break-word;
 }
-
 /* ── Color zone defaults: Level 1 / ファーストビュー ── */
 :root {
   --c-accent:     #28b0b8;
@@ -29,7 +28,7 @@ body {
   --c-btn-text:   #1a1a1a;
   --c-btn-active: #1ea4ac;
 }
-/* Level 2: SELF CHECK */
+/* Level 2 */
 .cz-2 {
   --c-accent:     #249ba8;
   --c-soft:       #0e7883;
@@ -37,7 +36,7 @@ body {
   --c-border:     #91c8d2;
   --c-btn-active: #1a8e9a;
 }
-/* Level 3: WHY + ABOUT */
+/* Level 3 */
 .cz-3 {
   --c-accent:     #1f8698;
   --c-soft:       #0c6574;
@@ -45,7 +44,7 @@ body {
   --c-border:     #84bac7;
   --c-btn-active: #177888;
 }
-/* Level 4: SPECIFICATION + LINE登録 */
+/* Level 4 */
 .cz-4 {
   --c-accent:     #1b7088;
   --c-soft:       #0b5366;
@@ -54,7 +53,7 @@ body {
   --c-btn-text:   #fff;
   --c-btn-active: #136177;
 }
-/* Level 5: DIFFERENCE + WHY HUMAN */
+/* Level 5 */
 .cz-5 {
   --c-accent:     #165b78;
   --c-soft:       #094057;
@@ -63,7 +62,7 @@ body {
   --c-btn-text:   #fff;
   --c-btn-active: #104b66;
 }
-/* Level 6: PROFILE + CHANGE + クロージング */
+/* Level 6 */
 .cz-6 {
   --c-accent:     #124668;
   --c-soft:       #082e48;
@@ -72,7 +71,6 @@ body {
   --c-btn-text:   #fff;
   --c-btn-active: #0c3554;
 }
-
 .target-label {
   text-align: center; font-size: 0.78rem; color: #666; letter-spacing: 0.08em;
   margin: 0 0 28px; padding-bottom: 16px; border-bottom: 1px solid #e8e8e8;
@@ -107,6 +105,11 @@ body {
 .check-mark { color: var(--c-soft); font-size: 0.9rem; font-weight: bold; margin-top: 2px; flex-shrink: 0; }
 p { margin: 0 0 1.2em; line-height: 1.9; }
 p:last-child { margin-bottom: 0; }
+.lead-strong { font-weight: 800; color: #1a1a1a; font-size: 1.0rem; }
+.future-head {
+  font-size: 0.98rem; font-weight: 800; color: #1a1a1a; margin: 22px 0 12px;
+  padding: 8px 12px; background-color: var(--c-bg); border-radius: 4px;
+}
 .mint-box {
   background-color: var(--c-bg); border-left: 4px solid var(--c-accent);
   padding: 18px 16px; margin: 24px 0; font-size: 0.93rem; line-height: 1.85;
@@ -130,6 +133,18 @@ p:last-child { margin-bottom: 0; }
 .line-benefit-list li:last-child { margin-bottom: 0; }
 .line-benefit-mark { color: var(--c-soft); flex-shrink: 0; margin-top: 2px; font-weight: bold; }
 .line-info { font-size: 0.83rem; color: #666; line-height: 1.85; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--c-border); }
+.step-list { list-style: none; padding: 0; margin: 18px 0 0; counter-reset: step; }
+.step-list li {
+  position: relative; padding: 12px 0 12px 40px; font-size: 0.92rem; line-height: 1.7;
+  border-bottom: 1px solid #f0f0f0; font-weight: bold; color: #2a2a2a;
+}
+.step-list li:last-child { border-bottom: none; }
+.step-list li::before {
+  counter-increment: step; content: counter(step);
+  position: absolute; left: 0; top: 12px;
+  width: 26px; height: 26px; line-height: 26px; text-align: center;
+  background-color: var(--c-accent); color: #fff; border-radius: 50%; font-size: 0.85rem;
+}
 .btn-wrap { margin: 24px 0; }
 .btn {
   display: block; width: 94%; margin: 0 auto; padding: 16px 12px;
@@ -157,6 +172,7 @@ td:first-child { font-weight: bold; color: #666; font-size: 0.8rem; }
 .benefit-mark { color: var(--c-soft); flex-shrink: 0; margin-top: 3px; font-weight: bold; }
 .closing-block { margin: 0 0 32px; }
 .closing { font-size: 0.93rem; line-height: 2.0; color: #444; margin: 0 0 1.2em; }
+.sign { text-align: right; font-size: 0.9rem; color: #555; font-weight: bold; margin-top: 24px; }
 img { display: block; margin: 20px auto; max-width: 76%; height: auto; border-radius: 4px; }
 .footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid #ebebeb; text-align: center; font-size: 0.73rem; color: #bbb; line-height: 1.9; }
 @media (max-width: 374px) {
@@ -169,15 +185,13 @@ img { display: block; margin: 20px auto; max-width: 76%; height: auto; border-ra
   .container { max-width: 520px; padding: 48px 32px; }
 }
 </style>
-
 <!-- Meta Pixel -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
-fbq("init","1302054671384974"); // Must match META_PIXEL_ID env var in Cloudflare Pages — mismatch silently breaks CAPI deduplication
+fbq("init","1302054671384974");
 fbq("track","PageView");
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1302054671384974&ev=PageView&noscript=1"/></noscript>
-
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
 (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","vhe50003pj");
@@ -186,179 +200,227 @@ fbq("track","PageView");
 <body>
 <div class="container">
 
-  <!-- ── Level 1: HERO ── -->
+  <!-- ── ① ファーストビュー ── -->
   <div class="cz-1">
     <p class="target-label">このまま終わりたくない人へ　声紋診断・無料LINE相談</p>
-
     <div class="hero">
       <h1 class="hero-headline">気づいたら、<br>何年も同じ場所にいた。</h1>
-      <p class="hero-sub">そう感じたことはありませんか。</p>
+      <p class="hero-sub">そう感じたことは、ありませんか。</p>
       <p class="hero-frame">「このままでいい」とは思えない。<br>でも、何を変えればいいかも、わからない。</p>
-      <div class="hero-resolve">その、くすぶりの正体を——声から整理します。</div>
+      <p class="hero-frame">その答えは、外にではなく——<br>あなたの声の中にあります。</p>
+      <div class="hero-resolve">くすぶりの正体を、声から整理します。</div>
     </div>
   </div>
 
-  <!-- ── Level 2: SELF CHECK ── -->
+  <!-- ── ② 共感・セルフチェック ── -->
   <div class="cz-2">
-    <p class="section-label">SELF CHECK</p>
-    <h2 class="section-title">3つ以上当てはまる方に、<br>声紋診断はよく機能します</h2>
+    <p>朝、目が覚める。<br>やるべきことはある。仕事もこなしている。</p>
+    <p>それでも、心のどこかが、ずっと言い続けている。<br>——「これじゃない」と。</p>
+    <p>周りからは、うまくいっているように見えるかもしれません。<br>でも、自分のなかの満たされなさだけは、ごまかせない。</p>
+    <h2 class="section-title">3つ以上当てはまるなら、<br>この先はあなたのための話です</h2>
     <ul class="check-list">
       <li><span class="check-mark">✓</span><span>評価されても、心のモヤモヤが消えない</span></li>
-      <li><span class="check-mark">✓</span><span>目標を立てると、なぜか行動が続かない</span></li>
+      <li><span class="check-mark">✓</span><span>目標を立てても、なぜか行動が続かない</span></li>
       <li><span class="check-mark">✓</span><span>「本当にやりたいこと」を聞かれると、答えに詰まる</span></li>
-      <li><span class="check-mark">✓</span><span>肩書きを外したら、何が残るかわからない</span></li>
-      <li><span class="check-mark">✓</span><span>周りの期待に応え続けて、自分が何者かわからなくなってきた</span></li>
+      <li><span class="check-mark">✓</span><span>肩書きを外したら、何が残るのか分からない</span></li>
+      <li><span class="check-mark">✓</span><span>周りの期待に応え続けて、自分が何者か分からなくなってきた</span></li>
       <li><span class="check-mark">✓</span><span>学んでも学んでも、現実は何も変わっていない</span></li>
     </ul>
+    <p>もし、ひとつでも当てはまるなら——<br>どうか、この先を最後まで読んでみてください。</p>
+    <p>あなたのくすぶりの正体と、その動かし方の話をします。</p>
   </div>
 
-  <!-- ── Level 3: WHY + ABOUT ── -->
+  <!-- ── ③ はじめまして ＋ ④ WHY ＋ ⑤ ABOUT ── -->
   <div class="cz-3">
     <hr class="divider">
-
-    <p class="section-label">WHY</p>
-    <h2 class="section-title">詰まりの正体は、<br>どこにあるのか</h2>
-    <p>その詰まりが、行動の問題なのか。<br>目標設定の問題なのか。<br>それとも、自分の本音が自分に見えていないだけなのか。</p>
-    <p>多くの場合、問題は一番手前にある。</p>
-    <p>言葉では「やりたい」と言っていても、声のトーンが別のことを言っている。<br>自分でも気づいていない本音が、声の中に隠れているからです。</p>
+    <h2 class="section-title">はじめまして</h2>
+    <p>申し遅れました。私は、<strong>声紋診断コーチ</strong>のアップデート林です。</p>
+    <p>声を手がかりに、あなた自身も気づいていない本音を可視化し、「自分の生き方で生きる」ための一歩を、一緒に見つける仕事をしています。</p>
+    <p>なぜ声なのか。なぜそれで人が変わるのか。<br>その話を、これからします。</p>
 
     <hr class="divider">
+    <h2 class="section-title">なぜ、変われなかったのか</h2>
+    <p>意志の力で変わろうとして、続かなかった経験はありませんか。</p>
+    <p>続かないのは、意志が弱いからではありません。</p>
+    <p>その詰まりが、行動の問題なのか。目標設定の問題なのか。それとも、自分の本音が、自分自身に見えていないだけなのか。</p>
+    <p>多くの場合、問題はいちばん手前にあります。</p>
+    <p>言葉では「やりたい」と言っていても、声のトーンは別のことを言っている。自分でも気づいていない本音が、声の中に隠れているからです。</p>
 
-    <p class="section-label">ABOUT</p>
+    <hr class="divider">
     <h2 class="section-title">声紋診断とは何か</h2>
-    <p>人は、言葉では取り繕える。でも声の周波数は、嘘をつきません。</p>
+    <p>人は、言葉では取り繕えます。でも、声の周波数は、嘘をつきません。</p>
     <img src="voiceanalysis.webp" alt="声紋診断グラフ" width="335" height="335" loading="lazy">
-    <p>声の周波数を解析し、自分でも気づいていない本音の状態を12色のデータとして可視化する。これが声紋診断の核心です。</p>
+    <p>声の周波数を解析し、自分でも気づいていない本音の状態を、12色のデータとして可視化する。これが声紋診断の核心です。</p>
     <div class="mint-box">
-      <p>特許技術（公開特許2007-212932）をベースに、2万人以上の統計データから体系化されたもので、企業・病院・大学など約200の組織に導入されています。</p>
+      <p>特許技術（公開特許2007-212932）をベースに、2万人以上の統計データから体系化された手法です。企業・病院・大学など、約200の組織に導入されています。</p>
     </div>
-    <p>「あなたはこういう人だ」と人に言られると、どうしても抵抗が生まれます。<br>でも、感情のない客観的なデータは、素直に見つめることができます。</p>
-    <p>これが、行動が変わる最初の一歩になります。</p>
+    <p><span class="lead-strong">何よりも大切なのは、まず「現在地」を知ることです。</span></p>
+    <p>どんなに優れた地図があっても、自分が今どこにいるか分からなければ、進む方向は決められません。変わりたいのに変われない——その多くは、行き先ではなく、現在地が見えていないことに原因があります。</p>
+    <p>「あなたはこういう人だ」と人に言われれば、抵抗が生まれます。けれど、感情のない客観的なデータなら、素直に受け取れる。</p>
+    <p>自分の現在地が、はっきりと見える。そこからはじめて、これから進むべき方向が——おのずと定まっていきます。</p>
   </div>
 
-  <!-- ── Level 4: SPECIFICATION + LINE登録 ── -->
+  <!-- ── ⑥ MECHANISM ── -->
   <div class="cz-4">
     <hr class="divider">
-
-    <p class="section-label">SPECIFICATION</p>
-    <h2 class="section-title">診断の概要</h2>
-    <div class="spec-block">
-      <div class="spec-item">
-        <span class="spec-number">6秒</span>
-        <span class="spec-label">録音のみ</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-number">20〜60分</span>
-        <span class="spec-label">診断時間</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-number">無料</span>
-        <span class="spec-label">費用</span>
-      </div>
+    <h2 class="section-title">なぜ、関わるだけで変わるのか</h2>
+    <p>人を本当に動かすのは、意志ではなく「環境」です。</p>
+    <p><span class="lead-strong">人は、まわりに同調する生き物です。</span></p>
+    <p>嬉しそうな人がひとりいるだけで、場の空気が明るくなる。怒っている人がいれば、その空間がぴりっと張りつめる。</p>
+    <p>あなたも、きっと体感したことがあるはずです。これは性格ではなく、本能として備わった反応です。</p>
+    <p><span class="lead-strong">では、いまのあなたの環境は、どうでしょうか。</span></p>
+    <p>うまくいっていないと感じるとき——まわりの人が発する言葉、漂う雰囲気は、どんなものですか。もしかすると、似たような空気なのではないでしょうか。</p>
+    <p>その環境が、いまのあなたに同調する。そして、あなたの雰囲気もまた、まわりに同調していく。こうして、同じような現実が、静かに再生産されていきます。</p>
+    <p>変われないのは、あなたの問題ではありません。<span class="lead-strong">「どこで同調するか」を、まだ選んでいないだけです。</span></p>
+    <div class="mint-box">
+      <p>そして、あなたに最も深く同調してきたのは——おそらく、いちばん身近な人たちです。家族や、親しい友人かもしれません。</p>
+      <p>その人たちが、気づかないうちに、あなたの挑戦を引き止めていることがあります。「やめておいたら」「あなたには難しいんじゃない」。悪気はありません。むしろ、あなたのためを思って——良かれと思って、です。</p>
+      <p>けれど結果として、あなたの可能性に、静かにブレーキがかかる。これを、ドリームキラーと呼びます。</p>
+      <p>「期待を裏切ってはいけない」「応えなければいけない」——その当たり前のような感覚が、実はあなた自身を縛っていることがあります。</p>
     </div>
-    <p class="spec-note">無理な勧誘はありません。　プライバシーは厳守します。</p>
-
-    <hr class="divider">
-
-    <p class="section-label">LINE登録で</p>
-    <h2 class="section-title">無料の声紋診断セッションが<br>受けられます</h2>
-    <div class="line-section">
-      <ul class="line-benefit-list">
-        <li><span class="line-benefit-mark">✓</span><span>いまの自分がどの「詰まり状態」にあるか、データで見える</span></li>
-        <li><span class="line-benefit-mark">✓</span><span>言葉にできなかったモヤモヤの正体が、整理される</span></li>
-      </ul>
-      <p class="line-info">オンラインセッションを行います。6秒の録音データをもとに、声紋の診断を対話を通じて進めます。</p>
-      <p class="line-info">あわせて、長年特殊な環境で経験してきた経験をもとに、書籍や動画には出てこない考察を定期的にお届けしています。<br>・ 声の科学、認知のクセ、人生を動かすための視点。</p>
-    </div>
-
-    <div class="btn-wrap">
-      <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録で無料の声紋診断を受けてみる →</a>
-    </div>
+    <p><span class="lead-strong">だからこそ、第三者の存在が、力になります。</span></p>
+    <p>あなたと、利害関係のない人。あなたの可能性を、条件をつけずに信じる人。そういう存在と同調できたとき、選ぶ行動が変わり、手にする現実が変わっていきます。</p>
+    <p>望む方向を、先に進んでいる人。欲しい状態を、先に手にしている人。その状態に同調すると、あなたにとっての"当たり前のライン"——基準点が、上がります。</p>
+    <p>基準点が上がると、日々の小さな選択の質が変わる。これまで避けていた一歩を、自然に選べるようになる。</p>
+    <p>根性でも、魔法でもありません。人がもともと持っている「同調」という性質を、変化のために使う。ただ、それだけのことです。</p>
   </div>
 
-  <!-- ── Level 5: DIFFERENCE + WHY HUMAN ── -->
+  <!-- ── ⑦ STORY ＋ ⑧ DIFFERENCE ＋ ⑨ WHY HUMAN ── -->
   <div class="cz-5">
+    <div class="btn-wrap">
+      <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、声紋診断を無料で予約する →</a>
+      <p class="btn-note">※ 登録は30秒です。／ 強引な勧誘は一切ありません。</p>
+    </div>
     <hr class="divider">
+    <h2 class="section-title">なぜ、私がこれをやるのか</h2>
+    <div class="mint-box">
+      <p><strong>声紋診断　アップデート林</strong>　｜　声紋診断コーチ<br>国家資格救急救命士 ／ 生命の最前線で20年以上・2,000名以上と対話</p>
+    </div>
+    <p>人が死にそうな現場で、20年間、声をかけ続けてきました。</p>
+    <p>規律がすべての、硬い世界です。決められた手順、変わらない毎日。その中で、少しずつ感じていた違和感がありました。<br>——「自分は、本当にやりたいことを、やれているのだろうか」と。</p>
+    <p>そして、いちばん近い存在——家族と、向き合うことになりました。</p>
+    <p>振り返れば、私はずっと、家族の敷いたレールの上を歩いてきました。反発しているつもりでした。けれど結局は、そのレールの内側で生きていただけでした。</p>
+    <p>そんな自分が、生まれてはじめて、声に出したことがあります。<br>——「自分の生き方で生きる。自分の足で、歩く」と。</p>
+    <p>それは、家族にとって痛みを伴うことでした。衝撃を与えることでも、あったと思います。</p>
+    <p>それでも、言わずにはいられなかった。知らないうちに、家族の望むとおりに動いてきた自分の奥には——どうしても消せないくすぶりと、虚しさと、苛立ちが、ずっと残っていたからです。</p>
+    <p>その宣言は、言葉だけでは終わりませんでした。</p>
+    <p>私が選んだのは、安定した道を離れ、起業して自分で稼ぎ、自分自身の価値を、社会に提供していく道でした。</p>
+    <p>怖さは、ありました。でも、やらなければ一生変わらないことだけは、分かっていました。</p>
+    <p>自分の足で歩きはじめると、不思議と、見える景色が変わっていきました。それまでの私は、正直、自分のことで精一杯でした。けれど少しずつ、問いが変わっていったんです。<br>——「自分は、世の中に対して何ができるのか」「この自分を、どう使えるのか」と。</p>
+    <p>きれいごとに聞こえるかもしれません。ただ、ひとつだけ、はっきりしたことがあります。</p>
+    <p>自分が本当に満たされるのは、何かを手に入れたときではなく、誰かの役に、立てたとき——だったということです。長いあいだ、自分でも、気づいていませんでした。</p>
+    <p><span class="lead-strong">行き止まりのように見えたとしても、可能性は見つけられる。</span></p>
+    <p>振り返れば、そのヒントは、ずっと現場にありました。</p>
+    <p>言葉では「大丈夫です」と言っていても、声が揺れている人がいた。言葉では「もう終わりです」と言っていても、声に力が残っている人がいた。</p>
+    <p>言葉と心の声がずれる瞬間を、現場で、繰り返し見てきました。その感覚が、声紋診断と出会ったとき、ひとつにつながったんです。</p>
+    <p>「やればできた」。小さくても確かなその実感を、ひとつずつ積み重ねてきました。その積み重ねが、いまの私をつくっています。</p>
+    <div class="mint-box">
+      <p>くすぶっていた私を、この場所まで連れてきたもの。それは、特別な才能でも、運でもありませんでした。</p>
+      <p>自分の現在地を見せてくれた、声紋診断。ひとりでは出せなかった本音を引き出してくれた、対話——コーチング。そして、「やればできる」に同調できる、環境の力。</p>
+      <p>この三つが、私自身を変えました。いま私があなたに差し出すのは、机上の理論ではありません。私自身が、それで変わった——その、三つです。</p>
+    </div>
+    <p>だからこそ、いま同じようにくすぶっている人に、伝えたいんです。変われないのは、あなたのせいではありません。ただ——同調する相手を、まだ選んでいないだけです。</p>
 
-    <p class="section-label">DIFFERENCE</p>
+    <hr class="divider">
     <h2 class="section-title">一般的なコーチングとの違い</h2>
-    <p>一般的なコーチングを否定するわけではありません。<br>ただ、私たちは無意識のうちに、周りの期待や常識に合わせて生きています。<br>そのため、頭で考えた「やりたいこと」が、心からの本音とはズレていることがよくあるのです。</p>
-    <p>もし、これまでコーチングや自己分析を試しても、モヤモヤが晴れなかったり、行動が続かなかったのなら、「声紋診断コーチング」がうまく機能する可能性があります。</p>
-    <p>従来の対話型コーチングをベースに、客観的な「声紋データ」と「認知科学」の視点を掛け合わせることで、より深く、遠回りせずに変化を起こすことができます。</p>
+    <p>一般的なコーチングを、否定するわけではありません。ただ、私たちは無意識のうちに、周りの期待や常識に合わせて生きています。そのため、頭で考えた「やりたいこと」が、心からの本音とズレていることがよくあります。</p>
+    <p>これまでコーチングや自己分析を試しても、モヤモヤが晴れなかった。行動が続かなかった。もしそうなら、「声紋診断コーチング」が、うまく機能する可能性があります。</p>
     <div class="table-container">
       <table>
         <tr>
           <th></th>
           <th>一般的な<br>コーチング</th>
-          <th>声紋診断コーチング</th>
+          <th>声紋診断<br>コーチング</th>
         </tr>
         <tr>
           <td>現状の把握</td>
-          <td>本人の「言葉」をベースに対話を進める</td>
-          <td>「言葉」に加え、「声紋データ」で無意識の本音も可視化して進める</td>
+          <td>本人の「言葉」をベースに進める</td>
+          <td>言葉に加え、「声紋データ」で無意識の本音も可視化して進める</td>
         </tr>
         <tr>
           <td>アプローチ</td>
-          <td>質問を通じて、思考の整理を促す</td>
-          <td>思考の整理に加え、認知科学に基づき「ものの捉え方」の根本から見直す</td>
+          <td>質問で思考の整理を促す</td>
+          <td>思考の整理に加え、認知科学で「ものの捉え方」の根本から見直す</td>
         </tr>
         <tr>
-          <td>納得感と<br>行動</td>
+          <td>納得と<br>行動</td>
           <td>頭で理解しても、心が追いつかないことがある</td>
-          <td>データと対話の両輪で深く納得できるため、無理なく自然に行動が続く</td>
+          <td>データと対話の両輪で深く納得でき、無理なく行動が続く</td>
         </tr>
       </table>
     </div>
 
     <hr class="divider">
-
-    <p class="section-label">WHY HUMAN</p>
     <h2 class="section-title">データだけでは、<br>人は変われません</h2>
-    <p>声紋診断で、現在地がわかります。<br>「本来の素質」と「今の状態」のズレが見えます。</p>
+    <p>声紋診断で、現在地がわかります。「本来の素質」と「いまの状態」のズレが見えます。</p>
     <p>でも、それだけでは変われません。「で、どうすればいいの？」が残るからです。</p>
-    <p>行動だけを変えようとしても、根本にある「ものの捉え方」が変わらなければ、元のパターンに戻ります。</p>
-    <p>だから、対話が必要になります。</p>
-    <p>声紋診断で現在地を把握し、対話の中で「本当はどうしたいのか」を一緒に探る。<br>言葉だけでなく、声のトーン、間、非言語の情報を読み取りながら、ご本人も気づいていない思考のパターンに光を当てます。</p>
+    <p>行動だけを変えようとしても、根本の「ものの捉え方」が変わらなければ、元のパターンに戻る。だから、対話が必要になります。</p>
+    <p>声で現在地を把握し、対話で「本当はどうしたいのか」を一緒に探る。声のトーン、間、非言語の情報を読み取りながら、ご本人も気づいていない思考のパターンに光を当てる。</p>
     <p>これは、機械にはできません。</p>
   </div>
 
-  <!-- ── Level 6: PROFILE + CHANGE + クロージング ── -->
+  <!-- ── ⑩ FUTURE 〜 ⑭ CLOSING ── -->
   <div class="cz-6">
     <hr class="divider">
+    <h2 class="section-title">二つの未来</h2>
+    <p>今、あなたの前には、二つの道があります。</p>
 
-    <p class="section-label">PROFILE</p>
-    <h2 class="section-title">声紋診断　アップデート林</h2>
-    <div class="mint-box">
-      <p>国家資格救急救命士 ／ 生命の最前線で20年以上・2,000名以上と対話</p>
-    </div>
-    <p>人が死にそうな現場で、20年間声をかけ続けてきた。</p>
-    <p>言葉では「大丈夫です」と言っていても、声が揺れている人がいた。<br>言葉では「もう終わりです」と言っていても、声に力が残っている人がいた。</p>
-    <p>言葉と心の声がずれる瞬間を、現場で繰り返し見てきた。<br>それが声紋診断と交わったとき、自分がやるべきことが見えた。</p>
+    <p class="future-head">このまま、何も変えなかったら</p>
+    <p>来月も、同じ朝が来ます。目は覚める。やることはある。でも、心のどこかが「これじゃない」と言い続けている。</p>
+    <p>また新しい本を買い、セミナーに申し込むかもしれません。その時は少し前向きになる。けれど数日経てば、現実は元のまま。</p>
+    <p>1年後。状況は、ほとんど変わっていません。同じ時期に動き出した人が先へ進んでいくのを、横目で見ている。</p>
+    <p>3年後。「あの時、何か変えていれば」——その問いが、ふとした瞬間に浮かぶようになります。</p>
+    <p>時間だけは、二度と戻りません。</p>
+
+    <p class="future-head">もし、声と一度、向き合ってみたら</p>
+    <p>数週間後。ずっと言葉にできなかったモヤモヤに、輪郭がつきます。「自分は、こういう状態だったのか」と、はじめて腑に落ちる。</p>
+    <p>3ヶ月後。朝、起き上がるときの重さが軽くなっています。ずっと先延ばしにしていた一歩に、気づけば手をつけはじめている。</p>
+    <p>1年後。大事なことを、人の目より先に、自分の本音で決められるようになっている。「自分の人生を生きている」——その感覚が、当たり前の日常になっているかもしれません。</p>
+    <p>どちらの未来になるかは、今日の小さな選択で決まります。</p>
 
     <hr class="divider">
-
-    <p class="section-label">CHANGE</p>
-    <h2 class="section-title">声と向き合うことで、<br>こんな変化が起きる可能性があります</h2>
+    <h2 class="section-title">こんな変化が、<br>起きるかもしれません</h2>
     <ul class="benefit-list">
-      <li><span class="benefit-mark">✓</span><span>ずっと抱えてきたモヤモヤの正体が、やっとわかった</span></li>
-      <li><span class="benefit-mark">✓</span><span>「これだ」と思える方向が見つかり、迷わなくなった</span></li>
-      <li><span class="benefit-mark">✓</span><span>誰かと比べて落ち込む日々が、嘘みたいに消えた</span></li>
-      <li><span class="benefit-mark">✓</span><span>朝、目が覚めた瞬間から、生きている実感が湧いてくる</span></li>
-      <li><span class="benefit-mark">✓</span><span>自分がどうしたいか、それだけで決められるようになった</span></li>
-      <li><span class="benefit-mark">✓</span><span>言い訳しなくなった。動ける自分が誇らしい</span></li>
-      <li><span class="benefit-mark">✓</span><span>「自分の人生を生きている」その確信が、涙が出るほど嬉しい</span></li>
+      <li><span class="benefit-mark">✓</span><span>「本当はどうしたい？」と聞かれて、口ごもらずに答えられるようになる</span></li>
+      <li><span class="benefit-mark">✓</span><span>朝、起き上がるときの気の重さが消え、予定が"こなすもの"から"進めたいこと"に変わる</span></li>
+      <li><span class="benefit-mark">✓</span><span>SNSや他人の評価を見て落ち込む時間が減り、自分の基準で選べるようになる</span></li>
+      <li><span class="benefit-mark">✓</span><span>ずっと迷っていたこと（新しい挑戦、環境を変える一歩）に、実際に着手できる</span></li>
+      <li><span class="benefit-mark">✓</span><span>何かを決めるたびに誰かに相談しないと不安だったのが、自分の本音で決められる</span></li>
+      <li><span class="benefit-mark">✓</span><span>家族や同僚から「最近、変わったね」と声をかけられるようになる</span></li>
     </ul>
+    <p>——こうした変化が起きる可能性が、声と向き合うことの先にあります。</p>
 
     <hr class="divider">
+    <h2 class="section-title">無料の声紋診断について</h2>
+    <p>いきなり「お申し込みください」とは言いません。まずは、無料の声紋診断で、いまのあなたの状態を、声から一緒に見てみませんか。</p>
+    <div class="spec-block">
+      <div class="spec-item"><span class="spec-number">6秒</span><span class="spec-label">録音のみ</span></div>
+      <div class="spec-item"><span class="spec-number">20〜60分</span><span class="spec-label">診断時間</span></div>
+      <div class="spec-item"><span class="spec-number">無料</span><span class="spec-label">費用</span></div>
+    </div>
+    <p class="spec-note">形式：オンライン（Google Meet）　無理な勧誘はありません。　プライバシーは厳守します。</p>
+    <p>ただ、ひとりで丁寧に向き合う形をとっているため、お受けできる人数には、限りがあります。「気になる」と思った今が、たぶん、いちばん動きやすいタイミングです。</p>
 
-    <div class="closing-block">
-      <p class="closing">声を診断することで何かが変わるかどうか、正直、やってみなければわかりません。</p>
-      <p class="closing">ただ、自分の声を一度も聴いたことがない人が、自分の本心を知ろうとすることには、意味があると思っています。</p>
-      <p class="closing">気になるなら、それだけで十分です。</p>
+    <div class="line-section">
+      <ul class="line-benefit-list">
+        <li><span class="line-benefit-mark">✓</span><span>いまの自分がどんな「状態」にあるか、データで見える</span></li>
+        <li><span class="line-benefit-mark">✓</span><span>言葉にできなかったモヤモヤの正体が、整理される</span></li>
+      </ul>
+      <p class="line-info">LINE登録後、リッチメニューの「声紋診断を無料で予約する」からお申し込みいただけます。</p>
+      <p class="line-info">セッションはGoogle Meetで、6秒の録音データをもとに、対話を通じて進めます。</p>
+      <p class="line-info">あわせて、長年、特殊な環境で積み重ねてきた経験をもとに、書籍や動画には出てこない考察を、定期的にお届けしています。<br>声の科学、認知のクセ、人生を動かすための視点を。</p>
     </div>
 
+    <hr class="divider">
+    <div class="closing-block">
+      <p class="closing">声を診断することで何かが変わるかどうか、正直、やってみなければ分かりません。</p>
+      <p class="closing">ただ、自分の声を一度も聴いたことがない人が、自分の本心を知ろうとすることには、意味があると思っています。</p>
+      <p class="closing">変わると決めた瞬間が、変われる瞬間です。その一歩を、今日、踏み出してみませんか。</p>
+      <p class="closing">あなたとお話しできることを、楽しみにしています。</p>
+      <p class="sign">声紋診断　アップデート林</p>
+    </div>
     <div class="btn-wrap">
-      <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">ライン登録で無料の声紋診断を受けてみる →</a>
+      <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、声紋診断を無料で予約する →</a>
       <p class="btn-note">※ 登録は30秒です。</p>
     </div>
 
@@ -377,30 +439,18 @@ fbq("track","PageView");
     if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
     return 'lp-' + Date.now() + '-' + Math.random().toString(36).slice(2, 11);
   }
-
   function getCookie(name) {
     var re = new RegExp('(?:^|;\\s*)' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)');
     var m = document.cookie.match(re);
     return m ? decodeURIComponent(m[1]) : '';
   }
-
-  // localStorage wrapper — silently fails in restricted IAB contexts
-  function lsGet(key) {
-    try { return localStorage.getItem(key) || ''; } catch (_) { return ''; }
-  }
-  function lsSet(key, val) {
-    try { localStorage.setItem(key, val); } catch (_) {}
-  }
-
-  // _fbp: Cookie → localStorage backup (persists even when pixel fails to load in IAB)
+  function lsGet(key) { try { return localStorage.getItem(key) || ''; } catch (_) { return ''; } }
+  function lsSet(key, val) { try { localStorage.setItem(key, val); } catch (_) {} }
   function getFbp() {
     var v = getCookie('_fbp');
     if (v) { lsSet('_fbp_bk', v); return v; }
     return lsGet('_fbp_bk');
   }
-
-  // _fbc: fbclid URL param is the most reliable signal in IAB (Meta injects it on ad clicks).
-  // Timestamp must be Unix seconds (10 digits) per Meta spec — Date.now() gives milliseconds.
   function getFbc() {
     var params = new URLSearchParams(window.location.search);
     var fbclid = params.get('fbclid');
@@ -413,81 +463,35 @@ fbq("track","PageView");
     if (fromCookie) { lsSet('_fbc_bk', fromCookie); return fromCookie; }
     return lsGet('_fbc_bk');
   }
-
-  // sendBeacon survives page unload and is the most reliable in IAB.
-  // Blob with application/json ensures the backend can parse the body.
-  // Falls back to fetch(keepalive) when sendBeacon is unavailable.
   function postToCapi(payload) {
     var json = JSON.stringify(payload);
     if (typeof navigator.sendBeacon === 'function') {
       var blob = new Blob([json], { type: 'application/json' });
       if (navigator.sendBeacon('/api/capi', blob)) return;
     }
-    fetch('/api/capi', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: json,
-      keepalive: true,
-    }).catch(function () {});
+    fetch('/api/capi', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: json, keepalive: true }).catch(function () {});
   }
-
-  // window.open(_blank) called synchronously within a user-gesture event handler:
-  //   - Preserves the user-gesture flag, so popup blockers don't fire
-  //   - In Instagram IAB (WKWebView), _blank target routes through the system URL
-  //     handler, which triggers iOS Universal Links → LINE app opens natively
-  //   - window.location.href in the same WKWebView suppresses Universal Links,
-  //     so this is the correct path for IAB-to-LINE-app hand-off
   function navigateTo(url) {
     var opened = window.open(url, '_blank');
-    if (!opened) {
-      // window.open blocked (should not happen on direct click); fall back to same-window
-      setTimeout(function () { window.location.href = url; }, 300);
-    }
+    if (!opened) { setTimeout(function () { window.location.href = url; }, 300); }
   }
-
-  // bfcache fix: iOS Safari and Instagram IAB restore the full DOM from memory on back
-  // navigation. dataset.sending persists on the element, permanently disabling the button.
-  // pageshow with persisted=true fires on bfcache restore and resets the flag.
   window.addEventListener('pageshow', function (e) {
     if (e.persisted) {
-      document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
-        delete btn.dataset.sending;
-      });
+      document.querySelectorAll('.line-cv-btn').forEach(function (btn) { delete btn.dataset.sending; });
     }
   });
-
   document.querySelectorAll('.line-cv-btn').forEach(function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
-
-      // Resolve destination first — if data-href is absent, bail before touching any state
       var destUrl = btn.getAttribute('data-href') || '';
       if (!destUrl) return;
-
-      // Prevent double-fire
       if (btn.dataset.sending) return;
       btn.dataset.sending = '1';
-
       var eventId = generateEventId();
       var fbp = getFbp();
       var fbc = getFbc();
-
-      // Browser-side pixel (may not load in IAB — CAPI is the reliable path)
-      try {
-        if (typeof window.fbq === 'function') {
-          window.fbq('track', 'Lead', {}, { eventID: eventId });
-        }
-      } catch (_) {}
-
-      // Server-side CAPI via sendBeacon — queued immediately, survives page unload
-      postToCapi({
-        eventId: eventId,
-        url: window.location.href,
-        fbp: fbp,
-        fbc: fbc,
-      });
-
-      // Navigate synchronously — sendBeacon is already queued and does not block
+      try { if (typeof window.fbq === 'function') { window.fbq('track', 'Lead', {}, { eventID: eventId }); } } catch (_) {}
+      postToCapi({ eventId: eventId, url: window.location.href, fbp: fbp, fbc: fbc });
       navigateTo(destUrl);
     });
   });
