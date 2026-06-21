@@ -196,7 +196,8 @@ img { display: block; margin: 20px auto; max-width: 76%; height: auto; border-ra
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
 fbq("init","1302054671384974");
-fbq("track","PageView");
+window._pvId=(typeof crypto!=='undefined'&&crypto.randomUUID)?crypto.randomUUID():'pv-'+Date.now()+'-'+Math.random().toString(36).slice(2,11);
+fbq("track","PageView",{},{eventID:window._pvId});
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1302054671384974&ev=PageView&noscript=1"/></noscript>
 <!-- Microsoft Clarity -->
@@ -476,6 +477,7 @@ fbq("track","PageView");
     if (fromCookie) { lsSet('_fbc_bk', fromCookie); return fromCookie; }
     return lsGet('_fbc_bk');
   }
+  var testCode = new URLSearchParams(window.location.search).get('test') || '';
   function postToCapi(payload) {
     var json = JSON.stringify(payload);
     if (typeof navigator.sendBeacon === 'function') {
@@ -484,6 +486,14 @@ fbq("track","PageView");
     }
     fetch('/api/capi', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: json, keepalive: true }).catch(function () {});
   }
+  // PageView CAPI（ブラウザピクセルと同じeventIDで重複除去）
+  (function () {
+    var pvId = window._pvId;
+    if (!pvId) return;
+    var pv = { eventName: 'PageView', eventId: pvId, url: window.location.href, fbp: getFbp(), fbc: getFbc() };
+    if (testCode) pv.testEventCode = testCode;
+    postToCapi(pv);
+  })();
   function navigateTo(url) {
     var opened = window.open(url, '_blank');
     if (!opened) { setTimeout(function () { window.location.href = url; }, 300); }
@@ -504,7 +514,9 @@ fbq("track","PageView");
       var fbp = getFbp();
       var fbc = getFbc();
       try { if (typeof window.fbq === 'function') { window.fbq('track', 'Lead', {}, { eventID: eventId }); } } catch (_) {}
-      postToCapi({ eventId: eventId, url: window.location.href, fbp: fbp, fbc: fbc });
+      var leadPayload = { eventName: 'Lead', eventId: eventId, url: window.location.href, fbp: fbp, fbc: fbc };
+      if (testCode) leadPayload.testEventCode = testCode;
+      postToCapi(leadPayload);
       navigateTo(destUrl);
     });
   });
