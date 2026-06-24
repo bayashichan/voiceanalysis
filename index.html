@@ -466,16 +466,20 @@ fbq("track","PageView",{},{eventID:window._pvId});
     return lsGet('_fbp_bk');
   }
   function getFbc() {
-    var params = new URLSearchParams(window.location.search);
-    var fbclid = params.get('fbclid');
+    // 1. Meta Pixel が設定した _fbc Cookie を最優先（creationTime を改変せずそのまま送信）
+    var fromCookie = getCookie('_fbc');
+    if (fromCookie) { lsSet('_fbc_bk', fromCookie); return fromCookie; }
+    // 2. Cookie 未設定時のみ URL の fbclid から生成（creationTime はミリ秒）
+    var fbclid = new URLSearchParams(window.location.search).get('fbclid');
+    var backup = lsGet('_fbc_bk');
     if (fbclid) {
+      // 同一 fbclid のバックアップがあれば初回観測時刻を保持して再利用
+      if (backup && backup.indexOf('.' + fbclid) !== -1) return backup;
       var v = 'fb.1.' + Date.now() + '.' + fbclid;
       lsSet('_fbc_bk', v);
       return v;
     }
-    var fromCookie = getCookie('_fbc');
-    if (fromCookie) { lsSet('_fbc_bk', fromCookie); return fromCookie; }
-    return lsGet('_fbc_bk');
+    return backup;
   }
   var testCode = new URLSearchParams(window.location.search).get('test') || '';
   function postToCapi(payload) {
