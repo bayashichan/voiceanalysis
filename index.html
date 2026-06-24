@@ -469,7 +469,7 @@ fbq("track","PageView",{},{eventID:window._pvId});
     var params = new URLSearchParams(window.location.search);
     var fbclid = params.get('fbclid');
     if (fbclid) {
-      var v = 'fb.1.' + Math.floor(Date.now() / 1000) + '.' + fbclid;
+      var v = 'fb.1.' + Date.now() + '.' + fbclid;
       lsSet('_fbc_bk', v);
       return v;
     }
