@@ -8,189 +8,42 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <title>声紋診断 | アップデート林</title>
 <style>
-* { box-sizing: border-box; -webkit-text-size-adjust: 100%; }
-html { font-size: 15px; }
-body {
-  font-family: "ヒラギノ明朝 ProN","Hiragino Mincho ProN","游明朝","Yu Mincho","ＭＳ 明朝",serif;
-  color: #2a2a2a; background-color: #f2f4f5; margin: 0; padding: 0; overflow-x: hidden;
-}
-.container {
-  max-width: 430px; margin: 0 auto; background-color: #fff;
-  padding: 36px 20px 48px; line-height: 1.9; font-size: 0.95rem;
-  word-break: break-all; overflow-wrap: break-word;
-}
-/* ── Color zone defaults: Level 1 / ファーストビュー ── */
-:root {
-  --c-accent:     #28b0b8;
-  --c-soft:       #0f8a92;
-  --c-bg:         #e0f6f8;
-  --c-border:     #9ed6dc;
-  --c-btn-text:   #1a1a1a;
-  --c-btn-active: #1ea4ac;
-}
-/* Level 2 */
-.cz-2 {
-  --c-accent:     #249ba8;
-  --c-soft:       #0e7883;
-  --c-bg:         #dcf2f6;
-  --c-border:     #91c8d2;
-  --c-btn-active: #1a8e9a;
-}
-/* Level 3 */
-.cz-3 {
-  --c-accent:     #1f8698;
-  --c-soft:       #0c6574;
-  --c-bg:         #d9edf3;
-  --c-border:     #84bac7;
-  --c-btn-active: #177888;
-}
-/* Level 4 */
-.cz-4 {
-  --c-accent:     #1b7088;
-  --c-soft:       #0b5366;
-  --c-bg:         #d5e9f1;
-  --c-border:     #78acbd;
-  --c-btn-text:   #fff;
-  --c-btn-active: #136177;
-}
-/* Level 5 */
-.cz-5 {
-  --c-accent:     #165b78;
-  --c-soft:       #094057;
-  --c-bg:         #d2e4ee;
-  --c-border:     #6b9eb2;
-  --c-btn-text:   #fff;
-  --c-btn-active: #104b66;
-}
-/* Level 6 */
-.cz-6 {
-  --c-accent:     #124668;
-  --c-soft:       #082e48;
-  --c-bg:         #cee0ec;
-  --c-border:     #5e90a8;
-  --c-btn-text:   #fff;
-  --c-btn-active: #0c3554;
-}
-.target-label {
-  text-align: center; font-size: 0.78rem; color: #666; letter-spacing: 0.08em;
-  margin: 0 0 28px; padding-bottom: 16px; border-bottom: 1px solid #e8e8e8;
-}
-.hero { margin: 0 0 36px; }
-.hero-headline {
-  font-size: 1.35rem; font-weight: 800; line-height: 1.55;
-  letter-spacing: 0.03em; margin: 0 0 20px; color: #1a1a1a;
-}
-.hero-sub { font-size: 0.95rem; line-height: 1.9; color: #333; margin: 0 0 1.1em; }
-.hero-frame { font-size: 0.95rem; line-height: 1.9; color: #333; margin: 0 0 1.1em; }
-.hero-promise { font-size: 1.08rem; font-weight: 800; line-height: 1.7; color: #1a1a1a; margin: 0 0 1.1em; }
-.hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
-.hero-badges span { font-size: 0.74rem; color: var(--c-soft); background: var(--c-bg); border: 1px solid var(--c-border); border-radius: 999px; padding: 5px 11px; font-weight: bold; }
-.hero-resolve {
-  margin-top: 20px; padding: 14px 16px;
-  background-color: var(--c-bg); border-left: 4px solid var(--c-accent);
-  font-size: 0.95rem; line-height: 1.85; color: #1a1a1a;
-}
-.section-label {
-  font-size: 0.72rem; letter-spacing: 0.12em; font-weight: bold;
-  color: var(--c-soft); background-color: #ffffff; margin: 40px 0 10px;
-}
-.section-title {
-  font-size: 1.05rem; font-weight: 800; color: #1a1a1a; line-height: 1.55;
-  margin: 0 0 18px; padding-left: 12px; border-left: 4px solid var(--c-accent);
-}
-.check-list { list-style: none; padding: 0; margin: 0 0 10px; }
-.check-list li {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 10px 0; border-bottom: 1px solid #f0f0f0;
-  font-size: 0.93rem; line-height: 1.75; color: #2a2a2a;
-}
-.check-list li:last-child { border-bottom: none; }
-.check-mark { color: var(--c-soft); font-size: 0.9rem; font-weight: bold; margin-top: 2px; flex-shrink: 0; }
-p { margin: 0 0 1.2em; line-height: 1.9; }
-p:last-child { margin-bottom: 0; }
-.lead-strong { font-weight: 800; color: #1a1a1a; font-size: 1.0rem; }
-.future-head {
-  font-size: 0.98rem; font-weight: 800; color: #1a1a1a; margin: 22px 0 12px;
-  padding: 8px 12px; background-color: var(--c-bg); border-radius: 4px;
-}
-.mint-box {
-  background-color: var(--c-bg); border-left: 4px solid var(--c-accent);
-  padding: 18px 16px; margin: 24px 0; font-size: 0.93rem; line-height: 1.85;
-}
-.mint-box p:last-child { margin-bottom: 0; }
-.spec-block {
-  display: flex; justify-content: center; margin: 24px 0 10px;
-  border: 1px solid #e8e8e8; border-radius: 6px; overflow: hidden;
-}
-.spec-item { text-align: center; padding: 16px 12px; flex: 1; }
-.spec-item + .spec-item { border-left: 1px solid #e8e8e8; }
-.spec-number { font-size: 1.15rem; font-weight: 800; color: var(--c-soft); line-height: 1.3; display: block; }
-.spec-label { font-size: 0.7rem; color: #999; letter-spacing: 0.05em; display: block; margin-top: 5px; }
-.spec-note { text-align: center; font-size: 0.8rem; color: #888; margin: 10px 0 0; line-height: 1.7; }
-.spec-mini { margin: 0 0 16px; }
-.spec-mini .spec-item { padding: 11px 8px; }
-.spec-mini .spec-number { font-size: 0.92rem; font-weight: bold; color: #555; }
-.spec-mini .spec-label { font-size: 0.7rem; margin-top: 3px; }
-.line-section { background-color: var(--c-bg); border-radius: 8px; padding: 22px 18px; margin: 20px 0 24px; }
-.line-benefit-list { list-style: none; padding: 0; margin: 0 0 16px; }
-.line-benefit-list li {
-  display: flex; align-items: flex-start; gap: 9px;
-  font-size: 0.9rem; line-height: 1.75; color: #2a2a2a; font-weight: bold; margin-bottom: 10px;
-}
-.line-benefit-list li:last-child { margin-bottom: 0; }
-.line-benefit-mark { color: var(--c-soft); flex-shrink: 0; margin-top: 2px; font-weight: bold; }
-.line-info { font-size: 0.83rem; color: #666; line-height: 1.85; margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--c-border); }
-.step-list { list-style: none; padding: 0; margin: 18px 0 0; counter-reset: step; }
-.step-list li {
-  position: relative; padding: 12px 0 12px 40px; font-size: 0.92rem; line-height: 1.7;
-  border-bottom: 1px solid #f0f0f0; font-weight: bold; color: #2a2a2a;
-}
-.step-list li:last-child { border-bottom: none; }
-.step-list li::before {
-  counter-increment: step; content: counter(step);
-  position: absolute; left: 0; top: 12px;
-  width: 26px; height: 26px; line-height: 26px; text-align: center;
-  background-color: var(--c-accent); color: #fff; border-radius: 50%; font-size: 0.85rem;
-}
-.btn-wrap { margin: 24px 0; }
-.btn {
-  display: block; width: 94%; margin: 0 auto; padding: 16px 12px;
-  background-color: var(--c-accent); color: var(--c-btn-text); text-align: center;
-  text-decoration: none; font-weight: 800; font-size: 0.98rem;
-  border-radius: 6px; letter-spacing: 0.05em; line-height: 1.5;
-  -webkit-tap-highlight-color: transparent;
-}
-.btn:active { background-color: var(--c-btn-active); }
-.btn-note { text-align: center; font-size: 0.75rem; color: #bbb; margin: 8px 0 0; }
-hr.divider { border: 0; border-top: 1px solid #ebebeb; margin: 36px 0; }
-.table-container { width: 100%; margin: 16px 0 24px; font-size: 0.82rem; line-height: 1.6; overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-th, td { padding: 10px 8px; vertical-align: top; border-bottom: 1px solid #eaeaea; word-break: break-all; }
-th { font-weight: bold; text-align: center; font-size: 0.8rem; background-color: var(--c-bg); color: #1a1a1a; }
-th:first-child { width: 18%; }
-td:first-child { font-weight: bold; color: #666; font-size: 0.8rem; }
-.benefit-list { list-style: none; padding: 0; margin: 0; }
-.benefit-list li {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 11px 0; border-bottom: 1px solid #f0f0f0;
-  font-size: 0.93rem; line-height: 1.75; color: #2a2a2a; font-weight: bold;
-}
-.benefit-list li:last-child { border-bottom: none; }
-.benefit-mark { color: var(--c-soft); flex-shrink: 0; margin-top: 3px; font-weight: bold; }
-.closing-block { margin: 0 0 32px; }
-.closing { font-size: 0.93rem; line-height: 2.0; color: #444; margin: 0 0 1.2em; }
-.sign { text-align: right; font-size: 0.9rem; color: #555; font-weight: bold; margin-top: 24px; }
-img { display: block; margin: 20px auto; max-width: 76%; height: auto; border-radius: 4px; }
-.footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid #ebebeb; text-align: center; font-size: 0.73rem; color: #bbb; line-height: 1.9; }
-@media (max-width: 374px) {
-  html { font-size: 14px; }
-  .container { padding: 28px 15px 40px; }
-  .hero-headline { font-size: 1.2rem; }
-  img { max-width: 86%; }
-}
-@media (min-width: 768px) {
-  .container { max-width: 520px; padding: 48px 32px; }
-}
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #fff;
+    color: #2c2c2b;
+    font-family: "ヒラギノ明朝 ProN","Hiragino Mincho ProN","游明朝","Yu Mincho","ＭＳ 明朝",serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 374px; margin: 0 auto; padding: 40px 16px 64px; }
+  p { font-size: 16px; line-height: 1.85; margin: 0 0 1.15em; letter-spacing: .01em; }
+  h1.hero {
+    font-size: 26px; font-weight: 700; line-height: 1.4; color: #2c2c2b;
+    margin: 8px 0 40px; letter-spacing: .02em;
+  }
+  h2 {
+    font-size: 24px; font-weight: 700; line-height: 1.35; color: #387dc9;
+    margin: 52px 0 20px; letter-spacing: .01em;
+  }
+  strong { font-weight: 600; }
+  .tx-blue { color: #387dc9; }
+  .tx-red { color: #cf5148; }
+  mark { background: rgba(211,168,0,.137); color: inherit; padding: 0 .06em; border-radius: 2px; }
+  .btn-wrap { margin: 28px 0; }
+  .btn {
+    display: block; width: 100%; max-width: 340px; margin: 0 auto;
+    padding: 17px 14px;
+    background: #fffdf7;
+    color: #cf5148;
+    text-align: center; text-decoration: none;
+    font-weight: 700; font-size: 1.05rem; line-height: 1.5; letter-spacing: .03em;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active { box-shadow: 0 2px 6px rgba(0,0,0,.14); transform: translateY(1px); }
 </style>
 <!-- Meta Pixel -->
 <script>
@@ -206,244 +59,35 @@ fbq("track","PageView",{},{eventID:window._pvId});
 </script>
 </head>
 <body>
-<div class="container">
-
-  <!-- ── ① ファーストビュー ── -->
-  <div class="cz-1">
-    <p class="target-label">このまま終わりたくない人へ　声紋診断・無料LINE相談</p>
-    <div class="hero">
-      <h1 class="hero-headline">気づいたら、<br>何年も同じ場所にいた。</h1>
-      <p class="hero-sub">「どうすれば、ここから抜け出せるのか」。</p>
-      <p class="hero-promise">その答えの糸口が、<br>たった6秒の声から、見えてきます。</p>
-      <p class="hero-frame">「このままでいい」とは思えない。でも、何を変えればいいかも、わからない。<br>——そのモヤモヤの正体から、一緒に整理します。</p>
-      <div class="hero-resolve">あなたが次に進むべき方向が、声から見えてきます。</div>
-    </div>
-  </div>
-
-  <!-- ── ② 共感・セルフチェック ── -->
-  <div class="cz-2">
-    <p>朝、目が覚める。<br>やるべきことはある。仕事もこなしている。</p>
-    <p>それでも、心のどこかが、ずっと言い続けている。<br>——「これじゃない」と。</p>
-    <p>周りからは、うまくいっているように見えるかもしれません。<br>でも、自分のなかの満たされなさだけは、ごまかせない。</p>
-    <h2 class="section-title">3つ以上当てはまるなら、<br>この先はあなたのための話です</h2>
-    <ul class="check-list">
-      <li><span class="check-mark">✓</span><span>評価されても、心のモヤモヤが消えない</span></li>
-      <li><span class="check-mark">✓</span><span>目標を立てても、なぜか行動が続かない</span></li>
-      <li><span class="check-mark">✓</span><span>「本当にやりたいこと」を聞かれると、答えに詰まる</span></li>
-      <li><span class="check-mark">✓</span><span>肩書きを外したら、何が残るのか分からない</span></li>
-      <li><span class="check-mark">✓</span><span>周りの期待に応え続けて、自分が何者か分からなくなってきた</span></li>
-      <li><span class="check-mark">✓</span><span>学んでも学んでも、現実は何も変わっていない</span></li>
-    </ul>
-    <p>もし、ひとつでも当てはまるなら——<br>どうか、この先を最後まで読んでみてください。</p>
-    <p>あなたのくすぶりの正体と、そこから抜け出す方法を、これからお話しします。</p>
-  </div>
-
-  <!-- ── ③ はじめまして ＋ ④ WHY ＋ ⑤ ABOUT ── -->
-  <div class="cz-3">
-    <hr class="divider">
-    <h2 class="section-title">はじめまして</h2>
-    <p>申し遅れました。私は、<strong>声紋診断コーチ</strong>のアップデート林です。</p>
-    <p>声を手がかりに、あなた自身も気づいていない本音を可視化し、「自分の生き方で生きる」ための一歩を、一緒に見つける仕事をしています。</p>
-    <p>なぜ声なのか。なぜそれで人が変わるのか。<br>その話を、これからします。</p>
-
-    <hr class="divider">
-    <h2 class="section-title">なぜ、変われなかったのか</h2>
-    <p>意志の力で変わろうとして、続かなかった経験はありませんか。</p>
-    <p>続かないのは、意志が弱いからではありません。</p>
-    <p>その詰まりが、行動の問題なのか。目標設定の問題なのか。それとも、自分の本音が、自分自身に見えていないだけなのか。</p>
-    <p>多くの場合、問題はいちばん手前にあります。</p>
-    <p>言葉では「やりたい」と言っていても、声のトーンは別のことを言っている。自分でも気づいていない本音が、声の中に隠れているからです。</p>
-    <p><span class="lead-strong">だから、声を聴けば——抜け出す糸口が、見えてきます。</span></p>
-
-    <hr class="divider">
-    <h2 class="section-title">声紋診断とは何か</h2>
-    <p>人は、言葉では取り繕えます。でも、声の周波数は、嘘をつきません。</p>
-    <img src="voiceanalysis.webp" alt="声紋診断グラフ" width="335" height="335" loading="lazy">
-    <p>声の周波数を解析し、自分でも気づいていない本音の状態を、12色のデータとして可視化する。これが声紋診断の核心です。</p>
-    <div class="mint-box">
-      <p>特許技術（公開特許2007-212932）をベースに、2万人以上の統計データから体系化された手法です。企業・病院・大学など、約200の組織に導入されています。</p>
-    </div>
-    <p><span class="lead-strong">何よりも大切なのは、まず「現在地」を知ることです。</span></p>
-    <p>どんなに優れた地図があっても、自分が今どこにいるか分からなければ、進む方向は決められません。変わりたいのに変われない——その多くは、行き先ではなく、現在地が見えていないことに原因があります。</p>
-    <p>「あなたはこういう人だ」と人に言われれば、抵抗が生まれます。けれど、感情のない客観的なデータなら、素直に受け取れる。</p>
-    <p>自分の現在地が、はっきりと見える。そこからはじめて、「次に何をすればいいか」が——おのずと、定まっていきます。</p>
-  </div>
-
-  <!-- ── ⑥ MECHANISM ── -->
-  <div class="cz-4">
-    <hr class="divider">
-    <h2 class="section-title">なぜ、関わるだけで変わるのか</h2>
-    <p>人を本当に動かすのは、意志ではなく「環境」です。</p>
-    <p><span class="lead-strong">人は、まわりに同調する生き物です。</span></p>
-    <p>嬉しそうな人がひとりいるだけで、場の空気が明るくなる。怒っている人がいれば、その空間がぴりっと張りつめる。</p>
-    <p>あなたも、きっと体感したことがあるはずです。これは性格ではなく、本能として備わった反応です。</p>
-    <p><span class="lead-strong">では、いまのあなたの環境は、どうでしょうか。</span></p>
-    <p>うまくいっていないと感じるとき——まわりの人が発する言葉、漂う雰囲気は、どんなものですか。もしかすると、似たような空気なのではないでしょうか。</p>
-    <p>その環境が、いまのあなたに同調する。そして、あなたの雰囲気もまた、まわりに同調していく。こうして、同じような現実が、静かに再生産されていきます。</p>
-    <p>変われないのは、あなたの問題ではありません。<span class="lead-strong">「どこで同調するか」を、まだ選んでいないだけです。</span></p>
-    <div class="mint-box">
-      <p>そして、あなたに最も深く同調してきたのは——おそらく、いちばん身近な人たちです。家族や、親しい友人かもしれません。</p>
-      <p>その人たちが、気づかないうちに、あなたの挑戦を引き止めていることがあります。「やめておいたら」「あなたには難しいんじゃない」。悪気はありません。むしろ、あなたのためを思って——良かれと思って、です。</p>
-      <p>けれど結果として、あなたの可能性に、静かにブレーキがかかる。これを、ドリームキラーと呼びます。</p>
-      <p>「期待を裏切ってはいけない」「応えなければいけない」——その当たり前のような感覚が、実はあなた自身を縛っていることがあります。</p>
-    </div>
-    <p><span class="lead-strong">だからこそ、第三者の存在が、力になります。</span></p>
-    <p>あなたと、利害関係のない人。あなたの可能性を、条件をつけずに信じる人。そういう存在と同調できたとき、選ぶ行動が変わり、手にする現実が変わっていきます。</p>
-    <p>望む方向を、先に進んでいる人。欲しい状態を、先に手にしている人。その状態に同調すると、あなたにとっての"当たり前のライン"——基準点が、上がります。</p>
-    <p>基準点が上がると、日々の小さな選択の質が変わる。これまで避けていた一歩を、自然に選べるようになる。</p>
-    <p>根性でも、魔法でもありません。人がもともと持っている「同調」という性質を、変化のために使う。ただ、それだけのことです。</p>
-  </div>
-
-  <!-- ── ⑦ STORY ＋ ⑧ DIFFERENCE ＋ ⑨ WHY HUMAN ── -->
-  <div class="cz-5">
-    <div class="spec-block spec-mini">
-      <div class="spec-item"><span class="spec-number">6秒</span><span class="spec-label">録音のみ</span></div>
-      <div class="spec-item"><span class="spec-number">無料</span><span class="spec-label">費用</span></div>
-      <div class="spec-item"><span class="spec-number">特許技術</span><span class="spec-label">導入200組織</span></div>
-    </div>
-    <div class="btn-wrap">
-      <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、声紋診断を無料で予約する →</a>
-      <p class="btn-note">※ 登録は30秒です。／ 強引な勧誘は一切ありません。</p>
-    </div>
-    <hr class="divider">
-    <h2 class="section-title">なぜ、私がこれをやるのか</h2>
-    <div class="mint-box">
-      <p><strong>声紋診断　アップデート林</strong>　｜　声紋診断コーチ<br>国家資格救急救命士 ／ 生命の最前線で20年以上・2,000名以上と対話</p>
-    </div>
-    <p>人が死にそうな現場で、20年間、声をかけ続けてきました。</p>
-    <p>規律がすべての、硬い世界です。決められた手順、変わらない毎日。その中で、少しずつ感じていた違和感がありました。<br>——「自分は、本当にやりたいことを、やれているのだろうか」と。</p>
-    <p>そして、いちばん近い存在——家族と、向き合うことになりました。</p>
-    <p>振り返れば、私はずっと、家族の敷いたレールの上を歩いてきました。反発しているつもりでした。けれど結局は、そのレールの内側で生きていただけでした。</p>
-    <p>そんな自分が、生まれてはじめて、声に出したことがあります。<br>——「自分の生き方で生きる。自分の足で、歩く」と。</p>
-    <p>それは、家族にとって痛みを伴うことでした。衝撃を与えることでも、あったと思います。</p>
-    <p>それでも、言わずにはいられなかった。知らないうちに、家族の望むとおりに動いてきた自分の奥には——どうしても消せないくすぶりと、虚しさと、苛立ちが、ずっと残っていたからです。</p>
-    <p>その宣言は、言葉だけでは終わりませんでした。</p>
-    <p>私が選んだのは、安定した道を離れ、起業して自分で稼ぎ、自分自身の価値を、社会に提供していく道でした。</p>
-    <p>怖さは、ありました。でも、やらなければ一生変わらないことだけは、分かっていました。</p>
-    <p>自分の足で歩きはじめると、不思議と、見える景色が変わっていきました。それまでの私は、正直、自分のことで精一杯でした。けれど少しずつ、問いが変わっていったんです。<br>——「自分は、世の中に対して何ができるのか」「この自分を、どう使えるのか」と。</p>
-    <p>きれいごとに聞こえるかもしれません。ただ、ひとつだけ、はっきりしたことがあります。</p>
-    <p>自分が本当に満たされるのは、何かを手に入れたときではなく、誰かの役に、立てたとき——だったということです。長いあいだ、自分でも、気づいていませんでした。</p>
-    <p><span class="lead-strong">行き止まりのように見えたとしても、可能性は見つけられる。</span></p>
-    <p>振り返れば、そのヒントは、ずっと現場にありました。</p>
-    <p>言葉では「大丈夫です」と言っていても、声が揺れている人がいた。言葉では「もう終わりです」と言っていても、声に力が残っている人がいた。</p>
-    <p>言葉と心の声がずれる瞬間を、現場で、繰り返し見てきました。その感覚が、声紋診断と出会ったとき、ひとつにつながったんです。</p>
-    <p>「やればできた」。小さくても確かなその実感を、ひとつずつ積み重ねてきました。その積み重ねが、いまの私をつくっています。</p>
-    <div class="mint-box">
-      <p>くすぶっていた私を、この場所まで連れてきたもの。それは、特別な才能でも、運でもありませんでした。</p>
-      <p>自分の現在地を見せてくれた、声紋診断。ひとりでは出せなかった本音を引き出してくれた、対話——コーチング。そして、「やればできる」に同調できる、環境の力。</p>
-      <p>この三つが、私自身を変えました。いま私があなたに差し出すのは、机上の理論ではありません。私自身が、それで変わった——その、三つです。</p>
-    </div>
-    <p>だからこそ、いま同じようにくすぶっている人に、伝えたいんです。変われないのは、あなたのせいではありません。ただ——同調する相手を、まだ選んでいないだけです。</p>
-
-    <hr class="divider">
-    <h2 class="section-title">一般的なコーチングとの違い</h2>
-    <p>一般的なコーチングを、否定するわけではありません。ただ、私たちは無意識のうちに、周りの期待や常識に合わせて生きています。そのため、頭で考えた「やりたいこと」が、心からの本音とズレていることがよくあります。</p>
-    <p>これまでコーチングや自己分析を試しても、モヤモヤが晴れなかった。行動が続かなかった。もしそうなら、「声紋診断コーチング」が、うまく機能する可能性があります。</p>
-    <div class="table-container">
-      <table>
-        <tr>
-          <th></th>
-          <th>一般的な<br>コーチング</th>
-          <th>声紋診断<br>コーチング</th>
-        </tr>
-        <tr>
-          <td>現状の把握</td>
-          <td>本人の「言葉」をベースに進める</td>
-          <td>言葉に加え、「声紋データ」で無意識の本音も可視化して進める</td>
-        </tr>
-        <tr>
-          <td>アプローチ</td>
-          <td>質問で思考の整理を促す</td>
-          <td>思考の整理に加え、認知科学で「ものの捉え方」の根本から見直す</td>
-        </tr>
-        <tr>
-          <td>納得と<br>行動</td>
-          <td>頭で理解しても、心が追いつかないことがある</td>
-          <td>データと対話の両輪で深く納得でき、無理なく行動が続く</td>
-        </tr>
-      </table>
-    </div>
-
-    <hr class="divider">
-    <h2 class="section-title">データだけでは、<br>人は変われません</h2>
-    <p>声紋診断で、現在地がわかります。「本来の素質」と「いまの状態」のズレが見えます。</p>
-    <p>でも、それだけでは変われません。「で、どうすればいいの？」が残るからです。</p>
-    <p>行動だけを変えようとしても、根本の「ものの捉え方」が変わらなければ、元のパターンに戻る。だから、対話が必要になります。</p>
-    <p>声で現在地を把握し、対話で「本当はどうしたいのか」を一緒に探る。声のトーン、間、非言語の情報を読み取りながら、ご本人も気づいていない思考のパターンに光を当てる。</p>
-    <p>これは、機械にはできません。</p>
-  </div>
-
-  <!-- ── ⑩ FUTURE 〜 ⑭ CLOSING ── -->
-  <div class="cz-6">
-    <hr class="divider">
-    <h2 class="section-title">二つの未来</h2>
-    <p>今、あなたの前には、二つの道があります。</p>
-
-    <p class="future-head">このまま、何も変えなかったら</p>
-    <p>来月も、同じ朝が来ます。目は覚める。やることはある。でも、心のどこかが「これじゃない」と言い続けている。</p>
-    <p>また新しい本を買い、セミナーに申し込むかもしれません。その時は少し前向きになる。けれど数日経てば、現実は元のまま。</p>
-    <p>1年後。状況は、ほとんど変わっていません。同じ時期に動き出した人が先へ進んでいくのを、横目で見ている。</p>
-    <p>3年後。「あの時、何か変えていれば」——その問いが、ふとした瞬間に浮かぶようになります。</p>
-    <p>時間だけは、二度と戻りません。</p>
-
-    <p class="future-head">もし、声と一度、向き合ってみたら</p>
-    <p>数週間後。ずっと言葉にできなかったモヤモヤに、輪郭がつきます。「自分は、こういう状態だったのか」と、はじめて腑に落ちる。</p>
-    <p>3ヶ月後。朝、起き上がるときの重さが軽くなっています。ずっと先延ばしにしていた一歩に、気づけば手をつけはじめている。</p>
-    <p>1年後。大事なことを、人の目より先に、自分の本音で決められるようになっている。「自分の人生を生きている」——その感覚が、当たり前の日常になっているかもしれません。</p>
-    <p>どちらの未来になるかは、今日の小さな選択で決まります。</p>
-
-    <hr class="divider">
-    <h2 class="section-title">こんな変化が、<br>起きるかもしれません</h2>
-    <ul class="benefit-list">
-      <li><span class="benefit-mark">✓</span><span>「本当はどうしたい？」と聞かれて、口ごもらずに答えられるようになる</span></li>
-      <li><span class="benefit-mark">✓</span><span>朝、起き上がるときの気の重さが消え、予定が"こなすもの"から"進めたいこと"に変わる</span></li>
-      <li><span class="benefit-mark">✓</span><span>SNSや他人の評価を見て落ち込む時間が減り、自分の基準で選べるようになる</span></li>
-      <li><span class="benefit-mark">✓</span><span>ずっと迷っていたこと（新しい挑戦、環境を変える一歩）に、実際に着手できる</span></li>
-      <li><span class="benefit-mark">✓</span><span>何かを決めるたびに誰かに相談しないと不安だったのが、自分の本音で決められる</span></li>
-      <li><span class="benefit-mark">✓</span><span>家族や同僚から「最近、変わったね」と声をかけられるようになる</span></li>
-    </ul>
-    <p>——こうした変化が起きる可能性が、声と向き合うことの先にあります。</p>
-
-    <hr class="divider">
-    <h2 class="section-title">無料の声紋診断について</h2>
-    <p>いきなり「お申し込みください」とは言いません。まずは、無料の声紋診断で、いまのあなたの状態を、声から一緒に見てみませんか。</p>
-    <div class="spec-block">
-      <div class="spec-item"><span class="spec-number">6秒</span><span class="spec-label">録音のみ</span></div>
-      <div class="spec-item"><span class="spec-number">20〜60分</span><span class="spec-label">診断時間</span></div>
-      <div class="spec-item"><span class="spec-number">無料</span><span class="spec-label">費用</span></div>
-    </div>
-    <p class="spec-note">形式：オンライン（Google Meet）　無理な勧誘はありません。　プライバシーは厳守します。</p>
-    <p>ただ、ひとりで丁寧に向き合う形をとっているため、お受けできる人数には、限りがあります。「気になる」と思った今が、たぶん、いちばん動きやすいタイミングです。</p>
-
-    <div class="line-section">
-      <ul class="line-benefit-list">
-        <li><span class="line-benefit-mark">✓</span><span>いまの自分がどんな「状態」にあるか、データで見える</span></li>
-        <li><span class="line-benefit-mark">✓</span><span>言葉にできなかったモヤモヤの正体が、整理される</span></li>
-      </ul>
-      <p class="line-info">LINE登録後、リッチメニューの「声紋診断を無料で予約する」からお申し込みいただけます。</p>
-      <p class="line-info">セッションはGoogle Meetで、6秒の録音データをもとに、対話を通じて進めます。</p>
-      <p class="line-info">あわせて、長年、特殊な環境で積み重ねてきた経験をもとに、書籍や動画には出てこない考察を、定期的にお届けしています。<br>声の科学、認知のクセ、人生を動かすための視点を。</p>
-    </div>
-
-    <hr class="divider">
-    <div class="closing-block">
-      <p class="closing">声を診断することで何かが変わるかどうか、正直、やってみなければ分かりません。</p>
-      <p class="closing">ただ、自分の声を一度も聴いたことがない人が、自分の本心を知ろうとすることには、意味があると思っています。</p>
-      <p class="closing">変わると決めた瞬間が、変われる瞬間です。その一歩を、今日、踏み出してみませんか。</p>
-      <p class="closing">あなたとお話しできることを、楽しみにしています。</p>
-      <p class="sign">声紋診断　アップデート林</p>
-    </div>
-    <div class="btn-wrap">
-      <a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、声紋診断を無料で予約する →</a>
-      <p class="btn-note">※ 登録は30秒です。</p>
-    </div>
-
-    <div class="footer">
-      © 2026 アップデート林 / 声紋診断<br>
-      使用技術：公開特許2007-212932
-    </div>
-  </div>
-
+<div class="wrap">
+<h1 class="hero">言葉は、取り繕える。声は、隠せない。</h1>
+<p>真面目にやってきた。<br>なのに、なぜ何年も同じ場所で<strong>燻っている</strong>のか。<br>その正体は、<br>努力が足りないからではありません。<br>あなたに深く染みついた、<strong><span class="tx-blue">たった一つの思い込み</span></strong>です。<mark><strong>6秒の声</strong></mark>が、<br>あなた自身も気づいていないそのズレを、<br>静かに映し出します。</p>
+<h2>そのモヤモヤは、能力のせいではありません</h2>
+<p>これから話すことに、<br>派手な成功率や、<br>何千人を変えたといった大きな数字は出てきません。<br>むしろ、<br>そういうものを掲げるページに、<br>あなたはもう少し疲れているかもしれません。<br>代わりに、一つだけ、<br>先にお伝えしておきたい事実があります。<br>私は国家資格である<strong>救急救命士</strong>として、<strong><span class="tx-blue">20年以上</span></strong>、生命の最前線に立ってきました。<br>そこで関わった人の数は、<strong><span class="tx-blue">2,000名</span></strong>を超えます。<br>この数字の本質は、<br>経験の長さではありません。<br>人が本質をむき出しにする瞬間を、<br>普通に生きていれば一生かけても見ないような密度で、<br>見続けてきたということです。<br>人は、本当に追い詰められると、<br>取り繕う余裕を失います。<br>ふだんは決して表に出さない部分が、<br>その瞬間だけ、むき出しになる。<br>同じ苦境でも、<br>最後の姿は人によってまるで違いました。<br>語気を荒げる人、<br>最後まで穏やかな人。<br>誰かに囲まれて終える人、<br>一人きりで終える人。<br>その差は、<br>才能でも運でもなく、<br>その人がどう生きてきたかの結果として、<br>静かに現れます。<br>膨大な数の、<br>取り繕えなくなった人間を見てきたことで、<br>私は一つ、はっきりと変わりました。<br>目の前の人を、<br>表面の言葉や、<br>社会的な肩書きで判断しなくなったのです。<br>どんな鎧をまとっていても、<br>その下で本当は何を抱えているのか。<br>それが、こちらには伝わってくる。<br>だからこそ、<br>今このページを読んでいるあなたにも、<br>静かな矛盾を感じています。<br>周りから見れば、<br>あなたはおそらく順調な側にいる。<br>安定した仕事、悪くない収入、大きな失敗もない。<br>それなのに、<br>なぜこの文章にたどり着き、<br>ここまで読み進めているのでしょうか。<mark><strong>口では別に困っていないと言えたとしても、<br>心のどこかが、そうではないと言っている。</strong></mark>その感覚こそが、今日の話の入り口です。<br>これからお話しするのは、<br>あなたが良かれと思って信じてきた、<br>変わるための3つの常識です。<br>とにかく行動すること。<br>前向きでいること。<br>人に迷惑をかけず、<br>自分のことは自分で解決すること。<br>どれも正しく聞こえます。<br>そして、<strong><span class="tx-red">どれもが、あなたを同じ場所に縛りつけてきた<br>張本人かもしれません</span></strong>。<br>なぜそう言えるのか。<br>その理由を、<br>私自身の20年と、声という消せない証拠を使って、<br>順にお見せしていきます。</p>
+<h2>私が、声にたどり着いた理由</h2>
+<p>改めて、私の立ち位置をお話しします。<br>活動名は、<strong><span class="tx-blue">声紋診断 アップデート林</span></strong>。<br>国家資格である<strong>救急救命士</strong>として、<br>生命の最前線に20年以上、身を置いてきました。<br>ただ、資格や年数そのものを誇るつもりはありません。<br>大事なのは、<br>その20年で何を見てきたかです。<br>私は、人が取り繕えなくなる瞬間を、<br>2,000名を超える数で見続けてきました。<br>人は、社会的な立場や普段の口ぶりの下に、<br>まるで別の本音を隠しています。<br>その本音が、<br>隠しきれずに漏れ出る瞬間を、<br>私は繰り返し目にしてきたのです。<br>だからこそ、ある時から、<br>目の前の人の言葉を、<br>言葉のまま受け取らなくなりました。<br>もう大丈夫です、<br>と口では言いながら、<br>表情も行動も、まったく逆のことを訴えている。<br>そういう矛盾が、<br>はっきり見えるようになっていったのです。<br>その感覚を、誰が見ても分かる形にできないか。<br>そう考えていた私が出会ったのが、<strong><span class="tx-blue">声紋診断</span></strong>でした。<br>これが、私自身の大きな転機になりました。<br>声帯や声質は、<br>指紋と同じで、その人固有のものです。<br>しかも声は、<br>精神状態によって上ずったり、<br>震えたりする。<br>自信のありそうな声と、<br>そうでない声が違うことは、<br>たいていの人が肌で感じ取れるはずです。<br>つまり声には、その人の今の状態が、<br>そのまま乗っています。<br>この声を、自分の名前を発してもらうことで<mark><strong>たった6秒</strong></mark>だけ記録し、<br>周波数として解析します。<br>周波数帯を細かく分類し、<strong><span class="tx-blue">3つの層、12の色</span></strong>で表示する。<br>この意味づけには<strong>2万人以上の統計データ</strong>が使われていて、<strong>特許技術</strong>を用いています。<br>曖昧な感覚ではなく、統計と科学に裏づけられた形で、<br>その人自身も気づいていない抑圧や、<br>素質とのズレが見えてくるのです。<br>ただ、私は診断結果を突きつけて終わりにはしません。<mark><strong>声紋診断は、<br>あくまでスタート地点です。</strong></mark>そこから先、<br>表情や、言葉と言葉の間、その場の空気といった、<br>数値にならない情報を読み取りながら対話していく。<br>ここは、<br>機械にはできない、<br>人間にしかできない部分だと思っています。<br>そして、<br>その関わりを半年という時間をかけて続けます。<br>人は一人では変われません。<br>変わり続ける人間のそばに居続けることでしか、<br>根っこの部分は変わらないからです。<br>ここで、正直にお伝えしておきたいことがあります。<br>今、私が伴走しているクライアント様は<br>多くはありません。<br>派手な実績を並べられないのが、<br>今の私の現在地です。<br>それでも、<br>この活動を続けているのは、<br>きれいなプロフィールを作りたいからではありません。<br>安全な場所にとどまったまま<br>20年くすぶり続けた私自身が、<br>今もあがきながら前へ進もうとしている。<br>その姿そのものが、<strong><span class="tx-blue">同じように燻っている人の背中を押せる</span></strong>と信じているからです。<br>体験セッションを受けた方からは、<br>こんな声をいただいています。<br>自分のビジョンや気持ちがすっきりした。<br>何を進めればいいのかが、明確になった感じがする。<br>対人支援の仕事をされているある方は、<br>診断のグラフを見て、傾聴が苦手なのに実は聞けている、という自分の姿にハッとした、<br>と話してくれました。<br>自分でも気づいていなかった一面が、<br>目に見える形になったからです。<br>演じている自分ではなく、<br>統合された自分で生きていきたい。<br>そう感じたと、伝えてくれました。<br>私が大切にしているのは、きれいごとではなく、<strong><span class="tx-blue">自分を活かしたい</span></strong>という思いです。<br>ただ、自分一人では、自分を活かしきれない。<br>誰かと関わり、<br>その人が前を向き、<br>心が軽くなって、<br>その人らしさを取り戻していく。<br>その関わりを通してはじめて、<br>私も自分の人生を生きられている。<br>そう思っています。<br>さて、<br>ここからが本題です。<br>あなたが良かれと信じてきた、<br>変わるための3つの常識。<br>その正体を、一つずつ見ていきます。</p>
+<h2>あなたを縛ってきた、3つの常識</h2>
+<p>ここから、少し踏み込んだ話をします。<br>あなたはこれまで、変わるために、<br>いろいろなことをしてきたはずです。<br>本を読み、<br>セミナーに通い、<br>高額な講座に申し込んだこともあるかもしれません。<br>真面目に、正しいとされることをやってきた。<br>それなのに、<br>なぜ、まだここにいるのでしょうか。<br>理由は、<strong><span class="tx-red">あなたの能力が低いからでも、<br>意志が弱いからでもありません</span></strong>。<br>あなたが良かれと信じて握りしめてきた正しさそのものが、実はあなたを同じ場所に縛りつけてきた。<br>私はそう考えています。<br>世の中には、<br>自分を変えるための常識が、<br>当たり前の顔をして広まっています。<br>今日は、その中でも特に多くの人を止めている3つを、<br>正面から扱います。<strong><span class="tx-blue">一つ目</span></strong>は、<br>とにかく行動しろ、という常識です。<br>動けば変わる。<br>動かないから変わらない。<br>一見、反論の余地がないように聞こえます。<strong><span class="tx-blue">二つ目</span></strong>は、<br>ポジティブでいることが大事だ、という常識です。<br>前向きに考えよう。<br>ネガティブは良くない。<br>これも、誰も否定しにくい響きを持っています。<strong><span class="tx-blue">三つ目</span></strong>は、<br>自分のことは自分で解決すべきで、<br>人に迷惑をかけてはいけない、という常識です。<br>これは最も根が深い。<br>多くの人が、幼い頃から、親や周りの大人から<br>繰り返し教え込まれてきたものだからです。<br>先に言っておきたいのは、<br>私はこれらを教えてきた業種や、<br>コーチングという分野そのものを<br>否定したいのではないということです。<br>それぞれ、<br>必要な人にとっては本当に必要なものです。<br>私が問いたいのは、もっと大きな枠、<br>つまり<mark><strong>常識という多数派の空気そのもの</strong></mark>です。<br>常識とは、要するに多数派の意見にすぎません。<br>多くの人がそう言っているから正しい、<br>というだけのことです。<br>そして、その多数派の型に、<br>あなたの心が本当に馴染んでいるかどうかは、<br>まったく別の問題です。<br>周りから見て順調に見えたとしても、<br>あなたの心がそうではないと言っているなら、<br>それはうまくいっている状態とは言えないのです。<br>これから、この3つを一つずつ、<br>私自身の経験と、<br>声という消せない証拠を使って見ていきます。<br>おそらく、<br>途中で少し落ち着かない気持ちになるはずです。<br>信じてきたものが揺らぐのは、<br>当然のことです。<br>でも、その揺らぎの先にしか、<br>あなたがずっと感じてきた違和感の正体はありません。<br>まず、一つ目の常識から見ていきましょう。</p>
+<h2>神話1　とにかく行動すればいい</h2>
+<p>まず、一つ目の常識です。<br>とにかく行動しろ、<br>動けば変わる。<br>あなたも一度は言われたことがあるはずです。<br>たしかに、<br>行動しないと何も始まらないのは事実です。<br>だからこの言葉自体が<br>間違っているわけではありません。<br>問題は、この言葉を受け取った多くの人が、<mark><strong>動けなくなって止まってしまう</strong></mark>ことにあります。<br>行動が続かない。<br>少しやってみて、<br>いつのまにかやめている。<br>もし動くことがそんなに簡単なら、<br>これほど多くの人が同じ場所で<br>足踏みしているはずがありません。<br>つまり、<strong><span class="tx-red">行動の前に、もっと大事な要因がある</span></strong>ということです。<br>なぜ、とにかく行動しろ、が広まったのか。<br>私は、<strong><span class="tx-blue">成功者バイアス</span></strong>だと考えています。<br>うまくいった人は、<br>たまたま運の要素が大きかったり、<br>折れない心を持っていたりした。<br>その人が振り返って語るとき、<br>行動したから成功した、<br>というエッセンスだけが残ります。<br>でも、その陰には、同じように行動して倒れていった<br>数えきれない人たちがいる。<br>その姿は語られないので、<br>受け取る側は、動けばいい、<br>という部分だけを学んでしまう。<br>本質が、そこでずれるのです。<br>では、<br>やみくもに動くと何が起きるか。<br>自分の特性を知らないまま、<br>世の中で良いとされている方向、<br>外側の正解に、自分を無理やり当てはめようとする。<br>すると、動けば動くほど消耗していきます。<br>たとえるなら、<mark><strong>魚が一生懸命、木に登ろうとしているようなもの</strong></mark>です。<br>登れないのは、<br>その魚の能力が低いからではありません。<br>魚は本来、水の中でこそ輝く。<br>それなのに木に登ろうとして、<br>登れない自分を責め、<br>自信を失っていく。<br>これは、私自身がまさに通ってきた道です。<br>周りから、こうした方がいいと言われ、<br>その通りに頑張ってきました。<br>けれど、本当に心が消耗しました。<br>人間関係も、<br>少しずつ悪くなっていった。<br>何より、うまくいっている感覚が、<br>まるでなかったのです。<br>そして、<br>どんどん自分に自信を持てなくなっていきました。<br>当時の私は、<br>努力が足りないのだと思っていました。<br>でも、そうではなかった。<strong>方向が、自分に合っていなかっただけ</strong>なのです。<br>自分の適性にはまった場所でなら、<br>話はまったく逆になります。<br>動くほどにエネルギーが湧いてきて、<br>むしろ動きたくなる。<br>同じ行動でも、<br>はまっているかどうかで、<br>疲弊するか、<br>加速するかが、<br>正反対に分かれるのです。<br>では、行動の前に何を見るべきか。<br>行動を生み出しているのは、<strong><span class="tx-blue">あなたの中の信念</span></strong>です。<br>信念が、<br>世界の受け取り方や解釈を決めている。<br>その解釈が、行動を生む。<br>だから、行動そのものをいじる前に、<br>その大元にある信念を見なければ、<br>何も変わりません。<br>その信念は、<br>過去の痛みや、うまくいった経験から作られています。<br>当時のあなたにとっては、それが正解だった。<br>その信念のおかげで身についたスキルや立場も、<br>確かにあったはずです。<br>でも時が経つにつれ、<br>メリットよりデメリットが上回ってくる。<br>人間関係が、なぜかうまくいかない。<br>内面の、何だかシックリこない感覚が、<br>無視できないレベルになってくる。<br>それはとても苦しい。<br>けれど、その苦しさこそが、<br>自分の在り方を見つめ直すきっかけであり、<mark><strong>あなたのOSをアップデートするタイミングが来た、<br>という合図</strong></mark>なのです。<br>だから私は、いきなり行動させません。<br>まず声紋診断で、<br>あなたの素質と、<br>今の抑圧の状態を映し出します。<br>それが、<strong><span class="tx-blue">あなたの現在地</span></strong>です。<br>現在地が分かってはじめて、<br>流行りのものにやみくもに飛びつくのではなく、<br>あなたにとって正しい方向を知った上で、<br>一歩目を踏み出せる。<br>魚が、木ではなく、<br>水へ向かえるようになるのです。<br>これで、一つ目の常識が崩れました。<br>でも、これはまだ序の口です。<br>次の常識は、もっと多くの人が、<br>良かれと信じて自分を追い込んでいるものです。</p>
+<h2>神話2　ポジティブでいることが正義</h2>
+<p>二つ目の常識は、<br>ポジティブでいることが大事だ、<br>というものです。<br>前向きに考えよう。<br>ネガティブは良くない。<br>おそらく、<br>一度も疑ったことがない人も多いはずです。<br>誰もこれを否定しません。<br>理由は単純で、明るく見えるし、<br>口にした瞬間だけは気が楽になるからです。<br>でも、だからこそ厄介なのです。<br>問題は、ポジティブ思考を、<br>すべてを肯定的にとらえること、<br>と<mark><strong>曲解してしまう</strong></mark>点にあります。<br>そう受け取ると、<br>反省も、内省も、修正もできなくなります。<br>ただの、何も考えていない楽観主義です。<br>うまくいかなかったことを糧にして、<br>だったら次はどうするか、<br>と考える回路が生まれない。<br>結果として、<strong>同じ失敗を何度も繰り返します</strong>。<br>良くなりたいはずなのに、<br>現状はいつまでも変わらない。<br>そのうち、ネガティブな感情を否定し、<br>ネガティブな人まで否定するようになり、<br>自分はうまくいっていると思い込んでいく。<br>これが、明るい言葉の下で静かに進行していきます。<br>これも、<br>私自身が通ってきた道です。<br>無理にポジティブな言葉を<br>吐いていた時期がありました。<br>本心とずれた言葉を口にするたびに、<br>心のどこかがざわつく。<br>前向きなことを言うたびに、<br>消耗していく感覚があったのです。<br>そして、ポジティブでいようとするあまり、<br>ネガティブなものを一切、<br>目に入れないようになりました。<br>そのネガティブとは、<br>要するに、自分が見たくないものです。<br>うまくいっていない事実を直視せず、<br>自分がポジティブに捉えられる範囲だけを見ていた。<br>だから検証がまったく進まない。<br>視野はどんどん狭くなり、<br>本当に向き合うべき点が、<br>まったく見えなくなっていきました。<br>それで何かが変わったかというと、<br>何も変わらないどころか、<br>むしろ悪化した。<br>ただ痛いところから目をそらしていただけなのに、<br>それを前向きさだと思い込んでいたのです。<br>やっかいなのは、<br>心の奥では、自分が避けていることに気づいている、<br>ということです。<br>言っていることと、<br>本心とのあいだにあるズレ。<mark><strong>その不一致こそが、自分をずっと苦しめていた。</strong></mark>ここで、声の話に戻ります。<br>無理にポジティブな言葉を発しているとき、<br>喉や胸の緊張は、本音のときとは必ず違っています。<br>そして、その違いは<strong><span class="tx-blue">声の周波数</span></strong>に表れます。<br>喉の筋肉の緊張状態が、<br>物理的に声質へ影響するからです。<br>つまり、口では前向きなことを言えても、<br>その裏にある違和感は、<br>外へ漏れ出ている。<br>周りは、それを言葉にできないまでも、<br>なんとなく感じ取っています。<br>丁寧な言葉づかいなのに、なぜか距離を感じる。<br>そういう相手が、<br>あなたにもいるかもしれません。<br>では、本当のポジティブ思考とは何か。<br>それは、<br>ネガティブを無かったことにすることではありません。<br>適切に自分を振り返り、<br>うまくいかなかった事実にちゃんと向き合った上で、<br>それでも活路はあると信じ、<br>その経験から何かをつかみ取り、<br>そのために動くこと。<strong><span class="tx-red">逃げではなく、直視から始まる前向きさ</span></strong>です。<br>私の関わりでは、<br>まず声紋診断と、表情や間といった非言語の情報から、<br>あなたが大きな声でごまかしている違和感を捉えます。<br>そこに、言葉と非言語の両方で介入する。<br>すると、これまで蓋をしてきた違和感が、<br>はじめて言葉になります。<br>言葉になると、本当はこうしたい、<br>という願望が見えてくる。<br>その願望に向けて、どうすれば実現できるかを考える。<br>これが、<br>消耗しない、本物の前向きさです。<br>これで、二つ目の常識も崩れました。<br>ただ、ここまでの二つは、<br>まだ準備運動にすぎません。<br>次にお話しするのは、<br>あなたが最も手放しにくい、<br>根の深い常識です。<br>多くの人が、<br>これを一種の呪いのように抱えたまま生きています。</p>
+<h2>神話3　人に迷惑をかけてはいけない</h2>
+<p>三つ目です。<br>自分のことは自分で解決すべきで、<br>人に迷惑をかけてはいけない。<mark><strong>これが、最も根が深い。</strong></mark>なぜ根深いのか。<br>この言葉は、多くの人が幼い頃から、<br>親や周りの大人に繰り返し<br>教え込まれてきたものだからです。<br>だから、正しいと信じ込んでいる。<br>ただ、この迷惑をかけないという言葉は、<br>いつのまにか、<br>自分勝手なことをするな、<br>周りに合わせなさい、<br>というニュアンスで受け取られていきます。<br>その結果、どうなるか。<br>自分らしく行動すること、自分の思うように<br>何かをやったり発言したりすることが、<br>どちらかといえば良くないことだ。<br>そんな認識を持って生きてきた人が、<br>とても多い。<br>でも、そうした生き方は、<br>実は自分の心に反していることが多いのです。<br>そして多くの場合、周りにうまく溶け込めないのは<br>自分がうまくやれないからだ、<br>だからもっと合わせるべきだ、<br>という自己否定につながっていく。<br>合わせようとするほど、<br>自分の本質から外れ、<br>苦しさやくすぶりは高まる一方です。<br>つまり、いざ自分らしく生きようとしたとき、<br>これまでの迷惑をかけてはいけないという常識を<br>破らなければならない。<br>長年かけて作り上げてきた、<strong><span class="tx-blue">自分のアイデンティティの一部を<br>壊さなければならない。</span></strong>だからこそ、ここが大きな壁になります。<strong>ある意味、<br>呪いのようになっているのです。</strong>なぜ人は、これを手放せないのか。<br>幼少期からその教育を受け、<br>周りもその常識で満ちていた環境で育った。<br>だから、深いところで、<br>それがもう自分のアイデンティティになっている。<br>その一部を手放すこと、<br>それに反した行動を取ることは、<br>とてつもない恐怖や不安を伴います。<br>では、この呪いを、<br>私はどう見ているか。<br>まず、<strong><span class="tx-blue">事実を見ること</span></strong>です。<br>迷惑をかけまいとして一人で抱え込んだ結果、<br>何が起きているか。<br>本人はどんどん苦しくなっている。<br>周りの人も、実はそれを喜んでいない。<br>迷惑をかけまいとしたことが、かえって周りにも自分にもしわ寄せがきている。<br>そういう現実が、<br>たいてい起きています。<br>私はこれまで、迷惑にならないようにと、<br>自分の見られ方ばかりを気にしている人と、<br>たくさん関わってきました。<br>そういう人ほど、<br>周りに自分を合わせ、<br>抑圧する方向へ動いていました。<br>何をするにも周りがどうしているかばかり気にして、<br>自分がどうしたいのかが分からなくなっている。<br>優しそうに見えても、<br>どこか距離を感じて、<br>本当の意味でつながりにくい。<br>本人も、人間関係に苦しんでいたりします。<br>逆に、はたから見ると自由にやっている人ほど、<br>楽しそうで、人が集まってくる。<br>そして、その人を迷惑だと感じている人は、<br>ほとんどいなかったのです。<br>むしろ、決まりをきっちり守ろうとする人ほど、<br>他人の一挙手一投足が気になって、<br>揚げ足を取ったり、<br>素直に人を応援できなかったりする。<br>そういう姿を、<br>私は何度も見てきました。<br>ここに、<strong><span class="tx-blue">遠慮という落とし穴</span></strong>があります。<br>迷惑をかけまいという遠慮は、<br>結局のところ、本心を隠すことです。<br>そして人の本能は不思議なもので、<br>言っていることと本心のギャップを、<br>敏感に感じ取ります。<br>どれだけ丁寧な言葉づかいでも、<br>その内側がただの遠慮や保身であるとき、<br>周りはそこに得体の知れない不安を覚える。<br>つまり、<mark><strong>迷惑をかけまいと自分を抑えることは、<br>周りにも不安を与え、<br>自分自身にも不安を植えつけてしまう</strong></mark>のです。<br>もちろん、言い方に気をつける配慮は必要です。<br>でも、遠慮で本心を隠すことは、<br>周りにも自分にも、良い影響を与えていません。<br>本当のことは、こうです。<strong><span class="tx-red">自分らしく生きることは、<br>結局、周りのためになります。</span></strong>自分らしく生きる人は、<br>まず自分自身に安心していて、<br>その安心感を周りにも振りまきます。<br>エネルギーに満ちているから、<br>人からエネルギーを奪う必要がなく、<br>他人に寛容になれる。<br>だから周りは、その人に関わりたいと思い、<br>その人からエネルギーをもらえるのです。<br>ただ、<br>この呪いは、<br>本人一人ではなかなか外せません。<br>本人は一生懸命やっているがゆえに、<br>自分の行動が生んでいる現実が見えないからです。<br>だから、本人以外の視点が要る。<br>声紋診断は、<br>本人も気づいていない抑圧を、<br>客観的な形で映し出します。<br>そこに、<br>私が第三者の目線と非言語の関わりを重ねる。<br>本人の解釈と、<br>実際の事実とのズレが見えたとき、<br>はじめて自覚が生まれ、<br>行動が変わり始めます。<br>これで、3つの神話がすべて崩れました。<br>とにかく行動しろ。<br>前向きでいろ。<br>迷惑をかけるな。<br>どれも、あなたを縛ってきたものでした。<br>では、<br>その先に何が残るのか。<br>次に、崩した後に見えてくる、<br>たった一つの本当のことをお話しします。</p>
+<h2>3つを崩した先に残る、たった一つのこと</h2>
+<p>ここまで、3つの常識を崩してきました。<br>とにかく行動しろ。<br>前向きでいろ。<br>迷惑をかけるな。<br>一つずつ見てくると、実はこの3つが、<strong><span class="tx-blue">同じ根っこ</span></strong>から伸びていたことに気づきます。<br>その根っことは、<mark><strong>外側にある正解に、自分を合わせようとしていた</strong></mark>、<br>ということです。<br>世の中で良いとされる行動。<br>明るくあるべきという空気。<br>人に合わせなさいという教え。<br>どれも、自分の外側にある基準です。<br>あなたはずっと、<br>その基準に自分をはめ込もうとして、<br>はまらない自分を責めてきた。<br>うまくいかないのは自分のせいだと。<br>でも、本当に見るべきは、<br>外側の正解ではありません。<br>目の前の事実です。<br>あなたが思い悩んでいるということ自体が、<br>今の状態が、あなたの望む状態ではないという事実を<br>示しています。<br>だったら、何かを変えなければならない。<br>そして、変えるべきは行動でもなく、性格でもなく、<br>そのもっと手前にある、<strong>あなたが世界を見るときの色眼鏡</strong>です。<br>その色眼鏡を外すために、<br>たった一つ、頼りにできるものがあります。<strong><span class="tx-blue">あなたの違和感</span></strong>です。<br>なんだかシックリこない。<br>この方向は違う気がする。<br>楽しくない。<br>そのザワつきを、<br>あなたはこれまで、気のせいだ、わがままだ、<br>と押し殺してきたはずです。<br>でも、その違和感こそが、<br>あなたの本能が鳴らしている、<br>いちばん正直な信号なのです。<br>言葉は取り繕えても、<br>この感覚だけは嘘をつけない。<br>だから、<strong><span class="tx-red">違和感を信じる</span></strong>。<br>これが、3つの常識を崩した先に残る、<br>たった一つの本当のことです。<br>この一点が変わると、<br>生き方のルールそのものが変わります。<br>一つ。<strong>行き先は、自分で決める。</strong>誰かが用意した正解の道ではなく、<br>自分が選んだ道を、<br>正解にしていく。<br>この順番が逆だったのです。<br>二つ。<strong>行き先さえ決めれば、<br>そこへ向かう答えは、必ず後から見つかります。</strong>多くの人は、<br>答えが見えないから動けないと言います。<br>でも実際は、逆です。<br>決めていないから、<br>答えが目に入らないだけなのです。<br>三つ。<strong>見たい世界を、見続ける。</strong>人は、自分にとって重要だと決めたものだけを、<br>意識に上げるようにできています。<br>だから、どこを見るかを自分で選ぶ。<br>それだけで、<br>目に入る情報が変わっていきます。<br>四つ。<strong>根拠のない自信こそ、最強です。</strong>うまくいく保証などなくても、<br>なぜか、やればできると思えている。<br>その状態にある人は、少しつまずいても、<br>きっと何かあるはずだと次の一歩を踏み出します。<br>そして、本当に見つけてくる。<br>信じているから、<br>途中でやめないのです。<br>ここまで読んで、<br>なぜ今までこれを誰も教えてくれなかったのか、<br>と思うかもしれません。<br>でも、答えはシンプルです。<br>あなたがこれまで生きてきた環境の中に、<br>たまたま、それを教えてくれる人がいなかった。<br>ただそれだけです。<br>この考え方は、<br>昔からずっと存在していました。<br>現に、あなたは変わりたいと思ったからこそ、<br>この文章にたどり着いている。<br>教わるチャンスは、<br>もともとちゃんとあったのです。<mark><strong>正しい道を探すのを、もうやめる。<br>自分の選んだ道を、正解にしていく。</strong></mark>できない理由を数えるのを、やめる。<br>できる理由を探し始める。<br>この転換が起きたとき、<br>人はようやく、<br>自分の人生を歩き始めます。<br>では、この真実を、<br>どうやって具体的に自分のものにしていくのか。<br>次に、私が実際に行っている関わり方をお話しします。</p>
+<h2>では、具体的に何をするのか</h2>
+<p>では、違和感を信じる、<br>を絵に描いた餅で終わらせないために、<br>私が実際に何をしているのかをお話しします。<br>やっていることは、<br>大きく分けて三つです。<strong><span class="tx-blue">声紋診断で現在地を映し出し、<br>コーチングで進みたい方向を見つけ、<br>半年という時間をかけて、その変化に伴走する。</span></strong>この三つを組み合わせています。<br>最初に、声紋診断です。<br>ここでいちばん大きいのは、<mark><strong>声は嘘がつけない</strong></mark>、ということです。<br>言葉はいくらでも取り繕えます。<br>でも、あなた自身も気づいていない素質とのズレや、<br>抑圧の状態は、声に表れます。<br>それを、<br>統計と特許技術に裏づけられた形で、<br>客観的に映し出す。<br>これには、<br>思いがけない効き目があります。<br>それは、<strong>いい意味で、自分に対する諦めがつく</strong>ことです。<br>私たちは情報の海の中で、<br>あれもできる、これもやった方がいい、<br>と選択肢を増やしすぎて、<br>かえって動けなくなっています。<br>声紋診断は、<br>その増えすぎた選択肢を、<br>あなたの素質に合ったものだけに絞ってくれる。<br>すると、あとはできることをとことんやるだけだ、<br>という開き直りに近い強さが手に入ります。<br>木に登ろうとしていた魚が、<br>自分は水の中で泳げばいいと分かる。<br>その安心感です。<br>ただし、<br>ここで正直にお伝えしておきます。<br>診断結果が、<br>絶対の正解というわけではありません。<br>それはあくまでスタート地点です。<br>本当に人生を動かすのは、<br>そこから先の関わりのほうです。<br>次が、コーチングです。<br>ここは、<strong><span class="tx-blue">機械にはできない、人間にしかできない領域</span></strong>だと思っています。<br>声のデータだけでは拾えない、<br>表情のわずかな変化、<br>言葉と言葉の間、<br>その場の空気。<br>そうした非言語の情報を読み取りながら、<br>対話していきます。<br>そして、私自身の非言語も、<br>あなたに影響を与えます。<br>人と人が向き合うことでしか起きない、<br>内面の変化を促していくのです。<br>このとき、<br>私が意識してやらないことがあります。<strong>答えを言わないこと</strong>です。<br>あなたにとっての本当の正解は、<br>あなたにしか分かりません。<br>だから私は、自分の解釈をあなたに押しつけません。<br>あなたが必ず自分で答えを導き出せると信じているからこそ、謙虚な姿勢で、隣を歩かせてもらう。<br>それだけです。<br>そして三つ目が、<br>半年間の伴走という環境です。<br>人は一人では変われません。<br>今のあなたを形作っているのは、<br>日々のいちばん身近な環境と、<br>周りの人との同調です。<br>だから、その環境を一人で変えるのは、<br>とても難しい。<br>変わり続けることを諦めない人間のそばに居続ける。<br>その同調の力を使って、<mark><strong>あなたの普通そのものを、<br>少しずつアップデートしていきます。</strong></mark>なぜ、<br>これを私がやるのか。<br>すごい知識やスキルがある人間だから<br>ではありません。<br>むしろ逆です。<br>私は安定した場所に身を置いたまま、<br>20年、くすぶり続けました。<br>何度も諦めようとして、それでも諦めきれなかった。<br>深いところで自信がなくて、<br>それを隠すために虚勢を張り、<br>その結果また自信を失う。<br>そんな悪循環の中にいたのです。<br>このままではいけない、<br>どうにか抜け出したい。<br>その思いから、<br>ようやく自分の内面と向き合い始めました。<br>痛みをさらけ出し、格好悪い自分をさらけ出す。<br>それを重ねて、<br>自分自身がクリアになっていくほど、<br>不思議と、周りの人の抱えているものまで見えるようになっていきました。<br>だから、あなたの違和感も、<br>私には捉えられます。<br>受けた人が、どう変わっていくか。<br>まず、自分の内面のエラーに気づき、<strong><span class="tx-blue">腑に落ちる瞬間</span></strong>が来ます。<br>腑に落ちるから、行動が変わる。<br>物の見方が変わり、現実が変わり始める。<br>最初の一歩が、いちばん怖い。<br>だからその小さな一歩から、<br>私が伴走します。<br>そこで得た小さな自信を積み重ねて、<br>最終的には、<br>私がいなくても自分で進んでいける自分を、<br>手に入れてもらう。<br>それが、<br>この関わりのゴールです。<br>言葉は取り繕える。<br>でも、<br>声は隠せない。<br>ここから、<br>あなたの人生をアップデートしていきましょう。</p>
+<h2>なぜ、これを誰も教えてくれなかったのか</h2>
+<p>ここまで読んで、<br>こう思った方もいるはずです。<br>もしこれが本当なら、<br>なぜ今まで誰も教えてくれなかったのか、<br>と。<br>先に言っておくと、<br>誰かが悪意を持って、<br>あなたに真実を隠していたわけではありません。<br>答えは、もっと静かで、もっと単純です。<mark><strong>あなたがこれまで生きてきた環境の中に、<br>たまたま、それを教えてくれる人がいなかった。</strong></mark>ただ、それだけのことです。<br>考えてみてください。<br>世の中に流れてくる成功の話は、<br>ほとんどが、うまくいった人の語りです。<br>うまくいった人が振り返って、<br>行動したから成功した、<br>諦めなかったから道が開けた、<br>と語る。<br>その言葉は力強く、<br>耳に残ります。<br>でも、その裏側には、<br>同じように行動して、<br>同じように諦めずに、<br>それでも報われなかった数えきれない人たちがいる。<br>彼らの声は、語られません。<br>だから受け取る側には、<br>うまくいった人の結論だけが届く。<br>とにかく動け、前を向け、<br>という部分だけが、<br>まるで法則のように広まっていくのです。<br>これは、<br>誰かが仕組んだ陰謀ではありません。<br>ただ、<strong>成功は声が大きく、失敗は沈黙する</strong>。<br>その非対称が、<br>常識という空気を作っているだけです。<br>そして、きれいに整った公式ほど、<br>受け取りやすいから広まります。<br>あなたの違和感を信じなさい、<br>自分で行き先を決めて、<br>それを正解にしていきなさい。<br>こういう話は、<br>行動すればうまくいく、<br>という一言に比べて、<br>受け取るのに手間がかかる。<br>だから、なかなか広まらないのです。<strong><span class="tx-blue">真実だから広まる、というわけではない</span></strong>のが、<br>現実です。<br>もう一つ、理由があります。<br>違和感を信じて、周りと違う道を選ぶ、というのは、<br>それを語る側にとっても、簡単なことではないのです。<br>常識とは多数派の意見です。<br>そこから外れるのは、<br>本能的に怖い。<br>だから、<br>自分自身がその怖さを一度くぐり抜けた人でなければ、<br>この話は、心からは語れません。<br>私自身、長いあいだ、<br>安定した場所で燻り続けてきました。<br>周りに合わせ、本音を飲み込み、<br>それでいいのだと思い込もうとしてきた。<br>何度も諦めようとして、諦めきれなかった。<br>その苦しさの果てに、<br>ようやく自分の内面と向き合い、<br>格好悪い自分をさらけ出す覚悟が決まった。<br>だからこそ、今、<br>これをあなたに話せています。<br>逆に言えば、<br>その痛みを通っていなければ、<br>私にもこの話はできなかったと思います。<br>ここで、はっきりさせておきたいことがあります。<br>私は、他のやり方や、<br>他の専門家を否定したいわけではありません。<br>それぞれのやり方は、<br>それを必要とする人にとっては、<br>本当に必要なものです。<br>私が問いたいのは、<br>あなた一人ではありません。<br>みんながそうしている、<br>という、もっと大きな空気の方です。<br>もし、<strong><span class="tx-blue">あなたがこれまでいろいろ試して、<br>それでもうまくいかなかったのなら</span></strong>。<br>そのときは、私のような関わり方も、<br>一度試してみる価値があると思っています。<br>そして、忘れないでほしいことがあります。<br>この考え方は、<br>昔からずっと存在していました。<br>今日、突然生まれたものではありません。<br>現に、あなたは変わりたいと思ったからこそ、<br>この文章にたどり着いた。<br>教わるチャンスは、<br>もともとあなたのすぐそばに、<br>ちゃんとあったのです。</p>
+<h2>二つの未来</h2>
+<p>ここで、少しだけ立ち止まって、<br>二つの未来を思い浮かべてみてください。<br>一つは、<strong><span class="tx-blue">これまで通り、常識のまま生きていく未来</span></strong>です。<br>明日も、周りに合わせます。<br>言いたいことは、<br>飲み込みます。<br>違和感は、気のせいだと言い聞かせます。<br>前向きな言葉で、<br>うまくいっていない事実に蓋をします。<br>迷惑をかけないよう、一人で抱え込みます。<br>どれも、これまで通りです。<br>だから、<br>大きな失敗は起きません。<br>表面上は、何も変わらず、<br>穏やかに過ぎていきます。<br>ただ、心の奥の、<br>あのザワつきだけは消えません。<br>むしろ、日を追うごとに濃くなっていく。<br>ふとした時、SNSで、前に進んでいる誰かを見ては、<br>自分だけが同じ場所で足踏みしているような感覚に襲われる。<br>やりたいことが何なのか、いまだに分からない。<br>何も変わっていない。<br>何をすればいいのかも分からない。<br>そんな言葉を、また飲み込む。<br>一年後も、三年後も、<br>この繰り返しかもしれません。<strong><span class="tx-red">このまま何も変わらないまま歳をとっていく</span></strong>というその未来は、劇的な出来事としてではなく、<br>こうして静かに、少しずつ、確定していきます。<br>誰のせいでもありません。<br>ただ、今の思考のパターンと、<br>今の選択の基準を握りしめたまま生きれば、<br>現実は、その基準の通りにしか動かないからです。<br>もう一つは、<strong><span class="tx-blue">その違和感を、はじめて信じてみる未来</span></strong>です。<br>気のせいだと押し殺してきたザワつきを、<br>あなたの本能が鳴らしている、<br>いちばん正直な信号として、扱ってみる。<br>無理にポジティブでいるのをやめ、<br>見たくなかった事実を、静かに直視してみる。<br>一人で抱え込むのをやめ、<br>自分の抑圧を客観的に映してくれる目に、<br>一度だけ、頼ってみる。<br>そこで見えてくるのは、<br>あなたの素質に合った、あなただけの行き先です。<br>魚が、木ではなく、水へ向かい始める。<br>動くほどに消耗するのではなく、<br>動くほどにエネルギーが湧いてくる。<br>周りの評価ではなく、<br>自分の内側で、これでいいのだと感じられる。<strong>安心とともに、自分を活かして生きている</strong>、<br>という感覚です。<br>どちらの未来を選ぶかは、<br>大きな決断のように聞こえるかもしれません。</p>
+<p>でも、<br>本当はもっと手前の、<br>小さな一点の違いです。<mark><strong>目の前の事実を、<br>色眼鏡を外して見る勇気があるかどうか。</strong></mark>ただ、<br>それだけです。<br>そして、それはとても勇気がいることです。<br>だからこそ、<br>その最初の一歩を、<br>一人で踏まなくていいように、私がいます。<br>正しい道を探し続けるのは、<br>もうやめる。<br>自分の選んだ道を、正解にしていく。<br>もし、その生き方に少しでも心が動いたなら、<br>次の話を読み進めてください。</p>
+<h2>無料声紋診断セッションへ</h2>
+<p>ここまで読んでくれた、ということ自体が、<br>一つの答えだと思っています。<br>人の脳は、自分にとって重要なものだけを、<br>意識に上げるようにできています。<br>逆に、どうでもいいものは、<br>盲点として、あえて目に入らないように処理される。<br>たとえば、車を買おうと決めた瞬間から、<br>狙っていた車種が、<br>街中でやたら目につくようになる。<br>実際に増えたわけではありません。<br>あなたの中で重要度が上がったから、<br>意識が拾うようになっただけです。<br>同じことが、今起きています。<br>この文章が目に留まり、<br>ここまで読んでいる。<br>それは、<mark><strong>あなたの無意識が、<br>これを重要な情報だと判断した証拠</strong></mark>です。<br>人生を今より良くしたいという願望が、<br>意識では気づかないほど深いところにあって、<br>だからこそ、<br>あなたはここにたどり着いたのだと思います。<br>だから、無理に決断を迫るつもりはありません。<br>ただ、その違和感を一度だけ、確かめてみませんか、<br>という提案をします。<br>用意しているのは、<strong><span class="tx-blue">無料の声紋診断セッション</span></strong>です。<br>流れはシンプルです。<br>まず、あなたの声を<mark><strong>6秒だけ録音</strong></mark>し、<br>解析します。<br>そのデータをもとに、<strong><span class="tx-blue">オンラインで対話しながら</span></strong>、<br>あなたの現在地を一緒に見ていきます。<br>ここは大事なので書いておきますが、<strong>アプリで数値が出て終わり、ではありません</strong>。<br>声紋診断はあくまで入り口で、<br>そこから先の対話にこそ、<br>本当の意味があります。<br>診断結果が絶対の正解なのではなく、<br>それをスタート地点にして、<br>あなたが本当はどこへ進みたいのかを、<br>一緒に言葉にしていく時間です。<br>このセッションで、あなたは<strong><span class="tx-blue">自分の現在地を知り、<br>進みたい方向の手がかりを持ち帰れます</span></strong>。<br>売り込みはしません。<br>必要なことは、<br>すべて同意を得ながら進めます。<br>もちろん、<br>変化のために必要だと思えばご提案はしますが、<br>無理にどうこうすることはありません。<br>一つだけ、正直にお伝えしておきます。<br>お受けできるのは、<mark><strong>月に5名まで</strong></mark>です。<br>一人ひとりと丁寧に向き合うと、<br>こちらもかなりのエネルギーを使うので、<br>数をこなすことができないのです。<br>これは煽りではなく、<br>質を保つための、<br>こちらの事情です。<br>それから、このセッションが向いている人と、<br>そうでない人がいます。<br>誰かがなんとかしてくれると思っている人、<br>棚ぼたを期待している人、<br>今の状態に十分満足している人には、<br>正直、向きません。<br>逆に、<strong>自分のことをまだ諦めていない人、<br>長年もがいてきた人、<br>なんとかしたいと思い続けてきた人</strong>には、受けてみる価値があると思います。<br>申し込みは、<strong><span class="tx-blue">LINEから</span></strong>受け付けています。<br>登録して、予約していただくだけです。<br>LINEでは、動画や書籍には載せていない、<br>人生をアップデートするための考え方も、<br>ときどき配信しています。<br>すぐに予約しなくても、<br>そこから受け取ってもらうだけでも構いません。</p>
+<div class="btn-wrap"><a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、声紋診断を無料で予約する →</a></div>
+<p>最後に、これだけ。<br>判断を先延ばしにする、という選択を、<br>あなたはこれまで何度してきたでしょうか。<br>責めているのではありません。<br>ただ、今の現実が望んだものでないなら、<br>その現実を作っているのは、今の思考のパターンと、<br>選択の基準です。<br>その基準を握りしめている限り、<br>来年も再来年も、景色はそう変わりません。<br>逆に言えば、<mark><strong>その基準が変わったとき、景色は変わり始めます。</strong></mark>正しい道を探すのは、もうやめる。<br>自分の選んだ道を、<br>正解にしていく。<br>その最初の一歩を、<br>一人で踏み出さなくていいように、私がいます。<strong>言葉は、取り繕える。</strong><strong><span class="tx-red">声は、隠せない。</span></strong>ここから、<br>あなたの人生をアップデートしていきましょう。</p>
+<div class="btn-wrap"><a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、声紋診断を無料で予約する →</a></div>
 </div>
 
 <!-- LINE 友だち追加ボタン押下で Lead 発火 + Meta CAPI -->
