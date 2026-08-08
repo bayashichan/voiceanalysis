@@ -45,6 +45,27 @@
     -webkit-tap-highlight-color: transparent;
   }
   .btn:active { box-shadow: 0 2px 6px rgba(0,0,0,.14); transform: translateY(1px); }
+  .voice-msg {
+    position: relative;
+    margin: 28px 0;
+    background: #f1f1ef;
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "ヒラギノ角ゴシック", "Noto Sans JP", sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #2c2c2b;
+    letter-spacing: .01em;
+  }
+  .voice-msg + .voice-msg { margin-top: 20px; }
+  .voice-msg::before {
+    content: "";
+    position: absolute;
+    top: 15px; left: -6px;
+    border: 6px solid transparent;
+    border-right-color: #f1f1ef;
+    border-left: 0;
+  }
 </style>
 <!-- Meta Pixel -->
 <script>
@@ -146,6 +167,8 @@ fbq("track","PageView",{},{eventID:window._pvId});
 <p>そう感じたと、伝えてくれました。</p>
 <img src="voice-testimonial-1.webp" alt="セッションの感想（お客様の声）1" width="1306" height="1100" loading="lazy">
 <img src="voice-testimonial-2.webp" alt="セッションの感想（お客様の声）2" width="1290" height="668" loading="lazy">
+<blockquote class="voice-msg">声紋診断の話にすぐに入ると思ったら、じっくり丁寧に話を聞いて下さり、話すつもりのなかった過去のことまで話していました。<br><br>一つ一つに共感してくださり、とてもありがたかったです。<br>相手の声に真摯に耳を傾けることは、コーチングだろうがカウンセリングだろうが、人が人と接する時に一番大切なことです。そこからしか何も始まりません。<br>信頼関係の築けない人とはコーチングも始まりません。<br>真摯に人と向き合う林さんの声紋診断はオススメです。</blockquote>
+<blockquote class="voice-msg">本日はありがとうございました。とても興味深い体験でした。自分で感じたこと（感情）や経験が本来持っているもの（素質）と近いのか、かけ離れているいうところがよく分かりました。<br>今回の体験はその答え合わせのようなものだったと思いもっと自分の感情や直感を信じてもいいんだと思えた時間でした。</blockquote>
 <p>私が大切にしているのは、きれいごとではなく、<br><strong><span class="tx-blue">自分を活かしたい</span></strong>という思いです。</p>
 <p>ただ、自分一人では、自分を活かしきれない。</p>
 <p>誰かと関わり、<br>その人が前を向き、<br>心が軽くなって、<br>その人らしさを取り戻していく。</p>
