@@ -31,7 +31,7 @@ export async function onRequestPost(context) {
     });
   }
 
-  const { eventId, url, fbp, fbc, eventName, testEventCode } = body;
+  const { eventId, url, fbp, fbc, eventName, testEventCode, contentName } = body;
 
   if (!eventId) {
     return new Response(JSON.stringify({ error: 'Missing eventId' }), {
@@ -62,7 +62,9 @@ export async function onRequestPost(context) {
       },
     ],
   };
-  if (testEventCode) payload.test_event_code = testEventCode;
+  // ブラウザピクセルと同じ content_name を付け、どのボタンからのリードかを区別する
+  if (typeof contentName === 'string' && contentName) payload.data[0].custom_data = { content_name: contentName.slice(0, 64) };
+    if (testEventCode) payload.test_event_code = testEventCode;
 
   try {
     // Authorization header keeps the token out of URL query strings and server access logs

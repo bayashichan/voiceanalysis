@@ -45,6 +45,11 @@
     -webkit-tap-highlight-color: transparent;
   }
   .btn:active { box-shadow: 0 2px 6px rgba(0,0,0,.14); transform: translateY(1px); }
+  .check-box { margin: 40px 0; padding: 24px 18px 8px; border-top: 1px solid #2c2c2b; border-bottom: 1px solid #2c2c2b; }
+  .check-box .eyebrow { font-size: 13px; color: #77746f; letter-spacing: .08em; margin: 0 0 8px; }
+  .check-box h3 { font-size: 20px; font-weight: 700; line-height: 1.5; margin: 0 0 16px; }
+  .check-box .btn { color: #387dc9; }
+  .check-box .note { font-size: 13px; line-height: 1.7; color: #77746f; text-align: center; }
 </style>
 <!-- Meta Pixel -->
 <script>
@@ -244,6 +249,14 @@ fbq("track","PageView",{},{eventID:window._pvId});
 <p>それが、<strong><span class="tx-blue">あなたの現在地</span></strong>です。</p>
 <p>そこから、<br>一度も聞かれたことのない問いを重ねて、<br>あなたの湧き水を掘り当てていく。</p>
 <p>魚が、木ではなく、<br>水へ向かえるようになるのです。</p>
+<div class="check-box">
+<p class="eyebrow">2分でできるセルフチェック</p>
+<h3>あなたはいま、いきなり大河を<br>目指していませんか？</h3>
+<p>創造性の研究「4C理論」では、<br>創造性は小さな気づき（<strong>ミニc</strong>）から、<br>段階を追って育つと考えられています。</p>
+<p>全11問のチェックで、<br><mark><strong>いまの段階</strong></mark>と<mark><strong>目指している段階</strong></mark>の差を、<br>その場で確かめられます。</p>
+<div class="btn-wrap"><a href="/4c/" class="btn">4C診断をやってみる →</a></div>
+<p class="note">登録なしで、このまま診断できます。</p>
+</div>
 <p>これで、一つ目の常識が崩れました。</p>
 <p>でも、これはまだ序の口です。</p>
 <p>次の常識は、もっと多くの人が、<br>良かれと信じて自分を追い込んでいるものです。</p>
@@ -681,8 +694,10 @@ fbq("track","PageView",{},{eventID:window._pvId});
       var eventId = generateEventId();
       var fbp = getFbp();
       var fbc = getFbc();
-      try { if (typeof window.fbq === 'function') { window.fbq('track', 'Lead', {}, { eventID: eventId }); } } catch (_) {}
-      var leadPayload = { eventName: 'Lead', eventId: eventId, url: window.location.href, fbp: fbp, fbc: fbc };
+      // どのボタンからのリードかを content_name で区別する（4C診断の結果 / LP最後の無料セッション）
+      var leadName = btn.getAttribute('data-lead') || 'session';
+      try { if (typeof window.fbq === 'function') { window.fbq('track', 'Lead', { content_name: leadName }, { eventID: eventId }); } } catch (_) {}
+      var leadPayload = { eventName: 'Lead', eventId: eventId, url: window.location.href, fbp: fbp, fbc: fbc, contentName: leadName };
       if (testCode) leadPayload.testEventCode = testCode;
       postToCapi(leadPayload);
       navigateTo(destUrl);
