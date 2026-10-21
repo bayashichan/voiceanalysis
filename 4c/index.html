@@ -157,15 +157,15 @@
   <h2>いまの段階から、一緒に整理しませんか</h2>
   <p>無料の個別セッション（60分・オンライン）では、<br>最初に<mark><strong>6秒の声</strong></mark>を録音し、<br>その結果を見ながら、<br>あなたのミニcを一緒に言葉にしていきます。</p>
   <p>話す準備はいりません。<br>合わないと感じたら、その場で終わりにできます。</p>
-  <!-- LINE アプリ内（LIFF）で開いたとき：「個別」を送ると日程候補が自動で返る -->
+  <p>ご希望の方は、トークで<br><mark><strong>「個別」</strong></mark>と送ってください。<br>日程の候補が届きます。</p>
+  <!-- LINE アプリ内（LIFF）で開いたとき -->
   <div id="cta-line" hidden>
-    <div class="btn-wrap"><button class="btn" id="book" type="button">無料セッションの日程を見る →</button></div>
-    <p class="small" style="text-align:center">押すと、トークに日程の候補が届きます。</p>
+    <div class="btn-wrap"><button class="btn" id="book" type="button">トークに戻る →</button></div>
   </div>
   <!-- LINE の外で開いたとき -->
   <div id="cta-web" hidden>
     <div class="btn-wrap"><a class="btn" href="https://line.me/R/ti/p/@582xsdpe" target="_blank" rel="noopener">LINEで無料セッションを予約する →</a></div>
-    <p class="small" style="text-align:center">友だち登録のあと、トークで「個別」と送ると、日程の候補が届きます。</p>
+    <p class="small" style="text-align:center">友だち登録のあと、トークで「個別」と送ってください。</p>
   </div>
 
   <div class="qnav"><button class="link" id="retry" type="button">もう一度チェックする</button></div>
@@ -280,7 +280,6 @@
     }).join('');
     $('cta-line').hidden = !inLine;
     $('cta-web').hidden = inLine;
-    $('book').disabled = false;
     show('result');
   }
 
@@ -288,15 +287,8 @@
   $('next').onclick = function () { if ((page + 1) * PER >= Q.length) finish(); else { page++; renderPage(); } };
   $('prev').onclick = function () { if (page > 0) { page--; renderPage(); } };
   $('retry').onclick = function () { ans = Q.map(function () { return null; }); page = 0; show('intro'); };
-  $('book').onclick = function () {
-    var b = this; b.disabled = true;
-    // line-manager の面談予約は「個別」を受け取ると日程候補を自動返信する
-    liff.sendMessages([{ type: 'text', text: '個別' }]).then(function () {
-      liff.closeWindow();
-    }).catch(function () {
-      $('cta-line').hidden = true; $('cta-web').hidden = false;
-    });
-  };
+  // こちらからメッセージは送らない。予約するかどうかは本人がトークで決める
+  $('book').onclick = function () { liff.closeWindow(); };
 
   if (LIFF_ID && window.liff) {
     liff.init({ liffId: LIFF_ID }).then(function () {
