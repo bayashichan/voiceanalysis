@@ -254,8 +254,8 @@ fbq("track","PageView",{},{eventID:window._pvId});
 <h3>あなたはいま、いきなり大河を<br>目指していませんか？</h3>
 <p>創造性の研究「4C理論」では、<br>創造性は小さな気づき（<strong>ミニc</strong>）から、<br>段階を追って育つと考えられています。</p>
 <p>全11問のチェックで、<br><mark><strong>いまの段階</strong></mark>と<mark><strong>目指している段階</strong></mark>の差を、<br>その場で確かめられます。</p>
-<div class="btn-wrap"><a href="javascript:void(0);" data-href="https://liff.line.me/2012139063-Pmces6QQ" data-lead="4c_check" class="btn line-cv-btn">4C診断をやってみる →</a></div>
-<p class="note">LINEで開きます。はじめての方は、友だち登録のあとに診断が始まります。</p>
+<div class="btn-wrap"><a href="/4c/" class="btn">4C診断をやってみる →</a></div>
+<p class="note">登録なしで、このまま診断できます。</p>
 </div>
 <p>これで、一つ目の常識が崩れました。</p>
 <p>でも、これはまだ序の口です。</p>
@@ -694,7 +694,7 @@ fbq("track","PageView",{},{eventID:window._pvId});
       var eventId = generateEventId();
       var fbp = getFbp();
       var fbc = getFbc();
-      // どのボタンからのリードかを content_name で区別する（4C診断 / 無料セッション）
+      // どのボタンからのリードかを content_name で区別する（4C診断の結果 / LP最後の無料セッション）
       var leadName = btn.getAttribute('data-lead') || 'session';
       try { if (typeof window.fbq === 'function') { window.fbq('track', 'Lead', { content_name: leadName }, { eventID: eventId }); } } catch (_) {}
       var leadPayload = { eventName: 'Lead', eventId: eventId, url: window.location.href, fbp: fbp, fbc: fbc, contentName: leadName };

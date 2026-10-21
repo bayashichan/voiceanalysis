@@ -109,6 +109,12 @@
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<!-- Meta Pixel（LPと同じピクセル） -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+fbq("init","1302054671384974");
+fbq("track","PageView");
+</script>
 </head>
 <body>
 
@@ -192,8 +198,8 @@
   </div>
   <!-- LINE の外で開いたとき -->
   <div id="cta-web" hidden>
-    <div class="btn-wrap"><a class="btn" href="https://line.me/R/ti/p/@582xsdpe" target="_blank" rel="noopener">LINEで無料セッションを予約する →</a></div>
-    <p class="small" style="text-align:center">友だち登録のあと、トークで「個別」と送ってください。</p>
+    <div class="btn-wrap"><a class="btn" id="lead" href="https://line.me/R/ti/p/@582xsdpe" target="_blank" rel="noopener">声紋診断を無料で体験する →</a></div>
+    <p class="small" style="text-align:center">LINEが開きます。友だち登録のあと、トークで「個別」と送ってください。</p>
   </div>
 
   <div class="qnav"><button class="link" id="retry" type="button">もう一度チェックする</button></div>
@@ -356,6 +362,24 @@
   $('next').onclick = function () { if ((page + 1) * PER >= Q.length) finish(); else { page++; renderPage(); } };
   $('prev').onclick = function () { if (page > 0) { page--; renderPage(); } };
   $('retry').onclick = function () { ans = Q.map(function () { return null; }); page = 0; show('intro'); };
+  // LP と同じ方法で Lead を発火する（ブラウザのピクセル + /api/capi、同じ eventID で重複を除く）
+  function cookie(n) { var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + n + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : ''; }
+  function ls(k) { try { return localStorage.getItem(k) || ''; } catch (_) { return ''; } }
+  $('lead').onclick = function (e) {
+    if (this.dataset.sending) return;
+    this.dataset.sending = '1';
+    var id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : '4c-' + Date.now() + '-' + Math.random().toString(36).slice(2, 11);
+    try { if (typeof window.fbq === 'function') window.fbq('track', 'Lead', { content_name: '4c_check' }, { eventID: id }); } catch (_) {}
+    var payload = { eventName: 'Lead', eventId: id, url: location.href, fbp: cookie('_fbp') || ls('_fbp_bk'), fbc: cookie('_fbc') || ls('_fbc_bk'), contentName: '4c_check' };
+    var test = new URLSearchParams(location.search).get('test');
+    if (test) payload.testEventCode = test;
+    var json = JSON.stringify(payload);
+    if (!(navigator.sendBeacon && navigator.sendBeacon('/api/capi', new Blob([json], { type: 'application/json' })))) {
+      fetch('/api/capi', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: json, keepalive: true }).catch(function () {});
+    }
+  };
+  window.addEventListener('pageshow', function (e) { if (e.persisted) delete $('lead').dataset.sending; });
+
   // こちらからメッセージは送らない。予約するかどうかは本人がトークで決める
   $('book').onclick = function () { liff.closeWindow(); };
 
