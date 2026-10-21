@@ -93,8 +93,6 @@
   .trait .track i { display: block; height: 100%; background: var(--c); }
   .box { border-top: 1px solid #2c2c2b; padding-top: 16px; margin-top: 32px; }
   .box h3 { font-size: 17px; margin: 0 0 10px; }
-  .keyword { font-size: 18px; font-weight: 700; text-align: center; padding: 14px; border: 1px dashed #387dc9; border-radius: 6px; margin: 0 0 12px; user-select: all; -webkit-user-select: all; }
-  .sent { text-align: center; font-weight: 700; color: #387dc9; }
   .sign { text-align: right; font-size: 14px; color: #77746f; margin-top: 40px; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -115,6 +113,13 @@
   <div class="stage" style="--c:#a9822e"><b>プロc</b><span>専門家としての創造。長い年月の積み重ね</span></div>
   <div class="stage off" style="--c:#b5b2ac"><b>ビッグC</b><span>歴史に残る創造。目指さなくていい段階</span></div>
 </div>
+<p>4C理論の「C」は、<br><strong>Creativity（創造性）</strong>のCです。<br>創造性を、4つの段階に分けて考えます。</p>
+<h2>多くの人がつまずく、順番のまちがい</h2>
+<p>「変わりたい」と思ったとき、<br>多くの人は、<strong>いきなりビッグCやプロcを目指します。</strong></p>
+<p>大きな目標、目に見える成果。<br>けれど、その高さに届かない自分を見て、<br>「やっぱり自分には無理だ」と止まってしまう。</p>
+<p>これが、つまずきの正体です。</p>
+<p>4C理論が示しているのは、<br>創造性は<strong><span class="tx-blue">段階を追って育つ</span></strong>ということ。</p>
+<p>だから、始めるのは<mark><strong>ミニc</strong></mark>から。<br>自分の中の、小さな「腑に落ちた」からです。</p>
 <p class="scope">このチェックで見るのは、<mark>主にミニcとリトルc</mark>です。</p>
 <p class="src">出典：Kaufman, J. C. &amp; Beghetto, R. A.（2009）Beyond Big and Little: The Four C Model of Creativity. Review of General Psychology, 13(1), 1–12.</p>
 <p>全10問、約2分です。<br>直感で答えてください。</p>
@@ -146,21 +151,21 @@
   <div class="box" id="rbrake" hidden><h3>ブレーキがかかっているかもしれません</h3>
     <p style="margin:0">考えを口にする前に、引っ込めてしまう傾向が見られました。<br>研究者のベゲットは、否定的な反応を受けた経験が、自分の気づきを外に出させなくすることがあると指摘しています（Beghetto, 2014）。<br><strong>優しくて、周りに合わせられる人ほど</strong>、このブレーキはかかりやすいものです。</p></div>
 
-  <!-- LINE アプリ内（LIFF）で開いたとき -->
-  <div id="send-area" hidden>
-    <h2>あなたの段階に合わせた解説を、LINEでお届けします</h2>
-    <p>下のボタンを押すと、診断結果がトークに送られ、<br>林から、<strong>あなたの段階に合わせた解説</strong>が届きます。</p>
-    <div class="btn-wrap"><button class="btn" id="send" type="button">結果をLINEで受け取る →</button></div>
-    <p class="sent" id="sent" hidden>送信しました。トーク画面をご確認ください。</p>
-  </div>
+  <div class="box"><h3>順番を、飛ばさないこと</h3>
+    <p style="margin:0">次の段階に進むために必要なのは、<br>大きな目標ではなく、<strong>いまの段階を一つ確かにすること</strong>です。</p></div>
 
+  <h2>いまの段階から、一緒に整理しませんか</h2>
+  <p>無料の個別セッション（60分・オンライン）では、<br>最初に<mark><strong>6秒の声</strong></mark>を録音し、<br>その結果を見ながら、<br>あなたのミニcを一緒に言葉にしていきます。</p>
+  <p>話す準備はいりません。<br>合わないと感じたら、その場で終わりにできます。</p>
+  <!-- LINE アプリ内（LIFF）で開いたとき：「個別」を送ると日程候補が自動で返る -->
+  <div id="cta-line" hidden>
+    <div class="btn-wrap"><button class="btn" id="book" type="button">無料セッションの日程を見る →</button></div>
+    <p class="small" style="text-align:center">押すと、トークに日程の候補が届きます。</p>
+  </div>
   <!-- LINE の外で開いたとき -->
-  <div id="keyword-area" hidden>
-    <h2>あなたの段階に合わせた解説を、LINEでお届けします</h2>
-    <p>下の言葉をコピーして、<br>LINEのトークに送ってください。</p>
-    <p class="keyword" id="keyword"></p>
-    <div class="btn-wrap" style="margin-top:12px"><button class="link" id="copy" type="button" style="display:block;margin:0 auto">言葉をコピーする</button></div>
-    <p class="small" style="text-align:center">まだ友だち登録をしていない方は、<a href="https://line.me/R/ti/p/@582xsdpe" target="_blank" rel="noopener">こちらから登録</a>できます（LINE ID：@582xsdpe）。</p>
+  <div id="cta-web" hidden>
+    <div class="btn-wrap"><a class="btn" href="https://line.me/R/ti/p/@582xsdpe" target="_blank" rel="noopener">LINEで無料セッションを予約する →</a></div>
+    <p class="small" style="text-align:center">友だち登録のあと、トークで「個別」と送ると、日程の候補が届きます。</p>
   </div>
 
   <div class="qnav"><button class="link" id="retry" type="button">もう一度チェックする</button></div>
@@ -170,7 +175,7 @@
 
 <script>
 (function () {
-  // LINE Developers で作成した LIFF ID。空のあいだは「言葉を送る」方式で動く
+  // LINE Developers で作成した LIFF ID。LINE の外で開いたときは友だち追加リンクを出す
   var LIFF_ID = '2012139063-Pmces6QQ';
   var PER = 5;
 
@@ -190,22 +195,20 @@
   var DOTS = [['s1', '#8a8580', 'あてはまらない'], ['s2', '#8a8580', 'あまりあてはまらない'], ['s3', '#c9c6c0', 'どちらともいえない'], ['s2', '#387dc9', 'ややあてはまる'], ['s1', '#387dc9', 'あてはまる']];
   var COLOR = { mini: ['#5b7f5a', '#eef2ec'], little: ['#387dc9', '#ebf2fa'], pro: ['#a9822e', '#f6f0e2'], big: ['#b5b2ac', '#f3f2ef'] };
 
-  // keyword は LINE 側の自動応答の合言葉と一致させる
   var R = {
-    asleep: { stage: 'mini', keyword: '【4C診断】ミニc・眠っている', tag: 'Mini-c', title: 'ミニcが、<br>まだ眠っている段階',
+    asleep: { stage: 'mini', tag: 'Mini-c', title: 'ミニcが、<br>まだ眠っている段階',
       body: 'いまは日々の役割をこなすことで手一杯で、自分の「本当はこうしたい」に気づく余白が少ないのかもしれません。<br>才能がないのではなく、<strong>気づきを拾う時間が、まだ取れていない</strong>状態です。',
       next: '1日の終わりに、「今日ちょっと心が動いたこと」を一行だけメモしてみてください。それがミニcの入り口です。' },
-    mini: { stage: 'mini', keyword: '【4C診断】ミニc・育っている', tag: 'Mini-c', title: 'ミニcが、<br>育っている段階',
+    mini: { stage: 'mini', tag: 'Mini-c', title: 'ミニcが、<br>育っている段階',
       body: 'あなたの中には、すでに「本当はこうしたい」という気づきがあります。<br>ただ、それを<strong>まだ外に出していない</strong>状態です。<br>4C理論でいえば、創造性はもう始まっています。',
       next: 'メモした気づきを一つ選び、信頼できる人ひとりにだけ話してみてください。リトルcへの最初の一歩になります。' },
-    little: { stage: 'little', keyword: '【4C診断】リトルc', tag: 'Little-c', title: 'リトルcを、<br>始めている段階',
+    little: { stage: 'little', tag: 'Little-c', title: 'リトルcを、<br>始めている段階',
       body: '自分の工夫を外に出し、周りにも届いています。<br><strong>日常の中で創造性を発揮できている</strong>状態です。',
       next: '一番手応えのあった工夫を、続けられる形（週1回、月1回など）にしてみてください。積み重ねが次の段階につながります。' },
-    pro: { stage: 'pro', keyword: '【4C診断】プロc', tag: 'Pro-c', title: 'プロcへ、<br>歩みを進めている段階',
+    pro: { stage: 'pro', tag: 'Pro-c', title: 'プロcへ、<br>歩みを進めている段階',
       body: 'ひとつの分野で積み重ねがあり、人からも頼られています。<br><strong>専門家としての創造性</strong>が育ってきている状態です。',
       next: 'これまでのやり方を言葉にして、人に伝えられる形にまとめてみてください。自分の専門性がよりはっきりします。' }
   };
-  var BRAKE_KEYWORD = '【4C診断】ブレーキあり';
   var STAGES = [['mini', 'ミニc', '自分の中の「腑に落ちた」という気づき'], ['little', 'リトルc', '日常で、人にも伝わる工夫'], ['pro', 'プロc', '専門家としての創造'], ['big', 'ビッグC', '歴史に残る創造']];
 
   var $ = function (id) { return document.getElementById(id); };
@@ -275,35 +278,24 @@
     $('rtraits').innerHTML = [['mini', 'ミニc（気づき）'], ['little', 'リトルc（外に出す）'], ['pro', 'プロc（積み重ね）']].map(function (t) {
       return '<div class="trait" style="--c:' + COLOR[t[0]][0] + '"><div class="top"><span>' + t[1] + '</span><b>' + Math.round(s[t[0]] * 100) + '%</b></div><div class="track"><i style="width:' + s[t[0]] * 100 + '%"></i></div></div>';
     }).join('');
-    $('send-area').hidden = !inLine;
-    $('keyword-area').hidden = inLine;
-    $('send').disabled = false; $('sent').hidden = true;
-    $('keyword').textContent = r.keyword;
+    $('cta-line').hidden = !inLine;
+    $('cta-web').hidden = inLine;
+    $('book').disabled = false;
     show('result');
-  }
-  function messages() {
-    var m = [{ type: 'text', text: last.r.keyword }];
-    if (last.brake) m.push({ type: 'text', text: BRAKE_KEYWORD });
-    return m;
   }
 
   $('start').onclick = function () { page = 0; renderPage(); show('quiz'); };
   $('next').onclick = function () { if ((page + 1) * PER >= Q.length) finish(); else { page++; renderPage(); } };
   $('prev').onclick = function () { if (page > 0) { page--; renderPage(); } };
   $('retry').onclick = function () { ans = Q.map(function () { return null; }); page = 0; show('intro'); };
-  $('send').onclick = function () {
+  $('book').onclick = function () {
     var b = this; b.disabled = true;
-    liff.sendMessages(messages()).then(function () {
-      $('sent').hidden = false;
-      setTimeout(function () { liff.closeWindow(); }, 1200);
+    // line-manager の面談予約は「個別」を受け取ると日程候補を自動返信する
+    liff.sendMessages([{ type: 'text', text: '個別' }]).then(function () {
+      liff.closeWindow();
     }).catch(function () {
-      // 送れなかったときは言葉を送ってもらう方式に切り替える
-      $('send-area').hidden = true; $('keyword-area').hidden = false;
+      $('cta-line').hidden = true; $('cta-web').hidden = false;
     });
-  };
-  $('copy').onclick = function () {
-    var t = $('keyword').textContent, b = this;
-    if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { b.textContent = 'コピーしました'; }).catch(function () {});
   };
 
   if (LIFF_ID && window.liff) {
