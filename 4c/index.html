@@ -81,6 +81,18 @@
   .labs { display: flex; justify-content: space-between; font-size: 12px; margin-top: 10px; padding: 0 2px; }
   .labs span:first-child { color: #8a8580; }
   .labs span:last-child { color: #387dc9; }
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice { appearance: none; font: inherit; font-size: 15px; line-height: 1.6; text-align: left; cursor: pointer; padding: 14px 16px; border: 1.5px solid #dcd9d3; border-radius: 8px; background: #fff; color: #2c2c2b; -webkit-tap-highlight-color: transparent; }
+  .choice small { display: block; font-size: 12px; color: #77746f; }
+  .choice[aria-pressed="true"] { border-color: #387dc9; background: #ebf2fa; }
+  .choice:focus-visible { outline: 2px solid #387dc9; outline-offset: 3px; }
+  .gap { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; text-align: center; margin: 0 0 14px; }
+  .gap div { padding: 12px 6px; border-top: 4px solid var(--g); background: var(--gs); }
+  .gap small { display: block; font-size: 12px; color: #77746f; }
+  .gap b { font-size: 19px; }
+  .gap .arrow { font-size: 20px; color: #77746f; }
+  .gapnum { text-align: center; font-size: 15px; margin: 0 0 12px; }
+  .stage .goal { grid-column: 1 / -1; font-size: 13px; font-weight: 700; color: #cf5148; }
   .qnav { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 32px; }
 
   /* 結果 */
@@ -129,14 +141,14 @@
 <p>まずはこのチェックで、<br>地図の上の現在地に、見当をつけてみてください。</p>
 <p class="scope">このチェックで見るのは、<mark>主にミニcとリトルc</mark>です。</p>
 <p class="src">出典：Kaufman, J. C. &amp; Beghetto, R. A.（2009）Beyond Big and Little: The Four C Model of Creativity. Review of General Psychology, 13(1), 1–12.</p>
-<p>全10問、約2分です。<br>直感で答えてください。</p>
+<p>全11問、約2分です。<br>直感で答えてください。</p>
 <div class="btn-wrap"><button class="btn" id="start" type="button">チェックを始める →</button></div>
 <p class="small">このチェックは4C理論の考え方をもとにした振り返り用のもので、学術的に検証された心理尺度ではありません。回答の内容は、この画面の中だけで集計されます。</p>
 </div>
 </div>
 
 <div id="quiz" hidden>
-<div class="qhead"><div class="in"><div class="progress" aria-hidden="true"><i id="bar"></i></div><span class="count" id="count">0 / 10</span></div></div>
+<div class="qhead"><div class="in"><div class="progress" aria-hidden="true"><i id="bar"></i></div><span class="count" id="count">0 / 11</span></div></div>
 <div class="wrap" style="padding-top:8px">
   <div id="qlist"></div>
   <div class="qnav">
@@ -160,6 +172,11 @@
 
   <div class="box"><h3>順番を、飛ばさないこと</h3>
     <p style="margin:0">次の段階に進むために必要なのは、<br>大きな目標ではなく、<strong>いまの段階を一つ確かにすること</strong>です。</p></div>
+
+  <div class="box"><h3>目指している段階との差</h3>
+    <div class="gap" id="rgap"></div>
+    <p class="gapnum" id="rgapnum"></p>
+    <p style="margin:0" id="rgaptext"></p></div>
 
   <div class="box"><h3>このチェックでわかるのは、ここまでです</h3>
     <p>この結果は、あなたが<strong>自分で答えた</strong>段階です。</p>
@@ -200,7 +217,15 @@
     { k: 'little', t: '「それ、いいね」と人から言われた工夫やアイデアがある。' },
     { k: 'pro', t: 'ひとつの分野を、何年も続けて学び、実践している。' },
     { k: 'brake', t: '周りに合わせて、自分の考えを後回しにすることが多い。' },
-    { k: 'pro', t: 'その分野で、人から頼まれたり、対価を受け取ったりしている。' }
+    { k: 'pro', t: 'その分野で、人から頼まれたり、対価を受け取ったりしている。' },
+    { k: 'goal', t: 'いま、あなたが目指しているのは、どれにいちばん近いですか？' }
+  ];
+  // 目指している段階（並びは STAGES と同じ）
+  var GOALS = [
+    ['自分の本音を、知りたい', 'ミニcにあたります'],
+    ['日常の中で、小さく試してみたい', 'リトルcにあたります'],
+    ['仕事や専門として、形にしたい', 'プロcにあたります'],
+    ['人生が大きく変わるような成果を出したい', 'ビッグCにあたります']
   ];
   // 左（あてはまらない）→ 右（あてはまる）
   var DOTS = [['s1', '#8a8580', 'あてはまらない'], ['s2', '#8a8580', 'あまりあてはまらない'], ['s3', '#c9c6c0', 'どちらともいえない'], ['s2', '#387dc9', 'ややあてはまる'], ['s1', '#387dc9', 'あてはまる']];
@@ -248,6 +273,24 @@
       row.className = 'qrow' + (ans[n] !== null ? ' done' : '');
       row.id = 'q-' + n;
       row.innerHTML = '<p class="qt">' + q.t + '</p><div class="dots" role="group" aria-label="回答"></div><div class="labs"><span>あてはまらない</span><span>あてはまる</span></div>';
+      if (q.k === 'goal') {
+        row.innerHTML = '<p class="qt">' + q.t + '</p><div class="choices" role="group" aria-label="回答"></div>';
+        var box = row.querySelector('.choices');
+        GOALS.forEach(function (g, v) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.className = 'choice'; b.id = 'q-' + n + '-' + v;
+          b.innerHTML = g[0] + '<small>' + g[1] + '</small>';
+          b.setAttribute('aria-pressed', ans[n] === v);
+          b.onclick = function () {
+            ans[n] = v;
+            Array.prototype.forEach.call(box.children, function (x, i) { x.setAttribute('aria-pressed', i === v); });
+            updateHead();
+          };
+          box.appendChild(b);
+        });
+        list.appendChild(row);
+        return;
+      }
       var dots = row.querySelector('.dots');
       DOTS.forEach(function (d, v) {
         var b = document.createElement('button');
@@ -287,9 +330,19 @@
     $('rnext').textContent = r.next;
     $('rvoice').textContent = r.voice;
     $('rbrake').hidden = !last.brake;
+    var order = ['mini', 'little', 'pro', 'big'], cur = order.indexOf(r.stage), goal = ans[Q.length - 1], diff = goal - cur;
+    var gc = COLOR[order[goal]];
+    $('rgap').innerHTML = '<div style="--g:' + c[0] + ';--gs:' + c[1] + '"><small>いまの段階</small><b>' + STAGES[cur][1] + '</b></div><span class="arrow">→</span>'
+      + '<div style="--g:' + gc[0] + ';--gs:' + gc[1] + '"><small>目指している段階</small><b>' + STAGES[goal][1] + '</b></div>';
+    $('rgapnum').innerHTML = diff > 0 ? '差は <strong class="tx-red">' + diff + '段階</strong>' : '差は <strong>ありません</strong>';
+    $('rgaptext').innerHTML = diff >= 2
+      ? '段階を<strong>飛ばして</strong>、先を目指している状態です。<br>差が大きいほど、届かない自分を責めやすく、どこから手をつければいいか見失いやすくなります。<br>この差が本当にあるのか、それとも言葉の上だけなのか。<strong>声で確かめることができます。</strong>'
+      : diff === 1
+      ? '一つ先の段階を目指している、<strong>順番に沿った目標</strong>です。<br>ただ、言葉で選んだ目標と、本音で目指しているものが同じとは限りません。<strong>声で確かめることができます。</strong>'
+      : 'いまの段階を、確かにしようとしている状態です。<br>ただ、遠慮して目標を低く見積もっていることもあります。本当はどこを目指したいのか。<strong>声で確かめることができます。</strong>';
     $('rstages').innerHTML = STAGES.map(function (st) {
       var here = st[0] === r.stage, cc = COLOR[st[0]];
-      return '<div class="stage' + (st[0] === 'big' ? ' off' : '') + (here ? ' here' : '') + '" style="--c:' + cc[0] + ';--soft:' + cc[1] + '"><b>' + st[1] + '</b><span>' + st[2] + '</span>' + (here ? '<span class="you">▲ いまのあなた</span>' : '') + '</div>';
+      return '<div class="stage' + (st[0] === 'big' ? ' off' : '') + (here ? ' here' : '') + '" style="--c:' + cc[0] + ';--soft:' + cc[1] + '"><b>' + st[1] + '</b><span>' + st[2] + '</span>' + (here ? '<span class="you">▲ いまのあなた</span>' : '') + (st[0] === order[goal] && !here ? '<span class="goal">◇ 目指している段階</span>' : '') + '</div>';
     }).join('');
     $('rtraits').innerHTML = [['mini', 'ミニc（気づき）'], ['little', 'リトルc（外に出す）'], ['pro', 'プロc（積み重ね）']].map(function (t) {
       return '<div class="trait" style="--c:' + COLOR[t[0]][0] + '"><div class="top"><span>' + t[1] + '</span><b>' + Math.round(s[t[0]] * 100) + '%</b></div><div class="track"><i style="width:' + s[t[0]] * 100 + '%"></i></div></div>';
