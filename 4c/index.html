@@ -149,7 +149,7 @@ fbq("track","PageView");
 <p class="src">出典：Kaufman, J. C. &amp; Beghetto, R. A.（2009）Beyond Big and Little: The Four C Model of Creativity. Review of General Psychology, 13(1), 1–12.</p>
 <p>全11問、約2分です。<br>直感で答えてください。</p>
 <div class="btn-wrap"><button class="btn" id="start" type="button">チェックを始める →</button></div>
-<p class="small">このチェックは4C理論の考え方をもとにした振り返り用のもので、学術的に検証された心理尺度ではありません。回答の内容は、この画面の中だけで集計されます。</p>
+<p class="small">このチェックは4C理論の考え方をもとにした振り返り用のもので、学術的に検証された心理尺度ではありません。LINEで開いた場合は、診断の結果（段階など）が林に届き、セッションの準備に使います。LINEの外で開いた場合は、結果はどこにも送られません。</p>
 </div>
 </div>
 
@@ -212,6 +212,8 @@ fbq("track","PageView");
   // LINE Developers で作成した LIFF ID。LINE の外で開いたときは友だち追加リンクを出す
   var LIFF_ID = '2012139063-Pmces6QQ';
   var PER = 5;
+  // LINE内で診断した人の結果を、line-manager に友だちのタグとして記録する
+  var RECORD_URL = 'https://line-manager-omega.vercel.app/api/diagnosis/4c';
 
   var Q = [
     { k: 'mini', t: '最近、「本当はこうしたい」と思う瞬間がある。' },
@@ -353,9 +355,21 @@ fbq("track","PageView");
     $('rtraits').innerHTML = [['mini', 'ミニc（気づき）'], ['little', 'リトルc（外に出す）'], ['pro', 'プロc（積み重ね）']].map(function (t) {
       return '<div class="trait" style="--c:' + COLOR[t[0]][0] + '"><div class="top"><span>' + t[1] + '</span><b>' + Math.round(s[t[0]] * 100) + '%</b></div><div class="track"><i style="width:' + s[t[0]] * 100 + '%"></i></div></div>';
     }).join('');
+    if (inLine) record(key, ans[Q.length - 1], last.brake);
     $('cta-line').hidden = !inLine;
     $('cta-web').hidden = inLine;
     show('result');
+  }
+
+  function record(stage, goal, brake) {
+    var token = liff.getAccessToken();
+    if (!token) return;
+    fetch(RECORD_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: JSON.stringify({ stage: stage, goal: goal, brake: brake }),
+      keepalive: true
+    }).catch(function () {});
   }
 
   $('start').onclick = function () { page = 0; renderPage(); show('quiz'); };
