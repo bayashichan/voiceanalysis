@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../favicon.png" type="image/png">
+<title>4C創造性チェック | アップデート林</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #fff;
+    color: #2c2c2b;
+    font-family: "ヒラギノ明朝 ProN","Hiragino Mincho ProN","游明朝","Yu Mincho","ＭＳ 明朝",serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+  }
+  [hidden] { display: none !important; }
+  .wrap { max-width: 374px; margin: 0 auto; padding: 40px 16px 64px; }
+  p { font-size: 16px; line-height: 1.75; margin: 0 0 1.6em; letter-spacing: .01em; }
+  h1.hero {
+    font-size: 26px; font-weight: 700; line-height: 1.5; color: #2c2c2b;
+    margin: 8px 0 32px; letter-spacing: .02em;
+  }
+  h2 {
+    font-size: 22px; font-weight: 700; line-height: 1.4; color: #387dc9;
+    margin: 48px 0 20px; letter-spacing: .01em;
+  }
+  strong { font-weight: 800; -webkit-text-stroke: 0.1px currentColor; }
+  .tx-blue { color: #387dc9; }
+  .tx-red { color: #cf5148; }
+  mark { background: rgba(211,168,0,.137); color: inherit; padding: 0 .06em; border-radius: 2px; }
+  .eyebrow { font-size: 13px; color: #77746f; letter-spacing: .08em; margin: 0 0 8px; }
+  .small { font-size: 13px; line-height: 1.7; color: #77746f; }
+  .btn-wrap { margin: 32px 0; }
+  .btn {
+    display: block; width: 100%; max-width: 340px; margin: 0 auto;
+    padding: 17px 14px; border: 0; cursor: pointer; font: inherit;
+    background: #fffdf7; color: #cf5148;
+    text-align: center; text-decoration: none;
+    font-weight: 700; font-size: 1.05rem; line-height: 1.5; letter-spacing: .03em;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active { box-shadow: 0 2px 6px rgba(0,0,0,.14); transform: translateY(1px); }
+  .btn:disabled { opacity: .4; cursor: default; box-shadow: none; }
+  .btn:focus-visible, .dot:focus-visible, .link:focus-visible { outline: 2px solid #387dc9; outline-offset: 3px; }
+  .link { appearance: none; background: none; border: 0; font: inherit; font-size: 14px; color: #77746f; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; padding: 4px 0; }
+
+  /* 4C の段階 */
+  .stages { border-top: 1px solid #2c2c2b; margin: 0 0 20px; }
+  .stage { display: grid; grid-template-columns: 92px 1fr; gap: 10px; align-items: baseline; padding: 14px 4px; border-bottom: 1px solid #e3e1dc; }
+  .stage b { font-size: 18px; display: flex; align-items: center; gap: 7px; }
+  .stage b::before { content: ""; width: 8px; height: 8px; background: var(--c); flex: none; transform: translateY(-1px); }
+  .stage span { font-size: 14px; line-height: 1.7; color: #55524d; }
+  .stage.off { color: #a3a09a; }
+  .stage.off span { color: #a3a09a; }
+  .stage.here { background: var(--soft); }
+  .stage .you { grid-column: 1 / -1; font-size: 13px; font-weight: 700; color: var(--c); }
+  .scope { font-size: 14px; text-align: center; margin: 0 0 1.4em; }
+  .src { font-size: 12px; line-height: 1.7; color: #77746f; }
+
+  /* 質問 */
+  .qhead { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid #e3e1dc; }
+  .qhead .in { max-width: 374px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+  .progress { flex: 1; height: 3px; background: #eceae5; border-radius: 2px; overflow: hidden; }
+  .progress i { display: block; height: 100%; width: 0; background: #387dc9; transition: width .3s; }
+  .count { font-size: 14px; color: #77746f; font-variant-numeric: tabular-nums; }
+  .qrow { padding: 32px 0; border-bottom: 1px solid #e3e1dc; transition: opacity .25s; }
+  .qrow.done { opacity: .4; }
+  .qt { font-size: 17px; font-weight: 700; line-height: 1.8; margin: 0 0 20px; text-align: center; }
+  .dots { display: flex; justify-content: center; align-items: center; gap: 14px; }
+  .dot { appearance: none; padding: 0; cursor: pointer; border-radius: 50%; border: 1.5px solid var(--k); background: transparent; flex: none; -webkit-tap-highlight-color: transparent; }
+  .dot[aria-pressed="true"] { background: var(--k); }
+  .dot.s1 { width: 46px; height: 46px; }
+  .dot.s2 { width: 36px; height: 36px; }
+  .dot.s3 { width: 24px; height: 24px; }
+  .labs { display: flex; justify-content: space-between; font-size: 12px; margin-top: 10px; padding: 0 2px; }
+  .labs span:first-child { color: #8a8580; }
+  .labs span:last-child { color: #387dc9; }
+  .qnav { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 32px; }
+
+  /* 結果 */
+  .rtag { font-size: 14px; font-weight: 700; color: var(--c); letter-spacing: .06em; margin: 0 0 6px; }
+  .rtitle { border-bottom: 1px solid var(--c); padding-bottom: 16px; }
+  .trait { margin: 0 0 16px; }
+  .trait .top { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 6px; }
+  .trait .top b { color: var(--c); font-variant-numeric: tabular-nums; }
+  .trait .track { height: 4px; background: #eceae5; border-radius: 2px; overflow: hidden; }
+  .trait .track i { display: block; height: 100%; background: var(--c); }
+  .box { border-top: 1px solid #2c2c2b; padding-top: 16px; margin-top: 32px; }
+  .box h3 { font-size: 17px; margin: 0 0 10px; }
+  .keyword { font-size: 18px; font-weight: 700; text-align: center; padding: 14px; border: 1px dashed #387dc9; border-radius: 6px; margin: 0 0 12px; user-select: all; -webkit-user-select: all; }
+  .sent { text-align: center; font-weight: 700; color: #387dc9; }
+  .sign { text-align: right; font-size: 14px; color: #77746f; margin-top: 40px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+
+<div id="intro">
+<div class="wrap">
+<p class="eyebrow">創造性の4C理論にもとづくセルフチェック</p>
+<h1 class="hero">あなたの創造性は、<br>いまどの段階？</h1>
+<p>「自分には才能がない」<br>そう感じるとき、多くの人は<br>歴史に残る天才と、自分を比べています。</p>
+<p>けれど研究では、創造性は<br><strong><span class="tx-blue">誰の中にもある小さな気づき</span></strong>から始まる、<br>段階的なものだと考えられています。</p>
+<h2>創造性の4つの段階</h2>
+<div class="stages">
+  <div class="stage" style="--c:#5b7f5a"><b>ミニc</b><span>自分の中の「腑に落ちた」という気づき</span></div>
+  <div class="stage" style="--c:#387dc9"><b>リトルc</b><span>日常で、人にも伝わる工夫</span></div>
+  <div class="stage" style="--c:#a9822e"><b>プロc</b><span>専門家としての創造。長い年月の積み重ね</span></div>
+  <div class="stage off" style="--c:#b5b2ac"><b>ビッグC</b><span>歴史に残る創造。目指さなくていい段階</span></div>
+</div>
+<p class="scope">このチェックで見るのは、<mark>主にミニcとリトルc</mark>です。</p>
+<p class="src">出典：Kaufman, J. C. &amp; Beghetto, R. A.（2009）Beyond Big and Little: The Four C Model of Creativity. Review of General Psychology, 13(1), 1–12.</p>
+<p>全10問、約2分です。<br>直感で答えてください。</p>
+<div class="btn-wrap"><button class="btn" id="start" type="button">チェックを始める →</button></div>
+<p class="small">このチェックは4C理論の考え方をもとにした振り返り用のもので、学術的に検証された心理尺度ではありません。回答の内容は、この画面の中だけで集計されます。</p>
+</div>
+</div>
+
+<div id="quiz" hidden>
+<div class="qhead"><div class="in"><div class="progress" aria-hidden="true"><i id="bar"></i></div><span class="count" id="count">0 / 10</span></div></div>
+<div class="wrap" style="padding-top:8px">
+  <div id="qlist"></div>
+  <div class="qnav">
+    <button class="btn" id="next" type="button" disabled>次へ</button>
+    <button class="link" id="prev" type="button">← 前に戻る</button>
+  </div>
+</div>
+</div>
+
+<div id="result" hidden>
+<div class="wrap" id="rwrap">
+  <p class="rtag" id="rtag"></p>
+  <h1 class="hero rtitle" id="rtitle"></h1>
+  <p id="rbody"></p>
+  <div class="stages" id="rstages"></div>
+  <h2>段階ごとの傾向</h2>
+  <div id="rtraits"></div>
+  <div class="box"><h3>次の小さな一歩</h3><p id="rnext" style="margin:0"></p></div>
+  <div class="box" id="rbrake" hidden><h3>ブレーキがかかっているかもしれません</h3>
+    <p style="margin:0">考えを口にする前に、引っ込めてしまう傾向が見られました。<br>研究者のベゲットは、否定的な反応を受けた経験が、自分の気づきを外に出させなくすることがあると指摘しています（Beghetto, 2014）。<br><strong>優しくて、周りに合わせられる人ほど</strong>、このブレーキはかかりやすいものです。</p></div>
+
+  <!-- LINE アプリ内（LIFF）で開いたとき -->
+  <div id="send-area" hidden>
+    <h2>あなたの段階に合わせた解説を、LINEでお届けします</h2>
+    <p>下のボタンを押すと、診断結果がトークに送られ、<br>林から、<strong>あなたの段階に合わせた解説</strong>が届きます。</p>
+    <div class="btn-wrap"><button class="btn" id="send" type="button">結果をLINEで受け取る →</button></div>
+    <p class="sent" id="sent" hidden>送信しました。トーク画面をご確認ください。</p>
+  </div>
+
+  <!-- LINE の外で開いたとき -->
+  <div id="keyword-area" hidden>
+    <h2>あなたの段階に合わせた解説を、LINEでお届けします</h2>
+    <p>下の言葉をコピーして、<br>LINEのトークに送ってください。</p>
+    <p class="keyword" id="keyword"></p>
+    <div class="btn-wrap" style="margin-top:12px"><button class="link" id="copy" type="button" style="display:block;margin:0 auto">言葉をコピーする</button></div>
+    <p class="small" style="text-align:center">まだ友だち登録をしていない方は、<a href="https://line.me/R/ti/p/@582xsdpe" target="_blank" rel="noopener">こちらから登録</a>できます（LINE ID：@582xsdpe）。</p>
+  </div>
+
+  <div class="qnav"><button class="link" id="retry" type="button">もう一度チェックする</button></div>
+  <p class="sign">声紋診断　アップデート林</p>
+</div>
+</div>
+
+<script>
+(function () {
+  // LINE Developers で作成した LIFF ID。空のあいだは「言葉を送る」方式で動く
+  var LIFF_ID = '';
+  var PER = 5;
+
+  var Q = [
+    { k: 'mini', t: '最近、「本当はこうしたい」と思う瞬間がある。' },
+    { k: 'mini', t: '本やできごとに触れて、「自分ならこう考える」と腑に落ちることがある。' },
+    { k: 'mini', t: '思いついたことや考えを、メモや言葉にして残すことがある。' },
+    { k: 'little', t: '思いついた工夫を、家族や職場の人に話したり見せたりしている。' },
+    { k: 'brake', t: '考えを口にする前に、「どうせ否定される」「自分なんか」と引っ込めてしまう。' },
+    { k: 'little', t: '仕事や暮らしで、自分なりのやり方を試し、周りにも使ってもらったことがある。' },
+    { k: 'little', t: '「それ、いいね」と人から言われた工夫やアイデアがある。' },
+    { k: 'pro', t: 'ひとつの分野を、何年も続けて学び、実践している。' },
+    { k: 'brake', t: '周りに合わせて、自分の考えを後回しにすることが多い。' },
+    { k: 'pro', t: 'その分野で、人から頼まれたり、対価を受け取ったりしている。' }
+  ];
+  // 左（あてはまらない）→ 右（あてはまる）
+  var DOTS = [['s1', '#8a8580', 'あてはまらない'], ['s2', '#8a8580', 'あまりあてはまらない'], ['s3', '#c9c6c0', 'どちらともいえない'], ['s2', '#387dc9', 'ややあてはまる'], ['s1', '#387dc9', 'あてはまる']];
+  var COLOR = { mini: ['#5b7f5a', '#eef2ec'], little: ['#387dc9', '#ebf2fa'], pro: ['#a9822e', '#f6f0e2'], big: ['#b5b2ac', '#f3f2ef'] };
+
+  // keyword は LINE 側の自動応答の合言葉と一致させる
+  var R = {
+    asleep: { stage: 'mini', keyword: '【4C診断】ミニc・眠っている', tag: 'Mini-c', title: 'ミニcが、<br>まだ眠っている段階',
+      body: 'いまは日々の役割をこなすことで手一杯で、自分の「本当はこうしたい」に気づく余白が少ないのかもしれません。<br>才能がないのではなく、<strong>気づきを拾う時間が、まだ取れていない</strong>状態です。',
+      next: '1日の終わりに、「今日ちょっと心が動いたこと」を一行だけメモしてみてください。それがミニcの入り口です。' },
+    mini: { stage: 'mini', keyword: '【4C診断】ミニc・育っている', tag: 'Mini-c', title: 'ミニcが、<br>育っている段階',
+      body: 'あなたの中には、すでに「本当はこうしたい」という気づきがあります。<br>ただ、それを<strong>まだ外に出していない</strong>状態です。<br>4C理論でいえば、創造性はもう始まっています。',
+      next: 'メモした気づきを一つ選び、信頼できる人ひとりにだけ話してみてください。リトルcへの最初の一歩になります。' },
+    little: { stage: 'little', keyword: '【4C診断】リトルc', tag: 'Little-c', title: 'リトルcを、<br>始めている段階',
+      body: '自分の工夫を外に出し、周りにも届いています。<br><strong>日常の中で創造性を発揮できている</strong>状態です。',
+      next: '一番手応えのあった工夫を、続けられる形（週1回、月1回など）にしてみてください。積み重ねが次の段階につながります。' },
+    pro: { stage: 'pro', keyword: '【4C診断】プロc', tag: 'Pro-c', title: 'プロcへ、<br>歩みを進めている段階',
+      body: 'ひとつの分野で積み重ねがあり、人からも頼られています。<br><strong>専門家としての創造性</strong>が育ってきている状態です。',
+      next: 'これまでのやり方を言葉にして、人に伝えられる形にまとめてみてください。自分の専門性がよりはっきりします。' }
+  };
+  var BRAKE_KEYWORD = '【4C診断】ブレーキあり';
+  var STAGES = [['mini', 'ミニc', '自分の中の「腑に落ちた」という気づき'], ['little', 'リトルc', '日常で、人にも伝わる工夫'], ['pro', 'プロc', '専門家としての創造'], ['big', 'ビッグC', '歴史に残る創造']];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var ans = Q.map(function () { return null; });
+  var page = 0, inLine = false, name = '', last = null;
+
+  function show(id) { ['intro', 'quiz', 'result'].forEach(function (s) { $(s).hidden = s !== id; }); window.scrollTo(0, 0); }
+  function answered() { return ans.filter(function (a) { return a !== null; }).length; }
+  function updateHead() {
+    $('count').textContent = answered() + ' / ' + Q.length;
+    $('bar').style.width = (answered() / Q.length * 100) + '%';
+    var from = page * PER;
+    $('next').disabled = !ans.slice(from, from + PER).every(function (a) { return a !== null; });
+    $('next').textContent = from + PER >= Q.length ? '結果を見る →' : '次へ →';
+    $('prev').style.visibility = page === 0 ? 'hidden' : 'visible';
+  }
+  function renderPage() {
+    var from = page * PER, list = $('qlist');
+    list.innerHTML = '';
+    Q.slice(from, from + PER).forEach(function (q, j) {
+      var n = from + j, row = document.createElement('div');
+      row.className = 'qrow' + (ans[n] !== null ? ' done' : '');
+      row.id = 'q-' + n;
+      row.innerHTML = '<p class="qt">' + q.t + '</p><div class="dots" role="group" aria-label="回答"></div><div class="labs"><span>あてはまらない</span><span>あてはまる</span></div>';
+      var dots = row.querySelector('.dots');
+      DOTS.forEach(function (d, v) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'dot ' + d[0]; b.id = 'q-' + n + '-' + v;
+        b.style.setProperty('--k', d[1]);
+        b.setAttribute('aria-label', d[2]);
+        b.setAttribute('aria-pressed', ans[n] === v);
+        b.onclick = function () {
+          ans[n] = v;
+          Array.prototype.forEach.call(dots.children, function (x, i) { x.setAttribute('aria-pressed', i === v); });
+          row.classList.add('done');
+          updateHead();
+          var nx = $('q-' + (n + 1));
+          if (nx && n + 1 < from + PER && ans[n + 1] === null) nx.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        };
+        dots.appendChild(b);
+      });
+      list.appendChild(row);
+    });
+    updateHead();
+    window.scrollTo(0, 0);
+  }
+  function avg(k) {
+    var v = []; Q.forEach(function (q, n) { if (q.k === k) v.push(ans[n] / 4); });
+    return v.reduce(function (a, b) { return a + b; }, 0) / v.length;
+  }
+  function finish() {
+    var s = { mini: avg('mini'), little: avg('little'), pro: avg('pro'), brake: avg('brake') };
+    var key = s.pro >= .67 && s.little >= .67 ? 'pro' : s.little >= .67 ? 'little' : s.mini >= .56 ? 'mini' : 'asleep';
+    var r = R[key], c = COLOR[r.stage];
+    last = { r: r, brake: s.brake >= .5 };
+    var w = $('rwrap');
+    w.style.setProperty('--c', c[0]);
+    $('rtag').textContent = (name ? name + 'さんの' : 'あなたの') + 'いまの段階　' + r.tag;
+    $('rtitle').innerHTML = r.title;
+    $('rbody').innerHTML = r.body;
+    $('rnext').textContent = r.next;
+    $('rbrake').hidden = !last.brake;
+    $('rstages').innerHTML = STAGES.map(function (st) {
+      var here = st[0] === r.stage, cc = COLOR[st[0]];
+      return '<div class="stage' + (st[0] === 'big' ? ' off' : '') + (here ? ' here' : '') + '" style="--c:' + cc[0] + ';--soft:' + cc[1] + '"><b>' + st[1] + '</b><span>' + st[2] + '</span>' + (here ? '<span class="you">▲ いまのあなた</span>' : '') + '</div>';
+    }).join('');
+    $('rtraits').innerHTML = [['mini', 'ミニc（気づき）'], ['little', 'リトルc（外に出す）'], ['pro', 'プロc（積み重ね）']].map(function (t) {
+      return '<div class="trait" style="--c:' + COLOR[t[0]][0] + '"><div class="top"><span>' + t[1] + '</span><b>' + Math.round(s[t[0]] * 100) + '%</b></div><div class="track"><i style="width:' + s[t[0]] * 100 + '%"></i></div></div>';
+    }).join('');
+    $('send-area').hidden = !inLine;
+    $('keyword-area').hidden = inLine;
+    $('send').disabled = false; $('sent').hidden = true;
+    $('keyword').textContent = r.keyword;
+    show('result');
+  }
+  function messages() {
+    var m = [{ type: 'text', text: last.r.keyword }];
+    if (last.brake) m.push({ type: 'text', text: BRAKE_KEYWORD });
+    return m;
+  }
+
+  $('start').onclick = function () { page = 0; renderPage(); show('quiz'); };
+  $('next').onclick = function () { if ((page + 1) * PER >= Q.length) finish(); else { page++; renderPage(); } };
+  $('prev').onclick = function () { if (page > 0) { page--; renderPage(); } };
+  $('retry').onclick = function () { ans = Q.map(function () { return null; }); page = 0; show('intro'); };
+  $('send').onclick = function () {
+    var b = this; b.disabled = true;
+    liff.sendMessages(messages()).then(function () {
+      $('sent').hidden = false;
+      setTimeout(function () { liff.closeWindow(); }, 1200);
+    }).catch(function () {
+      // 送れなかったときは言葉を送ってもらう方式に切り替える
+      $('send-area').hidden = true; $('keyword-area').hidden = false;
+    });
+  };
+  $('copy').onclick = function () {
+    var t = $('keyword').textContent, b = this;
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { b.textContent = 'コピーしました'; }).catch(function () {});
+  };
+
+  if (LIFF_ID && window.liff) {
+    liff.init({ liffId: LIFF_ID }).then(function () {
+      inLine = liff.isInClient();
+      if (inLine) return liff.getProfile().then(function (p) { name = p.displayName || ''; }).catch(function () {});
+    }).catch(function () { inLine = false; });
+  }
+})();
+</script>
+</body>
+</html>
