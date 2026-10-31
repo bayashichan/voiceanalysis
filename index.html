@@ -572,7 +572,7 @@ fbq("track","PageView",{},{eventID:window._pvId});
 <p>正しい道を探し続けるのは、<br>もうやめる。</p>
 <p>自分の選んだ道を、正解にしていく。</p>
 <p>もし、その生き方に少しでも心が動いたなら、<br>次の話を読み進めてください。</p>
-<h2>無料声紋診断セッションへ</h2>
+<h2>声紋診断の初回体験セッションへ</h2>
 <p>ここまで読んでくれた、ということ自体が、<br>一つの答えだと思っています。</p>
 <p>人の脳は、自分にとって重要なものだけを、<br>意識に上げるようにできています。</p>
 <p>逆に、どうでもいいものは、<br>盲点として、あえて目に入らないように処理される。</p>
@@ -586,7 +586,8 @@ fbq("track","PageView",{},{eventID:window._pvId});
 <p>だからこそ、<br>あなたはここにたどり着いたのだと思います。</p>
 <p>だから、無理に決断を迫るつもりはありません。</p>
 <p>ただ、その違和感を一度だけ、確かめてみませんか、<br>という提案をします。</p>
-<p>用意しているのは、<br><strong><span class="tx-blue">無料の声紋診断セッション</span></strong>です。</p>
+<p>用意しているのは、<br><strong><span class="tx-blue">声紋診断の初回体験セッション</span></strong>です。</p>
+<p>60分・オンラインで、<br>料金は<strong>5,500円（税込）</strong>です。</p>
 <p>流れはシンプルです。</p>
 <p>まず、あなたの声を<mark><strong>6秒だけ録音</strong></mark>し、<br>解析します。</p>
 <p>そのデータをもとに、<br><strong><span class="tx-blue">オンラインで対話しながら</span></strong>、<br>あなたの現在地を一緒に見ていきます。</p>
@@ -607,7 +608,8 @@ fbq("track","PageView",{},{eventID:window._pvId});
 <p>登録して、予約していただくだけです。</p>
 <p>LINEでは、動画や書籍には載せていない、<br>人生をアップデートするための考え方も、<br>ときどき配信しています。</p>
 <p>すぐに予約しなくても、<br>そこから受け取ってもらうだけでも構いません。</p>
-<div class="btn-wrap"><a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、声紋診断を無料で予約する →</a></div>
+<p style="font-size:13px;color:#77746f">料金のお支払い方法やキャンセルについては、<a href="/tokushoho/" style="color:#387dc9">特定商取引法に基づく表記</a>をご覧ください。</p>
+<div class="btn-wrap"><a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、初回体験を予約する →</a></div>
 <p>最後に、これだけ。</p>
 <p>気になったことを、また今度にする、という選択を、<br>あなたはこれまで何度してきたでしょうか。</p>
 <p>責めているのではありません。</p>
@@ -620,7 +622,8 @@ fbq("track","PageView",{},{eventID:window._pvId});
 <p><strong>言葉は、取り繕える。</strong></p>
 <p><strong><span class="tx-red">声は、隠せない。</span></strong></p>
 <p>ここから、<br>あなたの人生をアップデートしていきましょう。</p>
-<div class="btn-wrap"><a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、声紋診断を無料で予約する →</a></div>
+<div class="btn-wrap"><a href="javascript:void(0);" data-href="https://line.me/R/ti/p/@582xsdpe" class="btn line-cv-btn">LINE登録して、初回体験を予約する →</a></div>
+<p style="margin-top:48px;text-align:center;font-size:12px"><a href="/tokushoho/" style="color:#77746f">特定商取引法に基づく表記</a></p>
 </div>
 
 <!-- LINE 友だち追加ボタン押下で Lead 発火 + Meta CAPI -->
@@ -694,7 +697,7 @@ fbq("track","PageView",{},{eventID:window._pvId});
       var eventId = generateEventId();
       var fbp = getFbp();
       var fbc = getFbc();
-      // どのボタンからのリードかを content_name で区別する（4C診断の結果 / LP最後の無料セッション）
+      // どのボタンからのリードかを content_name で区別する（4C診断の結果 / LP最後の初回体験）
       var leadName = btn.getAttribute('data-lead') || 'session';
       try { if (typeof window.fbq === 'function') { window.fbq('track', 'Lead', { content_name: leadName }, { eventID: eventId }); } } catch (_) {}
       var leadPayload = { eventName: 'Lead', eventId: eventId, url: window.location.href, fbp: fbp, fbc: fbc, contentName: leadName };
